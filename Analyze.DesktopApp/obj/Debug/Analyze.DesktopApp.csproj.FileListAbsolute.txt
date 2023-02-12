@@ -1,0 +1,9 @@
+F:\DATA\Analyze.DesktopApp\Analyze.DesktopApp\bin\Debug\Analyze.DesktopApp.exe.config
+F:\DATA\Analyze.DesktopApp\Analyze.DesktopApp\bin\Debug\Analyze.DesktopApp.exe
+F:\DATA\Analyze.DesktopApp\Analyze.DesktopApp\bin\Debug\Analyze.DesktopApp.pdb
+F:\DATA\Analyze.DesktopApp\Analyze.DesktopApp\obj\Debug\Analyze.DesktopApp.csproj.AssemblyReference.cache
+F:\DATA\Analyze.DesktopApp\Analyze.DesktopApp\obj\Debug\Analyze.DesktopApp.Properties.Resources.resources
+F:\DATA\Analyze.DesktopApp\Analyze.DesktopApp\obj\Debug\Analyze.DesktopApp.csproj.GenerateResource.cache
+F:\DATA\Analyze.DesktopApp\Analyze.DesktopApp\obj\Debug\Analyze.DesktopApp.csproj.CoreCompileInputs.cache
+F:\DATA\Analyze.DesktopApp\Analyze.DesktopApp\obj\Debug\Analyze.DesktopApp.exe
+F:\DATA\Analyze.DesktopApp\Analyze.DesktopApp\obj\Debug\Analyze.DesktopApp.pdb
