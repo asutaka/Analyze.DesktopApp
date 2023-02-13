@@ -7,19 +7,36 @@ namespace Analyze.DesktopApp.Common
 {
     public class Security
     {
-        public static string MD5Hash(string input)
+        public static string HMACSHA256Hash(string text)
         {
-            using (MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider())
-            {
-                StringBuilder hash = new StringBuilder();
-                byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    hash.Append(bytes[i].ToString("x2"));
-                }
-                return hash.ToString();
-            }
+            var key = "NY2023@";
+            // change according to your needs, an UTF8Encoding
+            // could be more suitable in certain situations
+            var encoding = Encoding.UTF8;
+
+            byte[] textBytes = encoding.GetBytes(text);
+            byte[] keyBytes = encoding.GetBytes(key);
+
+            byte[] hashBytes;
+
+            using (HMACSHA256 hash = new HMACSHA256(keyBytes))
+                hashBytes = hash.ComputeHash(textBytes);
+
+            return Convert.ToBase64String(hashBytes);
         }
+        //public static string MD5Hash(string input)
+        //{
+        //    using (MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider())
+        //    {
+        //        StringBuilder hash = new StringBuilder();
+        //        byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
+        //        for (int i = 0; i < bytes.Length; i++)
+        //        {
+        //            hash.Append(bytes[i].ToString("x2"));
+        //        }
+        //        return hash.ToString();
+        //    }
+        //}
 
         //public static string Encrypt(string plainText)
         //{

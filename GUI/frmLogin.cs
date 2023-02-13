@@ -1,30 +1,23 @@
-﻿using BinanceApp.Common;
-using BinanceApp.Model.ENTITY;
+﻿using Analyze.DesktopApp.Common;
+using Analyze.DesktopApp.Models;
+using Analyze.DesktopApp.Utils;
 using DevExpress.XtraEditors;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Net;
-using System.Text;
 using System.Threading;
-using System.Windows.Automation;
 using System.Windows.Forms;
 
 namespace Analyze.DesktopApp.GUI
 {
     public partial class frmLogin : XtraForm
     {
-        private AuthResponse access;
+        private readonly string _fileName = "profile.json";
         private frmLogin()
         {
             InitializeComponent();
-            var bkgr = new BackgroundWorker();
-            bkgr.DoWork += (object sender, DoWorkEventArgs e) =>
-            {
-                Startup.Instance();
-            };
-            bkgr.RunWorkerAsync();
+            InitData();
         }
 
         private static frmLogin _instance = null;
@@ -34,149 +27,47 @@ namespace Analyze.DesktopApp.GUI
             return _instance;
         }
 
-        private void picGoogleSignIn_Click(object sender, EventArgs e)
+        private void InitData()
         {
-            try
+            var model = new ProfileModel().LoadJsonFile(_fileName);
+            if (model != null)
             {
-                var url = AuthResponse.GetAuthenticationURI(ConstantValue.clientId, ConstantValue.redirectURI).ToString();
-                Process.Start(url);
-                Thread.Sleep(1000);
-                DisplayMemoryUsageInTitleAsync();
-            }
-            catch (Exception ex)
-            {
-                NLogLogger.PublishException(ex, $"UserLogin:GoogleSignIn: {ex.Message}");
-            }
-        }
-
-        private void DisplayMemoryUsageInTitleAsync()
-        {
-            try
-            {
-                BackgroundWorker wrkr = new BackgroundWorker();
-                wrkr.WorkerReportsProgress = true;
-
-                wrkr.DoWork += (object sender, DoWorkEventArgs e) => {
-
-                    bool result;
-                    while (result = GetAppoveCodeGoogle())
-                    {
-                        wrkr.ReportProgress(0, result);
-                        Thread.Sleep(100);
-                    }
-
-                    wrkr.Dispose();
-                    Process[] procsChrome = Process.GetProcessesByName("chrome");
-                    foreach (Process chrome in procsChrome)
-                    {
-                        if (chrome.MainWindowHandle == IntPtr.Zero)
-                            continue;
-
-                        AutomationElement element = AutomationElement.FromHandle(chrome.MainWindowHandle);
-                        if (element != null)
-                        {
-                            Condition conditions = new AndCondition(
-                           new PropertyCondition(AutomationElement.ProcessIdProperty, chrome.Id),
-                           new PropertyCondition(AutomationElement.IsControlElementProperty, true),
-                           new PropertyCondition(AutomationElement.IsContentElementProperty, true),
-                           new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit));
-
-                            AutomationElement elementx = element.FindFirst(TreeScope.Descendants, conditions);
-                            if(elementx != null)
-                            {
-                                var url = ((ValuePattern)elementx.GetCurrentPattern(ValuePattern.Pattern)).Current.Value as string;
-                                if (url.Contains("accounts.google.com/o/oauth2/approval/v2/approvalnativeap"))
-                                {
-                                    var arr = url.Split('&');
-                                    var approvalCode = WebUtility.HtmlDecode(arr[arr.Length - 1].Replace("approvalCode=", ""));
-                                    this.BeginInvoke(new Action(() =>
-                                    {
-                                        var profile = GetProfile(approvalCode);
-                                        if (profile != null)
-                                        {
-                                            this.Hide();
-                                            StaticValues.profile = profile;
-                                            frmProfile.Instance().Show();
-                                        }
-                                    }));
-                                }
-                            }
-                        }
-                    }
-                    wrkr.Dispose();
-                };
-                wrkr.RunWorkerAsync();
-            }
-            catch (Exception ex)
-            {
-                NLogLogger.PublishException(ex, $"UserLogin:DisplayMemoryUsageInTitleAsync: {ex.Message}");
-            }
-        }
-
-        public bool GetAppoveCodeGoogle()
-        {
-            try
-            {
-                Process[] procsChrome = Process.GetProcessesByName("chrome");
-                foreach (Process chrome in procsChrome)
+                txtPhone.Text = model.phone;
+                txtPassword.Text = model.password;
+                var bkgr = new BackgroundWorker();
+                bkgr.DoWork += (object sender, DoWorkEventArgs e) =>
                 {
-                    if (chrome.MainWindowHandle == IntPtr.Zero)
-                        continue;
-
-                    AutomationElement element = AutomationElement.FromHandle(chrome.MainWindowHandle);
-                    if (element != null)
-                    {
-                        Condition conditions = new AndCondition(
-                       new PropertyCondition(AutomationElement.ProcessIdProperty, chrome.Id),
-                       new PropertyCondition(AutomationElement.IsControlElementProperty, true),
-                       new PropertyCondition(AutomationElement.IsContentElementProperty, true),
-                       new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit));
-
-                        AutomationElement elementx = element.FindFirst(TreeScope.Descendants, conditions);
-                        if(elementx == null)
-                        {
-                            return false;
-                        }
-                        var url = ((ValuePattern)elementx.GetCurrentPattern(ValuePattern.Pattern)).Current.Value as string;
-                        if (url.Contains("accounts.google.com/o/oauth2/approval/v2/approvalnativeap"))
-                        {
-                            var arr = url.Split('&');
-                            var approvalCode = WebUtility.HtmlDecode(arr[arr.Length - 1].Replace("approvalCode=", ""));
-                            return false;
-                        }
-
-                    }
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                NLogLogger.PublishException(ex, $"UserLogin:GetAppoveCodeGoogle");
-                return false;
+                    CheckUser();
+                };
+                bkgr.RunWorkerAsync();
             }
         }
 
-        private ProfileModel GetProfile(string approveCode)
+        private void CheckUser()
         {
-            try
+            var phone = txtPhone.Text.Trim();
+            var password = Security.HMACSHA256Hash(txtPassword.Text.Trim());
+            var res = StaticClass.PostCheckUser(new CheckUserModel { phone = phone, password = password, signature = Security.HMACSHA256Hash($"{phone}{password}") }).GetAwaiter().GetResult();
+            if(string.IsNullOrWhiteSpace(res))
             {
-                access = AuthResponse.Exchange(approveCode, ConstantValue.clientId, ConstantValue.clientSecret, ConstantValue.redirectURI);
-                if (access == null)
-                    return null;
-                var url = $"https://www.googleapis.com/oauth2/v3/userinfo?access_token={access.Access_token}";
-                var wc = new WebClient();
-                wc.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
-                wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; …) Gecko/20100101 Firefox/55.0");
-                wc.Encoding = Encoding.UTF8;
-                var jsonProfile = wc.DownloadString(url);
-                var resultModel = JsonConvert.DeserializeObject<ProfileModel>(jsonProfile);
-                return resultModel;
+                MessageBox.Show($"Lỗi không kiểm tra được Tài Khoản", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            catch (Exception ex)
+            
+            var resModel = JsonConvert.DeserializeObject<ResponseModel>(res);
+            if(resModel.code <= 0)
             {
-                NLogLogger.PublishException(ex, $"UserLogin:GetProfile: {ex.Message}");
+                MessageBox.Show(resModel.msg, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            return null;
+
+            //show Main
+            this.Invoke((MethodInvoker)delegate
+            {
+                Thread.Sleep(200);
+                _instance.Hide();
+                frmMain.Instance().Show();
+            });
         }
 
         private void frmLogin_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
@@ -187,6 +78,19 @@ namespace Analyze.DesktopApp.GUI
             Process.GetCurrentProcess().Kill();
             Application.Exit();
             Environment.Exit(0);
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if(chkSavePassword.Checked)
+            {
+                new ProfileModel
+                {
+                    phone = txtPhone.Text.Trim(),
+                    password = txtPassword.Text.Trim()
+                }.UpdateJson(_fileName);
+            }
+            CheckUser();
         }
     }
 }

@@ -17,17 +17,13 @@ namespace Analyze.DesktopApp.Common
     {
         public static Mapper MapperConfig = new Mapper(new MapperConfiguration(config => { config.AddProfile(new MapProfile()); }));
 
-        //public static long DateToInt(this DateTime value)
-        //{
-        //    return long.Parse(value.ToString("yyyyMMddHHssmm"));
-        //}
-
-
         public static T LoadJsonFile<T>(this T val, string fileName)
         {
             try
             {
                 string path = $"{Directory.GetCurrentDirectory()}\\settings\\{fileName}";
+                if (!File.Exists(path))
+                    return default(T); 
                 using (StreamReader r = new StreamReader(path))
                 {
                     string json = r.ReadToEnd();
@@ -37,7 +33,7 @@ namespace Analyze.DesktopApp.Common
             }
             catch(Exception ex)
             {
-                NLogLogger.PublishException(ex, $"ExtensionMethod:LoadJsonFile: {ex.Message}");
+                NLogLogger.PublishException(ex, $"ExtensionMethod.LoadJsonFile|EXCEPTION|INPUT: fileName: {fileName}| {ex.Message}");
                 return default(T);
             }
         }
@@ -47,6 +43,11 @@ namespace Analyze.DesktopApp.Common
             try
             {
                 string path = $"{Directory.GetCurrentDirectory()}\\settings\\{fileName}";
+                var check = File.Exists(path);
+                if(!check)
+                {
+                    using (StreamWriter w = File.AppendText(path)) ;
+                }
                 string json = JsonConvert.SerializeObject(_model);
                 //write string to file
                 File.WriteAllText(path, json);
@@ -54,7 +55,7 @@ namespace Analyze.DesktopApp.Common
             }
             catch (Exception ex)
             {
-                NLogLogger.PublishException(ex, $"ExtensionMethod:UpdateJson: {ex.Message}");
+                NLogLogger.PublishException(ex, $"ExtensionMethod.UpdateJson|EXCEPTION|INPUT: fileName: {fileName}| {ex.Message}");
                 return false;
             }
         }
@@ -86,7 +87,7 @@ namespace Analyze.DesktopApp.Common
             }
             catch (NumberParseException ex)
             {
-                NLogLogger.PublishException(ex, $"ExtensionMethod:GetPhone: {ex.Message}");
+                NLogLogger.PublishException(ex, $"ExtensionMethod.GetPhone|EXCEPTION|INPUT: input: {input}| {ex.Message}");
                 return (0, string.Empty);
             }
         }
