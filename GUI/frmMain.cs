@@ -1,4 +1,5 @@
 ﻿using Analyze.DesktopApp.Common;
+using Analyze.DesktopApp.GUI.Child;
 using DevExpress.XtraTab;
 using System;
 using System.ComponentModel;
@@ -337,6 +338,14 @@ namespace Analyze.DesktopApp.GUI
             //ConstantValue.strSupport.CreateFile("Support", true);
             Thread.Sleep(1000);
             barBtnSupport.Enabled = true;
+        }
+
+        private void btn24h_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                tabControl.AddTab(frm24H.Instance());
+            });
         }
     }
 }

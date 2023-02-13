@@ -206,6 +206,84 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\Child\frm24H.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frm24H.Designer.cs">
+      <DependentUpon>frm24H.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Child\frmAdvanceSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmAdvanceSetting.designer.cs">
+      <DependentUpon>frmAdvanceSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Child\frmBasicSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmBasicSetting.designer.cs">
+      <DependentUpon>frmBasicSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Child\frmBlackList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmBlackList.Designer.cs">
+      <DependentUpon>frmBlackList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Child\frmConfigFx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmConfigFx.Designer.cs">
+      <DependentUpon>frmConfigFx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Child\frmConfigNotify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmConfigNotify.Designer.cs">
+      <DependentUpon>frmConfigNotify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Child\frmDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmDashboard.Designer.cs">
+      <DependentUpon>frmDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Child\frmFollowList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmFollowList.Designer.cs">
+      <DependentUpon>frmFollowList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Child\frmMCDX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmMCDX.Designer.cs">
+      <DependentUpon>frmMCDX.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Child\frmRealTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmRealTime.Designer.cs">
+      <DependentUpon>frmRealTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Child\frmSpecialSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmSpecialSetting.Designer.cs">
+      <DependentUpon>frmSpecialSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Child\frmTop30.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmTop30.Designer.cs">
+      <DependentUpon>frmTop30.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Child\frmTradeList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmTradeList.Designer.cs">
+      <DependentUpon>frmTradeList.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,6 +306,7 @@
     <Compile Include="Utils\NLogLogger.cs" />
     <Compile Include="Utils\Security.cs" />
     <Compile Include="Utils\StaticClass.cs" />
+    <None Include="Resources\24h.png" />
     <Content Include="Resources\cancel.png" />
     <Content Include="Resources\check.png" />
     <Content Include="Resources\down_24x24.png" />
@@ -240,6 +319,45 @@
     <Content Include="Resources\telegram_64x64.png" />
     <Content Include="Resources\up_24x24.png" />
     <Content Include="Resources\yellow.png" />
+    <EmbeddedResource Include="GUI\Child\frm24H.resx">
+      <DependentUpon>frm24H.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmAdvanceSetting.resx">
+      <DependentUpon>frmAdvanceSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmBasicSetting.resx">
+      <DependentUpon>frmBasicSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmBlackList.resx">
+      <DependentUpon>frmBlackList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmConfigFx.resx">
+      <DependentUpon>frmConfigFx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmConfigNotify.resx">
+      <DependentUpon>frmConfigNotify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmDashboard.resx">
+      <DependentUpon>frmDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmFollowList.resx">
+      <DependentUpon>frmFollowList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmMCDX.resx">
+      <DependentUpon>frmMCDX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmRealTime.resx">
+      <DependentUpon>frmRealTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmSpecialSetting.resx">
+      <DependentUpon>frmSpecialSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmTop30.resx">
+      <DependentUpon>frmTop30.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmTradeList.resx">
+      <DependentUpon>frmTradeList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -255,6 +373,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="appsettings.json" />
     <None Include="job_scheduling_data_2_0.xsd">

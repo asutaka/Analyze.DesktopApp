@@ -11,6 +11,7 @@
         public string signature { get; set; }
     }
 
+    #region AppSetting
     public class DomainModel
     {
         public string Main { get; set; }
@@ -18,7 +19,13 @@
         public string Sub2 { get; set; }
         public string Sub3 { get; set; }
         public string Sub4 { get; set; }
+    } 
+
+    public class ViewWebModel
+    {
+        public string Single { get; set; }
     }
+    #endregion
 
     public class SendNotifyModel
     {

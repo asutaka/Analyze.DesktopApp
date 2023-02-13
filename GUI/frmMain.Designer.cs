@@ -46,6 +46,7 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnStart = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnStop = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnVersion = new DevExpress.XtraBars.BarButtonItem();
+            this.btn24h = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -56,6 +57,9 @@ namespace Analyze.DesktopApp.GUI
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.tabControl = new DevExpress.XtraTab.XtraTabControl();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.SuspendLayout();
@@ -78,14 +82,16 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnRealTime,
             this.barBtnStart,
             this.barBtnStop,
-            this.barBtnVersion});
+            this.barBtnVersion,
+            this.btn24h});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 14;
+            this.ribbon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ribbon.MaxItemId = 15;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
             this.ribbon.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.MacOffice;
-            this.ribbon.Size = new System.Drawing.Size(1022, 133);
+            this.ribbon.Size = new System.Drawing.Size(1192, 171);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             this.ribbon.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             // 
@@ -192,6 +198,15 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnVersion.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnVersion.ImageOptions.SvgImage")));
             this.barBtnVersion.Name = "barBtnVersion";
             // 
+            // btn24h
+            // 
+            this.btn24h.Caption = "24 giờ";
+            this.btn24h.Id = 14;
+            this.btn24h.ImageOptions.Image = global::Analyze.DesktopApp.Properties.Resources._24h;
+            this.btn24h.Name = "btn24h";
+            this.btn24h.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btn24h.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn24h_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -212,6 +227,7 @@ namespace Analyze.DesktopApp.GUI
             // 
             // ribbonGroup2
             // 
+            this.ribbonGroup2.ItemLinks.Add(this.btn24h);
             this.ribbonGroup2.ItemLinks.Add(this.barBtnRealTime);
             this.ribbonGroup2.ItemLinks.Add(this.barBtnTop30);
             this.ribbonGroup2.ItemLinks.Add(this.barBtnMCDX);
@@ -250,10 +266,11 @@ namespace Analyze.DesktopApp.GUI
             // 
             // ribbonStatusBar
             // 
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 740);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 914);
+            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1022, 27);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1192, 30);
             // 
             // ribbonPage4
             // 
@@ -264,23 +281,45 @@ namespace Analyze.DesktopApp.GUI
             // 
             this.tabControl.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InTabControlHeader;
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 133);
+            this.tabControl.Location = new System.Drawing.Point(0, 171);
             this.tabControl.LookAndFeel.SkinName = "McSkin";
             this.tabControl.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.tabControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl.Name = "tabControl";
-            this.tabControl.Size = new System.Drawing.Size(1022, 607);
+            this.tabControl.Size = new System.Drawing.Size(1192, 743);
             this.tabControl.TabIndex = 2;
             this.tabControl.CloseButtonClick += new System.EventHandler(this.tabControl_CloseButtonClick);
             // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "MCDX";
+            this.barButtonItem2.Id = 4;
+            this.barButtonItem2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "MCDX";
+            this.barButtonItem3.Id = 4;
+            this.barButtonItem3.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
+            this.barButtonItem3.Name = "barButtonItem3";
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "MCDX";
+            this.barButtonItem4.Id = 4;
+            this.barButtonItem4.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem4.ImageOptions.SvgImage")));
+            this.barButtonItem4.Name = "barButtonItem4";
+            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1022, 767);
+            this.ClientSize = new System.Drawing.Size(1192, 944);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
-            //this.IconOptions.Image = global::BinanceApp.Properties.Resources.logo;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmMain";
             this.Ribbon = this.ribbon;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -319,5 +358,9 @@ namespace Analyze.DesktopApp.GUI
         private DevExpress.XtraBars.BarButtonItem barBtnStop;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.BarButtonItem barBtnVersion;
+        private DevExpress.XtraBars.BarButtonItem btn24h;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
     }
 }
