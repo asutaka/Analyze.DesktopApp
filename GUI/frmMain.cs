@@ -1,11 +1,17 @@
 ﻿using Analyze.DesktopApp.Common;
 using Analyze.DesktopApp.GUI.Child;
+using Analyze.DesktopApp.Models;
+using Analyze.DesktopApp.Utils;
 using DevExpress.XtraTab;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Analyze.DesktopApp.GUI
 {
@@ -35,31 +41,38 @@ namespace Analyze.DesktopApp.GUI
             return _instance;
         }
 
-        //private void bkgrConfig_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //    //dtStartConfig = DateTime.Now;
-        //    _frmWaitForm.Show("Thiết lập ban đầu");
-        //    var lstTask = new List<Task>();
-        //    foreach (var item in StaticValues.lstCoinFilter)
-        //    {
-        //        var task = Task.Run(() =>
-        //        {
-        //            StaticValues.dicDatasource1H.Add(item.S, SeedData.LoadDatasource(item.S, (int)enumInterval.OneHour));
-        //        });
-        //        lstTask.Add(task);
-        //    }
-        //    Task.WaitAll(lstTask.ToArray());
-        //    Thread.Sleep(200);
-        //    _frmWaitForm.Close();
-        //}
-        //private void bkgrConfig_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        //{
-        //    _bkgr.DoWork -= bkgrConfig_DoWork;
-        //    _bkgr.RunWorkerCompleted -= bkgrConfig_RunWorkerCompleted;
-        //    _bkgr.DoWork += bkgrAnalyze_DoWork;
-        //    _bkgr.RunWorkerCompleted += bkgrAnalyze_RunWorkerCompleted;
-        //    _bkgr.RunWorkerAsync();
-        //}
+        private void bkgrConfig_DoWork(object sender, DoWorkEventArgs e)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                tabControl.AddTab(frm24H.Instance());
+            });
+            
+            
+
+            ////dtStartConfig = DateTime.Now;
+            //_frmWaitForm.Show("Thiết lập ban đầu");
+            //var lstTask = new List<Task>();
+            //foreach (var item in StaticValues.lstCoinFilter)
+            //{
+            //    var task = Task.Run(() =>
+            //    {
+            //        StaticValues.dicDatasource1H.Add(item.S, SeedData.LoadDatasource(item.S, (int)enumInterval.OneHour));
+            //    });
+            //    lstTask.Add(task);
+            //}
+            //Task.WaitAll(lstTask.ToArray());
+            //Thread.Sleep(200);
+            //_frmWaitForm.Close();
+        }
+        private void bkgrConfig_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            _bkgr.DoWork -= bkgrConfig_DoWork;
+            _bkgr.RunWorkerCompleted -= bkgrConfig_RunWorkerCompleted;
+            //_bkgr.DoWork += bkgrAnalyze_DoWork;
+            //_bkgr.RunWorkerCompleted += bkgrAnalyze_RunWorkerCompleted;
+            //_bkgr.RunWorkerAsync();
+        }
 
         //private void bkgrAnalyze_DoWork(object sender, DoWorkEventArgs e)
         //{
@@ -346,6 +359,14 @@ namespace Analyze.DesktopApp.GUI
             {
                 tabControl.AddTab(frm24H.Instance());
             });
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            _bkgr = new BackgroundWorker();
+            _bkgr.DoWork += bkgrConfig_DoWork;
+            _bkgr.RunWorkerCompleted += bkgrConfig_RunWorkerCompleted;
+            _bkgr.RunWorkerAsync();
         }
     }
 }

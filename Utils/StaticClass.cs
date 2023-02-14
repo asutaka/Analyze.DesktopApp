@@ -1,4 +1,5 @@
-﻿using Analyze.DesktopApp.Models;
+﻿using Analyze.DesktopApp.Common;
+using Analyze.DesktopApp.Models;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
@@ -91,7 +92,7 @@ namespace Analyze.DesktopApp.Utils
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"StaticClass.PostCheckUser|EXCEPTION| INPUT: {JsonConvert.SerializeObject(param)}| {ex.Message}");
+                NLogLogger.PublishException(ex, $"StaticClass.PostCheckUser|EXCEPTION| INPUT: {JsonConvert.SerializeObject(param)}| {ex.Message}");
                 return null;
             }
         }
@@ -116,14 +117,13 @@ namespace Analyze.DesktopApp.Utils
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"StaticClass.PostSendNotify|EXCEPTION| INPUT: {JsonConvert.SerializeObject(param)}| {ex.Message}");
+                NLogLogger.PublishException(ex, $"StaticClass.PostSendNotify|EXCEPTION| INPUT: {JsonConvert.SerializeObject(param)}| {ex.Message}");
                 return null;
             }
         }
 
         public static async Task<string> PostUpdatePassword(CheckUserModel param)
         {
-
             // Thiết lập các Header nếu cần
             HttpGetInstance().DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml+json");
             try
@@ -141,7 +141,7 @@ namespace Analyze.DesktopApp.Utils
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"StaticClass.PostUpdatePassword|EXCEPTION| INPUT: {JsonConvert.SerializeObject(param)}| {ex.Message}");
+                NLogLogger.PublishException(ex, $"StaticClass.PostUpdatePassword|EXCEPTION| INPUT: {JsonConvert.SerializeObject(param)}| {ex.Message}");
                 return null;
             }
         }

@@ -85,13 +85,12 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnVersion,
             this.btn24h});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ribbon.MaxItemId = 15;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
             this.ribbon.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.MacOffice;
-            this.ribbon.Size = new System.Drawing.Size(1192, 171);
+            this.ribbon.Size = new System.Drawing.Size(1022, 141);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             this.ribbon.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             // 
@@ -266,11 +265,10 @@ namespace Analyze.DesktopApp.GUI
             // 
             // ribbonStatusBar
             // 
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 914);
-            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 743);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1192, 30);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1022, 24);
             // 
             // ribbonPage4
             // 
@@ -281,12 +279,11 @@ namespace Analyze.DesktopApp.GUI
             // 
             this.tabControl.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InTabControlHeader;
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 171);
+            this.tabControl.Location = new System.Drawing.Point(0, 141);
             this.tabControl.LookAndFeel.SkinName = "McSkin";
             this.tabControl.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.tabControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl.Name = "tabControl";
-            this.tabControl.Size = new System.Drawing.Size(1192, 743);
+            this.tabControl.Size = new System.Drawing.Size(1022, 602);
             this.tabControl.TabIndex = 2;
             this.tabControl.CloseButtonClick += new System.EventHandler(this.tabControl_CloseButtonClick);
             // 
@@ -313,18 +310,18 @@ namespace Analyze.DesktopApp.GUI
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1192, 944);
+            this.ClientSize = new System.Drawing.Size(1022, 767);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmMain";
             this.Ribbon = this.ribbon;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
+            this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.ResumeLayout(false);

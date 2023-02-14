@@ -29,6 +29,8 @@ namespace Analyze.DesktopApp.GUI
 
         private void InitData()
         {
+            Startup.Instance();
+
             var model = new ProfileModel().LoadJsonFile(_fileName);
             if (model != null)
             {

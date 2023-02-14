@@ -25,12 +25,33 @@
     {
         public string Single { get; set; }
     }
+
+    public class APIModel
+    {
+        public string API24hr { get; set; }
+    }
+
+    public class JobModel
+    {
+        public string SubcribeJob { get; set; }
+    }
     #endregion
 
     public class SendNotifyModel
     {
         public string phone { get; set; }
         public string message { get; set; }
+    }
+
+    public class MiniTicketModel
+    {
+        public string Symbol { get; set; }
+        public decimal LastPrice { get; set; }
+        public decimal OpenPrice { get; set; }
+        public decimal HighPrice { get; set; }
+        public decimal LowPrice { get; set; }
+        public decimal Volume { get; set; }
+        public decimal QuoteVolume { get; set; }
     }
 
     public class TicketModel

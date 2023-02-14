@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Analyze.DesktopApp.Models;
+using AutoMapper;
 using DevExpress.XtraEditors;
 using DevExpress.XtraTab;
 using Newtonsoft.Json;
@@ -135,19 +136,20 @@ namespace Analyze.DesktopApp.Common
             }
         }
 
-        //public static T To<T>(this ElementModel model)
-        //{
-        //    if (model == null)
-        //        return default(T);
-        //    return MapperConfig.Map<T>(model);
-        //}
+        public static T To<T>(this TicketModel model)
+        {
+            if (model == null)
+                return default(T);
+            return MapperConfig.Map<T>(model);
+        }
 
-        //public static T To<T>(this List<ElementModel> model)
-        //{
-        //    if (model == null)
-        //        return default(T);
-        //    return MapperConfig.Map<T>(model);
-        //}
+        public static T To<T>(this List<TicketModel> model)
+        {
+            if (model == null)
+                return default(T);
+            return MapperConfig.Map<T>(model);
+        }
+
         public static string To2Digit(this int val)
         {
             if (val > 9)
@@ -204,14 +206,10 @@ namespace Analyze.DesktopApp.Common
     }
     public class MapProfile : Profile
     {
-        //public MapProfile()
-        //{
-        //    CreateMap<ElementModel, GeneralModel>()
-        //        .ForMember(dest => dest.Indicator, opt => opt.MapFrom(src => src.Id))
-        //        .ForMember(dest => dest.High, opt => opt.MapFrom(src => src.Id == (int)enumChooseData.MACD ? src.Value / 10000 : 0))
-        //        .ForMember(dest => dest.Low, opt => opt.MapFrom(src => src.Id == (int)enumChooseData.MACD ? int.Parse(src.Value.ToString().Substring(2, 2)) : 0))
-        //        .ForMember(dest => dest.Signal, opt => opt.MapFrom(src => src.Id == (int)enumChooseData.MACD ? src.Value % 10000 : 0))
-        //        .ForMember(dest => dest.Period, opt => opt.MapFrom(src => src.Id == (int)enumChooseData.MACD ? 0 : src.Value));
-        //}
+        public MapProfile()
+        {
+            CreateMap<TicketModel, API24hVM>()
+                .ForMember(dest => dest.Coin, opt => opt.MapFrom(src => src.symbol));
+        }
     }
 }

@@ -1,4 +1,10 @@
-﻿namespace Analyze.DesktopApp
+﻿using Analyze.DesktopApp.Job;
+using Analyze.DesktopApp.Job.ScheduleJob;
+using Analyze.DesktopApp.Models;
+using Microsoft.Extensions.Configuration;
+using Quartz;
+
+namespace Analyze.DesktopApp
 {
     public class Startup
     {
@@ -14,6 +20,10 @@
         }
         private void InitData()
         {
+            var settings = Program.Configuration.GetSection("Job").Get<JobModel>();
+            new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<SubcribeJob>(), settings.SubcribeJob, nameof(SubcribeJob)).Start();
+
+
             ////Load JSonFile
             //StaticValues.basicModel = new BasicSettingModel().LoadJsonFile("basic_setting.json");
             //var obj = new AdvanceSettingModel();
@@ -26,18 +36,18 @@
             //StaticValues.lstBlackList = new List<CryptonDetailDataModel>().LoadJsonFile("blacklist.json");
             //StaticValues.tradeList = new TradeListModel().LoadJsonFile("tradelist.json");
             //StaticValues.followList = new FollowModel().LoadJsonFile("followlist.json");
-            
+
             ////Load ListCoin
             //StaticValues.lstCoin = SeedData.GetCryptonList();
             //StaticValues.lstCoinFilter = SeedData.GetCryptonListWithFilter();
 
             ////Schedule
             //StaticValues.ScheduleMngObj.AddSchedule(new ScheduleMember(StaticValues.ScheduleMngObj.GetScheduler(), JobBuilder.Create<CheckStatusJob>(), StaticValues.Scron_CheckStatus, nameof(CheckStatusJob)));
-          
-            
-            
-            
-            
+
+
+
+
+
             //StaticValues.ScheduleMngObj.AddSchedule(new ScheduleMember(StaticValues.ScheduleMngObj.GetScheduler(), JobBuilder.Create<Top30CurrentValueScheduleJob>(), StaticValues.Scron_Top30CurrentValue, nameof(Top30CurrentValueScheduleJob)));
             //foreach (var Schedule in StaticValues.ScheduleMngObj.GetSchedules())
             //{

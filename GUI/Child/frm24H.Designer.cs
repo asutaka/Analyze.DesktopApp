@@ -44,9 +44,9 @@ namespace Analyze.DesktopApp.GUI.Child
             DevExpress.XtraEditors.FormatConditionIconSetIcon formatConditionIconSetIcon5 = new DevExpress.XtraEditors.FormatConditionIconSetIcon();
             DevExpress.XtraEditors.FormatConditionIconSetIcon formatConditionIconSetIcon6 = new DevExpress.XtraEditors.FormatConditionIconSetIcon();
             this.RateValue = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.RefValue = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CoinName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.WaveRecent = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.RefValue = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Rate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grid = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -76,25 +76,6 @@ namespace Analyze.DesktopApp.GUI.Child
             this.RateValue.Visible = true;
             this.RateValue.VisibleIndex = 6;
             this.RateValue.Width = 85;
-            // 
-            // RefValue
-            // 
-            this.RefValue.AppearanceCell.Options.UseTextOptions = true;
-            this.RefValue.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.RefValue.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.RefValue.AppearanceHeader.Options.UseTextOptions = true;
-            this.RefValue.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.RefValue.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.RefValue.Caption = "Giá tham chiếu";
-            this.RefValue.DisplayFormat.FormatString = "\"#,##0.0\"";
-            this.RefValue.FieldName = "RefValue";
-            this.RefValue.MaxWidth = 80;
-            this.RefValue.MinWidth = 80;
-            this.RefValue.Name = "RefValue";
-            this.RefValue.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
-            this.RefValue.Visible = true;
-            this.RefValue.VisibleIndex = 3;
-            this.RefValue.Width = 80;
             // 
             // CoinName
             // 
@@ -128,6 +109,25 @@ namespace Analyze.DesktopApp.GUI.Child
             this.WaveRecent.Visible = true;
             this.WaveRecent.VisibleIndex = 7;
             this.WaveRecent.Width = 100;
+            // 
+            // RefValue
+            // 
+            this.RefValue.AppearanceCell.Options.UseTextOptions = true;
+            this.RefValue.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.RefValue.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.RefValue.AppearanceHeader.Options.UseTextOptions = true;
+            this.RefValue.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.RefValue.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.RefValue.Caption = "Giá tham chiếu";
+            this.RefValue.DisplayFormat.FormatString = "\"#,##0.0\"";
+            this.RefValue.FieldName = "RefValue";
+            this.RefValue.MaxWidth = 80;
+            this.RefValue.MinWidth = 80;
+            this.RefValue.Name = "RefValue";
+            this.RefValue.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+            this.RefValue.Visible = true;
+            this.RefValue.VisibleIndex = 3;
+            this.RefValue.Width = 80;
             // 
             // Rate
             // 
@@ -357,7 +357,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.Count.Visible = true;
             this.Count.VisibleIndex = 8;
             // 
-            // frmTop30
+            // frm24H
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -365,8 +365,9 @@ namespace Analyze.DesktopApp.GUI.Child
             this.Controls.Add(this.grid);
             this.LookAndFeel.SkinName = "McSkin";
             this.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.Name = "frmTop30";
+            this.Name = "frm24H";
             this.Text = "Top30";
+            this.Load += new System.EventHandler(this.frm24H_Load);
             this.VisibleChanged += new System.EventHandler(this.frmTop30_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
