@@ -209,7 +209,8 @@ namespace Analyze.DesktopApp.Common
         public MapProfile()
         {
             CreateMap<TicketModel, API24hVM>()
-                .ForMember(dest => dest.Coin, opt => opt.MapFrom(src => src.symbol));
+                .ForMember(dest => dest.Coin, opt => opt.MapFrom(src => src.symbol))
+                .ForMember(dest => dest.PriceChangePercent, opt => opt.MapFrom(src => (int)(src.priceChangePercent)));
         }
     }
 }

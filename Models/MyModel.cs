@@ -1,4 +1,6 @@
-﻿namespace Analyze.DesktopApp.Models
+﻿using System.Collections.Generic;
+
+namespace Analyze.DesktopApp.Models
 {
     public class ProfileModel
     {
@@ -29,6 +31,7 @@
     public class APIModel
     {
         public string API24hr { get; set; }
+        public string Coin { get; set; }
     }
 
     public class JobModel
@@ -77,5 +80,16 @@
         public long firstId { get; set; }
         public long lastId { get; set; }
         public long count { get; set; }
+    }
+
+    public class CryptonDataModel
+    {
+        public List<CryptonDetailDataModel> Data { get; set; }
+    }
+
+    public class CryptonDetailDataModel
+    {
+        public string S { get; set; }
+        public string AN { get; set; }
     }
 }

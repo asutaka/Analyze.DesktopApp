@@ -43,39 +43,38 @@ namespace Analyze.DesktopApp.GUI.Child
             DevExpress.XtraEditors.FormatConditionIconSetIcon formatConditionIconSetIcon4 = new DevExpress.XtraEditors.FormatConditionIconSetIcon();
             DevExpress.XtraEditors.FormatConditionIconSetIcon formatConditionIconSetIcon5 = new DevExpress.XtraEditors.FormatConditionIconSetIcon();
             DevExpress.XtraEditors.FormatConditionIconSetIcon formatConditionIconSetIcon6 = new DevExpress.XtraEditors.FormatConditionIconSetIcon();
-            this.RateValue = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.PriceChangePercent = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CoinName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.WaveRecent = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.RefValue = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Rate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.weightedAvgPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.volume = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grid = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.STT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Coin = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Value = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.BottomRecent = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Count = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.prevClosePrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lastPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.PriceChange = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // RateValue
+            // PriceChangePercent
             // 
-            this.RateValue.AppearanceCell.Options.UseTextOptions = true;
-            this.RateValue.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.RateValue.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.RateValue.AppearanceHeader.Options.UseTextOptions = true;
-            this.RateValue.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.RateValue.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.RateValue.Caption = "Gia tăng(%)";
-            this.RateValue.FieldName = "RateValue";
-            this.RateValue.MaxWidth = 85;
-            this.RateValue.MinWidth = 85;
-            this.RateValue.Name = "RateValue";
-            this.RateValue.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
-            this.RateValue.Visible = true;
-            this.RateValue.VisibleIndex = 6;
-            this.RateValue.Width = 85;
+            this.PriceChangePercent.AppearanceCell.Options.UseTextOptions = true;
+            this.PriceChangePercent.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.PriceChangePercent.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.PriceChangePercent.AppearanceHeader.Options.UseTextOptions = true;
+            this.PriceChangePercent.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.PriceChangePercent.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.PriceChangePercent.Caption = "Gia tăng(%)";
+            this.PriceChangePercent.FieldName = "PriceChangePercent";
+            this.PriceChangePercent.MaxWidth = 85;
+            this.PriceChangePercent.MinWidth = 85;
+            this.PriceChangePercent.Name = "PriceChangePercent";
+            this.PriceChangePercent.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
+            this.PriceChangePercent.Visible = true;
+            this.PriceChangePercent.VisibleIndex = 6;
+            this.PriceChangePercent.Width = 85;
             // 
             // CoinName
             // 
@@ -92,61 +91,44 @@ namespace Analyze.DesktopApp.GUI.Child
             this.CoinName.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.CoinName.Visible = true;
             this.CoinName.VisibleIndex = 2;
+            this.CoinName.Width = 827;
             // 
-            // WaveRecent
+            // weightedAvgPrice
             // 
-            this.WaveRecent.AppearanceCell.Options.UseTextOptions = true;
-            this.WaveRecent.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.WaveRecent.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.WaveRecent.AppearanceHeader.Options.UseTextOptions = true;
-            this.WaveRecent.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.WaveRecent.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.WaveRecent.Caption = "Sóng gần nhất(%)";
-            this.WaveRecent.FieldName = "WaveRecent";
-            this.WaveRecent.MaxWidth = 100;
-            this.WaveRecent.MinWidth = 100;
-            this.WaveRecent.Name = "WaveRecent";
-            this.WaveRecent.Visible = true;
-            this.WaveRecent.VisibleIndex = 7;
-            this.WaveRecent.Width = 100;
+            this.weightedAvgPrice.AppearanceCell.Options.UseTextOptions = true;
+            this.weightedAvgPrice.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.weightedAvgPrice.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.weightedAvgPrice.AppearanceHeader.Options.UseTextOptions = true;
+            this.weightedAvgPrice.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.weightedAvgPrice.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.weightedAvgPrice.Caption = "Khối lượng TB";
+            this.weightedAvgPrice.DisplayFormat.FormatString = "\"#,##0.0\"";
+            this.weightedAvgPrice.FieldName = "weightedAvgPrice";
+            this.weightedAvgPrice.MaxWidth = 150;
+            this.weightedAvgPrice.MinWidth = 150;
+            this.weightedAvgPrice.Name = "weightedAvgPrice";
+            this.weightedAvgPrice.Visible = true;
+            this.weightedAvgPrice.VisibleIndex = 8;
+            this.weightedAvgPrice.Width = 150;
             // 
-            // RefValue
+            // volume
             // 
-            this.RefValue.AppearanceCell.Options.UseTextOptions = true;
-            this.RefValue.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.RefValue.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.RefValue.AppearanceHeader.Options.UseTextOptions = true;
-            this.RefValue.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.RefValue.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.RefValue.Caption = "Giá tham chiếu";
-            this.RefValue.DisplayFormat.FormatString = "\"#,##0.0\"";
-            this.RefValue.FieldName = "RefValue";
-            this.RefValue.MaxWidth = 80;
-            this.RefValue.MinWidth = 80;
-            this.RefValue.Name = "RefValue";
-            this.RefValue.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
-            this.RefValue.Visible = true;
-            this.RefValue.VisibleIndex = 3;
-            this.RefValue.Width = 80;
-            // 
-            // Rate
-            // 
-            this.Rate.AppearanceCell.Options.UseTextOptions = true;
-            this.Rate.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.Rate.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.Rate.AppearanceHeader.Options.UseTextOptions = true;
-            this.Rate.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.Rate.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.Rate.Caption = "Sóng TB(%)";
-            this.Rate.DisplayFormat.FormatString = "#,##0.0";
-            this.Rate.FieldName = "Rate";
-            this.Rate.MaxWidth = 75;
-            this.Rate.MinWidth = 75;
-            this.Rate.Name = "Rate";
-            this.Rate.OptionsColumn.AllowEdit = false;
-            this.Rate.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
-            this.Rate.Visible = true;
-            this.Rate.VisibleIndex = 9;
+            this.volume.AppearanceCell.Options.UseTextOptions = true;
+            this.volume.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.volume.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.volume.AppearanceHeader.Options.UseTextOptions = true;
+            this.volume.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.volume.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.volume.Caption = "Khối lượng";
+            this.volume.DisplayFormat.FormatString = "\"#,##0\"";
+            this.volume.FieldName = "volume";
+            this.volume.MaxWidth = 180;
+            this.volume.MinWidth = 180;
+            this.volume.Name = "volume";
+            this.volume.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+            this.volume.Visible = true;
+            this.volume.VisibleIndex = 7;
+            this.volume.Width = 180;
             // 
             // grid
             // 
@@ -165,15 +147,14 @@ namespace Analyze.DesktopApp.GUI.Child
             this.STT,
             this.Coin,
             this.CoinName,
-            this.RefValue,
-            this.Value,
-            this.BottomRecent,
-            this.RateValue,
-            this.WaveRecent,
-            this.Count,
-            this.Rate});
-            gridFormatRule1.Column = this.RateValue;
-            gridFormatRule1.ColumnApplyTo = this.RateValue;
+            this.prevClosePrice,
+            this.lastPrice,
+            this.volume,
+            this.PriceChange,
+            this.PriceChangePercent,
+            this.weightedAvgPrice});
+            gridFormatRule1.Column = this.PriceChangePercent;
+            gridFormatRule1.ColumnApplyTo = this.PriceChangePercent;
             gridFormatRule1.Name = "FormatRate";
             formatConditionRuleIconSet1.AllowAnimation = DevExpress.Utils.DefaultBoolean.True;
             formatConditionIconSet1.CategoryName = "Directional";
@@ -205,7 +186,7 @@ namespace Analyze.DesktopApp.GUI.Child
             formatConditionIconSet1.ValueType = DevExpress.XtraEditors.FormatConditionValueType.Number;
             formatConditionRuleIconSet1.IconSet = formatConditionIconSet1;
             gridFormatRule1.Rule = formatConditionRuleIconSet1;
-            gridFormatRule2.Column = this.RateValue;
+            gridFormatRule2.Column = this.PriceChangePercent;
             gridFormatRule2.ColumnApplyTo = this.CoinName;
             gridFormatRule2.Name = "Format1";
             formatConditionRule3ColorScale1.AllowAnimation = DevExpress.Utils.DefaultBoolean.True;
@@ -227,8 +208,8 @@ namespace Analyze.DesktopApp.GUI.Child
             formatConditionRule3ColorScale1.MinimumType = DevExpress.XtraEditors.FormatConditionValueType.Number;
             formatConditionRule3ColorScale1.PredefinedName = "Green, White, Red";
             gridFormatRule2.Rule = formatConditionRule3ColorScale1;
-            gridFormatRule3.Column = this.WaveRecent;
-            gridFormatRule3.ColumnApplyTo = this.WaveRecent;
+            gridFormatRule3.Column = this.weightedAvgPrice;
+            gridFormatRule3.ColumnApplyTo = this.weightedAvgPrice;
             gridFormatRule3.Name = "Format2";
             formatConditionIconSet2.CategoryName = "Symbols";
             formatConditionIconSetIcon4.PredefinedName = "Flags3_1.png";
@@ -302,60 +283,58 @@ namespace Analyze.DesktopApp.GUI.Child
             this.Coin.VisibleIndex = 1;
             this.Coin.Width = 90;
             // 
-            // Value
+            // prevClosePrice
             // 
-            this.Value.AppearanceCell.Options.UseTextOptions = true;
-            this.Value.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.Value.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.Value.AppearanceHeader.Options.UseTextOptions = true;
-            this.Value.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.Value.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.Value.Caption = "Giá hiện tại";
-            this.Value.DisplayFormat.FormatString = "#,##0.0";
-            this.Value.FieldName = "Value";
-            this.Value.MaxWidth = 75;
-            this.Value.MinWidth = 75;
-            this.Value.Name = "Value";
-            this.Value.OptionsColumn.AllowEdit = false;
-            this.Value.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
-            this.Value.Visible = true;
-            this.Value.VisibleIndex = 4;
+            this.prevClosePrice.AppearanceCell.Options.UseTextOptions = true;
+            this.prevClosePrice.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.prevClosePrice.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.prevClosePrice.AppearanceHeader.Options.UseTextOptions = true;
+            this.prevClosePrice.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.prevClosePrice.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.prevClosePrice.Caption = "Giá trước đó";
+            this.prevClosePrice.FieldName = "prevClosePrice";
+            this.prevClosePrice.MaxWidth = 75;
+            this.prevClosePrice.MinWidth = 75;
+            this.prevClosePrice.Name = "prevClosePrice";
+            this.prevClosePrice.Visible = true;
+            this.prevClosePrice.VisibleIndex = 3;
             // 
-            // BottomRecent
+            // lastPrice
             // 
-            this.BottomRecent.AppearanceCell.Options.UseTextOptions = true;
-            this.BottomRecent.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.BottomRecent.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.BottomRecent.AppearanceHeader.Options.UseTextOptions = true;
-            this.BottomRecent.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.BottomRecent.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.BottomRecent.Caption = "Đáy gần nhất";
-            this.BottomRecent.FieldName = "BottomRecent";
-            this.BottomRecent.MaxWidth = 80;
-            this.BottomRecent.MinWidth = 80;
-            this.BottomRecent.Name = "BottomRecent";
-            this.BottomRecent.Visible = true;
-            this.BottomRecent.VisibleIndex = 5;
-            this.BottomRecent.Width = 80;
+            this.lastPrice.AppearanceCell.Options.UseTextOptions = true;
+            this.lastPrice.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lastPrice.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.lastPrice.AppearanceHeader.Options.UseTextOptions = true;
+            this.lastPrice.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lastPrice.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.lastPrice.Caption = "Giá hiện tại";
+            this.lastPrice.DisplayFormat.FormatString = "#,##0.0";
+            this.lastPrice.FieldName = "lastPrice";
+            this.lastPrice.MaxWidth = 75;
+            this.lastPrice.MinWidth = 75;
+            this.lastPrice.Name = "lastPrice";
+            this.lastPrice.OptionsColumn.AllowEdit = false;
+            this.lastPrice.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+            this.lastPrice.Visible = true;
+            this.lastPrice.VisibleIndex = 4;
             // 
-            // Count
+            // PriceChange
             // 
-            this.Count.AppearanceCell.Options.UseTextOptions = true;
-            this.Count.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.Count.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.Count.AppearanceHeader.Options.UseTextOptions = true;
-            this.Count.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.Count.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.Count.Caption = "Số sóng";
-            this.Count.DisplayFormat.FormatString = "#,##0";
-            this.Count.FieldName = "Count";
-            this.Count.MaxWidth = 75;
-            this.Count.MinWidth = 75;
-            this.Count.Name = "Count";
-            this.Count.OptionsColumn.AllowEdit = false;
-            this.Count.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
-            this.Count.Visible = true;
-            this.Count.VisibleIndex = 8;
+            this.PriceChange.AppearanceCell.Options.UseTextOptions = true;
+            this.PriceChange.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.PriceChange.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.PriceChange.AppearanceHeader.Options.UseTextOptions = true;
+            this.PriceChange.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.PriceChange.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.PriceChange.Caption = "Giá thay đổi";
+            this.PriceChange.DisplayFormat.FormatString = "\"#,##0.0\"";
+            this.PriceChange.FieldName = "PriceChange";
+            this.PriceChange.MaxWidth = 80;
+            this.PriceChange.MinWidth = 80;
+            this.PriceChange.Name = "PriceChange";
+            this.PriceChange.Visible = true;
+            this.PriceChange.VisibleIndex = 5;
+            this.PriceChange.Width = 80;
             // 
             // frm24H
             // 
@@ -382,12 +361,11 @@ namespace Analyze.DesktopApp.GUI.Child
         private DevExpress.XtraGrid.Columns.GridColumn STT;
         private DevExpress.XtraGrid.Columns.GridColumn Coin;
         private DevExpress.XtraGrid.Columns.GridColumn CoinName;
-        private DevExpress.XtraGrid.Columns.GridColumn Value;
-        private DevExpress.XtraGrid.Columns.GridColumn Count;
-        private DevExpress.XtraGrid.Columns.GridColumn Rate;
-        private DevExpress.XtraGrid.Columns.GridColumn RateValue;
-        private DevExpress.XtraGrid.Columns.GridColumn RefValue;
-        private DevExpress.XtraGrid.Columns.GridColumn BottomRecent;
-        private DevExpress.XtraGrid.Columns.GridColumn WaveRecent;
+        private DevExpress.XtraGrid.Columns.GridColumn lastPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn PriceChangePercent;
+        private DevExpress.XtraGrid.Columns.GridColumn volume;
+        private DevExpress.XtraGrid.Columns.GridColumn PriceChange;
+        private DevExpress.XtraGrid.Columns.GridColumn weightedAvgPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn prevClosePrice;
     }
 }

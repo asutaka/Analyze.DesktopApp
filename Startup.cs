@@ -1,8 +1,12 @@
 ﻿using Analyze.DesktopApp.Job;
 using Analyze.DesktopApp.Job.ScheduleJob;
 using Analyze.DesktopApp.Models;
+using Analyze.DesktopApp.Utils;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using Quartz;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Analyze.DesktopApp
 {
@@ -22,6 +26,15 @@ namespace Analyze.DesktopApp
         {
             var settings = Program.Configuration.GetSection("Job").Get<JobModel>();
             new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<SubcribeJob>(), settings.SubcribeJob, nameof(SubcribeJob)).Start();
+
+            var settingsAPI = Program.Configuration.GetSection("API").Get<APIModel>();
+            var content = StaticClass.GetWebContent(settingsAPI.Coin).GetAwaiter().GetResult();
+            if (!string.IsNullOrWhiteSpace(content))
+            {
+                StaticVal.lstCoin = JsonConvert.DeserializeObject<CryptonDataModel>(content).Data
+                            .Where(x => x.S.EndsWith("USDT"))
+                            .OrderBy(x => x.S).ToList();
+            }
 
 
             ////Load JSonFile

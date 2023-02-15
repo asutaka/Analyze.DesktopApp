@@ -120,7 +120,9 @@ namespace Analyze.DesktopApp.GUI.Child
                 int index = 1;
                 foreach (var item in _lst24H)
                 {
+                    var entityCoin = StaticVal.lstCoin.FirstOrDefault(x => x.S == item.Coin);
                     item.STT = index++;
+                    item.CoinName = entityCoin == null ? string.Empty : entityCoin.AN; 
                 }
             }
         }

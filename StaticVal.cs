@@ -8,6 +8,8 @@ namespace Analyze.DesktopApp
     {
         //Local Data
         public static List<IBinanceMiniTick> binanceTicks = new List<IBinanceMiniTick>();
+        public static List<CryptonDetailDataModel> lstCoin = new List<CryptonDetailDataModel>();
+        public static List<CryptonDetailDataModel> lstCoinFilter = new List<CryptonDetailDataModel>();
         //Data Coin
         public static Dictionary<string, IEnumerable<MiniTicketModel>> dic1H = new Dictionary<string, IEnumerable<MiniTicketModel>>();
     }
