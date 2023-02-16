@@ -18,7 +18,7 @@ namespace Analyze.DesktopApp.Utils
         {
             if(_client == null)
             {
-                _client = new HttpClient();
+                _client = new HttpClient { Timeout = TimeSpan.FromSeconds(1) };
             }
             return _client;
         }

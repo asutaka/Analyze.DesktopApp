@@ -212,6 +212,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculateMng.cs" />
+    <Compile Include="ConfigVal.cs" />
     <Compile Include="GUI\Child\frm24H.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Analyze.DesktopApp.GUI
 {
@@ -47,50 +48,109 @@ namespace Analyze.DesktopApp.GUI
             {
                 tabControl.AddTab(frm24H.Instance());
             });
-            
-            
 
-            ////dtStartConfig = DateTime.Now;
-            //_frmWaitForm.Show("Thiết lập ban đầu");
-            //var lstTask = new List<Task>();
-            //foreach (var item in StaticValues.lstCoinFilter)
-            //{
-            //    var task = Task.Run(() =>
-            //    {
-            //        StaticValues.dicDatasource1H.Add(item.S, SeedData.LoadDatasource(item.S, (int)enumInterval.OneHour));
-            //    });
-            //    lstTask.Add(task);
-            //}
-            //Task.WaitAll(lstTask.ToArray());
-            //Thread.Sleep(200);
-            //_frmWaitForm.Close();
+            var settings = Program.Configuration.GetSection("Domain").Get<DomainModel>();
+            //var dt = DateTime.Now;
+            var lstTask = new List<Task>();
+            //1
+            lstTask.Add(Task.Run(() =>
+            {
+                GetData(settings.Sub1, ConfigVal._lstSub1);
+            }));
+            //2
+            lstTask.Add(Task.Run(() =>
+            {
+                GetData(settings.Sub2, ConfigVal._lstSub2);
+            }));
+            //3
+            lstTask.Add(Task.Run(() =>
+            {
+                GetData(settings.Sub3, ConfigVal._lstSub3);
+            }));
+            //4
+            lstTask.Add(Task.Run(() =>
+            {
+                GetData(settings.Sub4, ConfigVal._lstSub4);
+            }));
+            //5
+            lstTask.Add(Task.Run(() =>
+            {
+                GetData(settings.Sub5, ConfigVal._lstSub5);
+            }));
+            //6
+            lstTask.Add(Task.Run(() =>
+            {
+                GetData(settings.Sub6, ConfigVal._lstSub6);
+            }));
+            //7
+            lstTask.Add(Task.Run(() =>
+            {
+                GetData(settings.Sub7, ConfigVal._lstSub7);
+            }));
+            //8
+            lstTask.Add(Task.Run(() =>
+            {
+                GetData(settings.Sub8, ConfigVal._lstSub8);
+            }));
+            Task.WaitAll(lstTask.ToArray());
+            //TimeSpan span = DateTime.Now - dt;
         }
+        List<string> _lstCoinError = new List<string>();
+        private void GetData(string url, List<string> _lst)
+        {
+            int index = 1;
+            foreach (var item in _lst)
+            {
+                try
+                {
+                    var coin = StaticVal.lstCoin.FirstOrDefault(x => x.S == item.ToUpper());
+                    if (coin != null)
+                    {
+                        var content = StaticClass.GetWebContent($"{url}/symbol/{index++}").GetAwaiter().GetResult();
+                        if (!string.IsNullOrWhiteSpace(content))
+                        {
+                            StaticVal.dic1H.Add(coin.S, JsonConvert.DeserializeObject<List_LocalTicketModel>(content).data);
+                        }
+                        else
+                        {
+                            _lstCoinError.Add(item);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _lstCoinError.Add(item);
+                    NLogLogger.PublishException(ex, $"frmMain.GetData|EXCEPTION|INPUT: {JsonConvert.SerializeObject(item)}| {ex.Message}");
+                }
+            }
+        }
+
         private void bkgrConfig_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             _bkgr.DoWork -= bkgrConfig_DoWork;
             _bkgr.RunWorkerCompleted -= bkgrConfig_RunWorkerCompleted;
-            //_bkgr.DoWork += bkgrAnalyze_DoWork;
-            //_bkgr.RunWorkerCompleted += bkgrAnalyze_RunWorkerCompleted;
-            //_bkgr.RunWorkerAsync();
+            _bkgr.DoWork += bkgrAnalyze_DoWork;
+            _bkgr.RunWorkerCompleted += bkgrAnalyze_RunWorkerCompleted;
+            _bkgr.RunWorkerAsync();
         }
 
-        //private void bkgrAnalyze_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //    //dtStartCalculate = DateTime.Now;
-        //    _frmWaitForm.Show("Phân tích dữ liệu");
-        //    StaticValues.lstCryptonRank = CalculateMng.Top30();
-        //    Thread.Sleep(200);
-        //    _frmWaitForm.Close();
-        //}
-        //private void bkgrAnalyze_RunWorkerCompleted(object sender1, RunWorkerCompletedEventArgs e1)
-        //{
-        //    ribbon.Enabled = true;
-        //    _bkgr.DoWork -= bkgrAnalyze_DoWork;
-        //    _bkgr.RunWorkerCompleted -= bkgrAnalyze_RunWorkerCompleted;
-        //    _bkgr.DoWork += bkgrPrepareRealTime_DoWork;
-        //    _bkgr.RunWorkerCompleted += bkgrPrepareRealTime_RunWorkerCompleted;
-        //    _bkgr.RunWorkerAsync();
-        //}
+        private void bkgrAnalyze_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //dtStartCalculate = DateTime.Now;
+            //_frmWaitForm.Show("Phân tích dữ liệu");
+            //StaticValues.lstCryptonRank = CalculateMng.Top30();
+            //Thread.Sleep(200);
+            //_frmWaitForm.Close();
+        }
+        private void bkgrAnalyze_RunWorkerCompleted(object sender1, RunWorkerCompletedEventArgs e1)
+        {
+            ribbon.Enabled = true;
+            _bkgr.DoWork -= bkgrAnalyze_DoWork;
+            _bkgr.RunWorkerCompleted -= bkgrAnalyze_RunWorkerCompleted;
+            //_bkgr.DoWork += bkgrPrepareRealTime_DoWork;
+            //_bkgr.RunWorkerCompleted += bkgrPrepareRealTime_RunWorkerCompleted;
+            //_bkgr.RunWorkerAsync();
+        }
 
         //private void bkgrPrepareRealTime_DoWork(object sender1, DoWorkEventArgs e1)
         //{

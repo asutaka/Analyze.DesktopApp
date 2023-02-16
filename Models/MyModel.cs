@@ -21,6 +21,10 @@ namespace Analyze.DesktopApp.Models
         public string Sub2 { get; set; }
         public string Sub3 { get; set; }
         public string Sub4 { get; set; }
+        public string Sub5 { get; set; }
+        public string Sub6 { get; set; }
+        public string Sub7 { get; set; }
+        public string Sub8 { get; set; }
     } 
 
     public class ViewWebModel
@@ -38,6 +42,11 @@ namespace Analyze.DesktopApp.Models
     {
         public string DefaultJob { get; set; }
         public string SubcribeJob { get; set; }
+    }
+
+    public class CalculateModel
+    {
+        public int MCDX { get; set; }
     }
     #endregion
 
@@ -81,6 +90,25 @@ namespace Analyze.DesktopApp.Models
         public long firstId { get; set; }
         public long lastId { get; set; }
         public long count { get; set; }
+    }
+
+    public class LocalTicketModel
+    {
+        public string name { get; set; }
+        public long e { get; set; }
+        public float c { get; set; }
+        public float o { get; set; }
+        public float h { get; set; }
+        public float l { get; set; }
+        public float v { get; set; }
+        public float q { get; set; }
+        public long ut { get; set; }
+        public bool state { get; set; }
+    }
+
+    public class List_LocalTicketModel
+    {
+        public IEnumerable<LocalTicketModel> data { get; set; }
     }
 
     public class CryptonDataModel

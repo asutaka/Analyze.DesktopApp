@@ -171,7 +171,7 @@ namespace Analyze.DesktopApp.GUI.Child
             }
             catch (Exception ex)
             {
-                NLogLogger.PublishException(ex, $"Top30ScheduleJob:Execute: {ex.Message}");
+                NLogLogger.PublishException(ex, $"Top30ScheduleJob.Execute|EXCEPTION| {ex.Message}");
             }
         }
     }
