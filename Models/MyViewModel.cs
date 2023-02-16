@@ -14,5 +14,8 @@
         public float highPrice { get; set; }
         public float lowPrice { get; set; }
         public float volume { get; set; }
+        //
+        public float PriceRef { get; set; }
+        public float Div { get; set; }
     }
 }

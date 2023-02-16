@@ -36,6 +36,7 @@ namespace Analyze.DesktopApp.Models
 
     public class JobModel
     {
+        public string DefaultJob { get; set; }
         public string SubcribeJob { get; set; }
     }
     #endregion
