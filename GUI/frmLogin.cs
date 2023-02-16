@@ -49,7 +49,8 @@ namespace Analyze.DesktopApp.GUI
         {
             var phone = txtPhone.Text.Trim();
             var password = Security.HMACSHA256Hash(txtPassword.Text.Trim());
-            var res = StaticClass.PostCheckUser(new CheckUserModel { phone = phone, password = password, signature = Security.HMACSHA256Hash($"{phone}{password}") }).GetAwaiter().GetResult();
+            var model = new CheckUserModel { phone = phone, password = password, signature = Security.HMACSHA256Hash($"{phone}{password}") };
+            var res = StaticClass.PostCheckUser(model).GetAwaiter().GetResult();
             if(string.IsNullOrWhiteSpace(res))
             {
                 MessageBox.Show($"Lỗi không kiểm tra được Tài Khoản", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
