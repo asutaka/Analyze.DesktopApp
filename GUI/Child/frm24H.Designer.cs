@@ -214,7 +214,7 @@ namespace Analyze.DesktopApp.GUI.Child
             gridFormatRule2.Name = "Format1";
             formatConditionRule3ColorScale1.AllowAnimation = DevExpress.Utils.DefaultBoolean.True;
             formatConditionRule3ColorScale1.Maximum = new decimal(new int[] {
-            10,
+            30,
             0,
             0,
             0});
@@ -223,7 +223,7 @@ namespace Analyze.DesktopApp.GUI.Child
             formatConditionRule3ColorScale1.MiddleColor = System.Drawing.Color.White;
             formatConditionRule3ColorScale1.MiddleType = DevExpress.XtraEditors.FormatConditionValueType.Number;
             formatConditionRule3ColorScale1.Minimum = new decimal(new int[] {
-            10,
+            30,
             0,
             0,
             -2147483648});
