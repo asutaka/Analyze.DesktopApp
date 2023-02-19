@@ -68,12 +68,13 @@ namespace Analyze.DesktopApp.GUI.Child
             this.Div.Caption = "Độ lệch";
             this.Div.DisplayFormat.FormatString = "\"#,##0.0\"";
             this.Div.FieldName = "Div";
-            this.Div.MaxWidth = 75;
-            this.Div.MinWidth = 75;
+            this.Div.MaxWidth = 87;
+            this.Div.MinWidth = 87;
             this.Div.Name = "Div";
             this.Div.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.Div.Visible = true;
             this.Div.VisibleIndex = 10;
+            this.Div.Width = 87;
             // 
             // CoinName
             // 
@@ -85,12 +86,13 @@ namespace Analyze.DesktopApp.GUI.Child
             this.CoinName.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.CoinName.Caption = "Tên";
             this.CoinName.FieldName = "CoinName";
+            this.CoinName.MinWidth = 23;
             this.CoinName.Name = "CoinName";
             this.CoinName.OptionsColumn.AllowEdit = false;
             this.CoinName.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.CoinName.Visible = true;
             this.CoinName.VisibleIndex = 2;
-            this.CoinName.Width = 20;
+            this.CoinName.Width = 23;
             // 
             // weightedAvgPrice
             // 
@@ -103,12 +105,12 @@ namespace Analyze.DesktopApp.GUI.Child
             this.weightedAvgPrice.Caption = "Khối lượng TB";
             this.weightedAvgPrice.DisplayFormat.FormatString = "\"#,##0.0\"";
             this.weightedAvgPrice.FieldName = "weightedAvgPrice";
-            this.weightedAvgPrice.MaxWidth = 120;
-            this.weightedAvgPrice.MinWidth = 120;
+            this.weightedAvgPrice.MaxWidth = 140;
+            this.weightedAvgPrice.MinWidth = 140;
             this.weightedAvgPrice.Name = "weightedAvgPrice";
             this.weightedAvgPrice.Visible = true;
             this.weightedAvgPrice.VisibleIndex = 8;
-            this.weightedAvgPrice.Width = 120;
+            this.weightedAvgPrice.Width = 140;
             // 
             // PriceChangePercent
             // 
@@ -122,13 +124,13 @@ namespace Analyze.DesktopApp.GUI.Child
             this.PriceChangePercent.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.PriceChangePercent.Caption = "Gia tăng(%)";
             this.PriceChangePercent.FieldName = "PriceChangePercent";
-            this.PriceChangePercent.MaxWidth = 85;
-            this.PriceChangePercent.MinWidth = 85;
+            this.PriceChangePercent.MaxWidth = 99;
+            this.PriceChangePercent.MinWidth = 99;
             this.PriceChangePercent.Name = "PriceChangePercent";
             this.PriceChangePercent.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
             this.PriceChangePercent.Visible = true;
             this.PriceChangePercent.VisibleIndex = 6;
-            this.PriceChangePercent.Width = 85;
+            this.PriceChangePercent.Width = 99;
             // 
             // volume
             // 
@@ -141,21 +143,23 @@ namespace Analyze.DesktopApp.GUI.Child
             this.volume.Caption = "Khối lượng";
             this.volume.DisplayFormat.FormatString = "\"#,##0\"";
             this.volume.FieldName = "volume";
-            this.volume.MaxWidth = 120;
-            this.volume.MinWidth = 120;
+            this.volume.MaxWidth = 140;
+            this.volume.MinWidth = 140;
             this.volume.Name = "volume";
             this.volume.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.volume.Visible = true;
             this.volume.VisibleIndex = 7;
-            this.volume.Width = 120;
+            this.volume.Width = 140;
             // 
             // grid
             // 
             this.grid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grid.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.grid.Location = new System.Drawing.Point(0, 0);
             this.grid.MainView = this.gridView1;
+            this.grid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.grid.Name = "grid";
-            this.grid.Size = new System.Drawing.Size(795, 495);
+            this.grid.Size = new System.Drawing.Size(927, 609);
             this.grid.TabIndex = 0;
             this.grid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -174,6 +178,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.weightedAvgPrice,
             this.PriceRef,
             this.Div});
+            this.gridView1.DetailHeight = 431;
             gridFormatRule1.ColumnApplyTo = this.Div;
             gridFormatRule1.Name = "FormatRate";
             formatConditionRuleIconSet1.AllowAnimation = DevExpress.Utils.DefaultBoolean.True;
@@ -238,6 +243,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.gridView1.OptionsBehavior.Editable = false;
             this.gridView1.OptionsSelection.EnableAppearanceFocusedRow = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridView1_MouseDown);
             this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 
             // STT
@@ -247,14 +253,14 @@ namespace Analyze.DesktopApp.GUI.Child
             this.STT.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.STT.Caption = "STT";
             this.STT.FieldName = "STT";
-            this.STT.MaxWidth = 45;
-            this.STT.MinWidth = 45;
+            this.STT.MaxWidth = 52;
+            this.STT.MinWidth = 52;
             this.STT.Name = "STT";
             this.STT.OptionsColumn.AllowEdit = false;
             this.STT.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
             this.STT.Visible = true;
             this.STT.VisibleIndex = 0;
-            this.STT.Width = 45;
+            this.STT.Width = 52;
             // 
             // Coin
             // 
@@ -270,14 +276,14 @@ namespace Analyze.DesktopApp.GUI.Child
             this.Coin.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.Coin.Caption = "Coin";
             this.Coin.FieldName = "Coin";
-            this.Coin.MaxWidth = 90;
-            this.Coin.MinWidth = 90;
+            this.Coin.MaxWidth = 105;
+            this.Coin.MinWidth = 105;
             this.Coin.Name = "Coin";
             this.Coin.OptionsColumn.AllowEdit = false;
             this.Coin.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Coin.Visible = true;
             this.Coin.VisibleIndex = 1;
-            this.Coin.Width = 90;
+            this.Coin.Width = 105;
             // 
             // prevClosePrice
             // 
@@ -289,11 +295,12 @@ namespace Analyze.DesktopApp.GUI.Child
             this.prevClosePrice.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.prevClosePrice.Caption = "Giá trước đó";
             this.prevClosePrice.FieldName = "prevClosePrice";
-            this.prevClosePrice.MaxWidth = 75;
-            this.prevClosePrice.MinWidth = 75;
+            this.prevClosePrice.MaxWidth = 87;
+            this.prevClosePrice.MinWidth = 87;
             this.prevClosePrice.Name = "prevClosePrice";
             this.prevClosePrice.Visible = true;
             this.prevClosePrice.VisibleIndex = 3;
+            this.prevClosePrice.Width = 87;
             // 
             // lastPrice
             // 
@@ -308,13 +315,14 @@ namespace Analyze.DesktopApp.GUI.Child
             this.lastPrice.Caption = "Giá hiện tại";
             this.lastPrice.DisplayFormat.FormatString = "#,##0.0";
             this.lastPrice.FieldName = "lastPrice";
-            this.lastPrice.MaxWidth = 75;
-            this.lastPrice.MinWidth = 75;
+            this.lastPrice.MaxWidth = 87;
+            this.lastPrice.MinWidth = 87;
             this.lastPrice.Name = "lastPrice";
             this.lastPrice.OptionsColumn.AllowEdit = false;
             this.lastPrice.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.lastPrice.Visible = true;
             this.lastPrice.VisibleIndex = 4;
+            this.lastPrice.Width = 87;
             // 
             // PriceChange
             // 
@@ -329,12 +337,12 @@ namespace Analyze.DesktopApp.GUI.Child
             this.PriceChange.Caption = "Thay đổi 24H";
             this.PriceChange.DisplayFormat.FormatString = "\"#,##0.0\"";
             this.PriceChange.FieldName = "PriceChange";
-            this.PriceChange.MaxWidth = 80;
-            this.PriceChange.MinWidth = 80;
+            this.PriceChange.MaxWidth = 93;
+            this.PriceChange.MinWidth = 93;
             this.PriceChange.Name = "PriceChange";
             this.PriceChange.Visible = true;
             this.PriceChange.VisibleIndex = 5;
-            this.PriceChange.Width = 80;
+            this.PriceChange.Width = 93;
             // 
             // PriceRef
             // 
@@ -347,23 +355,25 @@ namespace Analyze.DesktopApp.GUI.Child
             this.PriceRef.Caption = "Mốc giá";
             this.PriceRef.DisplayFormat.FormatString = "\"#,##0.0\"";
             this.PriceRef.FieldName = "PriceRef";
-            this.PriceRef.MaxWidth = 75;
-            this.PriceRef.MinWidth = 75;
+            this.PriceRef.MaxWidth = 87;
+            this.PriceRef.MinWidth = 87;
             this.PriceRef.Name = "PriceRef";
             this.PriceRef.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.PriceRef.Visible = true;
             this.PriceRef.VisibleIndex = 9;
+            this.PriceRef.Width = 87;
             // 
             // frm24H
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 495);
+            this.ClientSize = new System.Drawing.Size(927, 609);
             this.Controls.Add(this.grid);
             this.LookAndFeel.SkinName = "McSkin";
             this.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frm24H";
-            this.Text = "Top30";
+            this.Text = "24 giờ";
             this.Load += new System.EventHandler(this.frm24H_Load);
             this.VisibleChanged += new System.EventHandler(this.frmTop30_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();

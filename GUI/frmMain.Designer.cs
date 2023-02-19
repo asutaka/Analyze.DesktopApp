@@ -85,18 +85,20 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnVersion,
             this.btn24h});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
+            this.ribbon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ribbon.MaxItemId = 15;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
             this.ribbon.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.MacOffice;
-            this.ribbon.Size = new System.Drawing.Size(1022, 141);
+            this.ribbon.Size = new System.Drawing.Size(1192, 171);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             this.ribbon.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             // 
             // barBtnListFollow
             // 
             this.barBtnListFollow.Caption = "Danh sách theo dõi";
+            this.barBtnListFollow.Enabled = false;
             this.barBtnListFollow.Id = 1;
             this.barBtnListFollow.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnListFollow.ImageOptions.SvgImage")));
             this.barBtnListFollow.Name = "barBtnListFollow";
@@ -105,6 +107,7 @@ namespace Analyze.DesktopApp.GUI
             // barBtnSupport
             // 
             this.barBtnSupport.Caption = "Hỗ trợ";
+            this.barBtnSupport.Enabled = false;
             this.barBtnSupport.Id = 2;
             this.barBtnSupport.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnSupport.ImageOptions.SvgImage")));
             this.barBtnSupport.Name = "barBtnSupport";
@@ -112,7 +115,8 @@ namespace Analyze.DesktopApp.GUI
             // 
             // barBtnInfo
             // 
-            this.barBtnInfo.Caption = "Tài khoản";
+            this.barBtnInfo.Caption = "My List";
+            this.barBtnInfo.Enabled = false;
             this.barBtnInfo.Id = 3;
             this.barBtnInfo.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnInfo.ImageOptions.SvgImage")));
             this.barBtnInfo.Name = "barBtnInfo";
@@ -121,6 +125,7 @@ namespace Analyze.DesktopApp.GUI
             // barBtnMCDX
             // 
             this.barBtnMCDX.Caption = "MCDX";
+            this.barBtnMCDX.Enabled = false;
             this.barBtnMCDX.Id = 4;
             this.barBtnMCDX.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnMCDX.ImageOptions.SvgImage")));
             this.barBtnMCDX.Name = "barBtnMCDX";
@@ -129,6 +134,7 @@ namespace Analyze.DesktopApp.GUI
             // barBtnConfigFx
             // 
             this.barBtnConfigFx.Caption = "Cấu hình chỉ báo";
+            this.barBtnConfigFx.Enabled = false;
             this.barBtnConfigFx.Id = 5;
             this.barBtnConfigFx.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnConfigFx.ImageOptions.SvgImage")));
             this.barBtnConfigFx.Name = "barBtnConfigFx";
@@ -137,6 +143,7 @@ namespace Analyze.DesktopApp.GUI
             // barBtnConfigNotify
             // 
             this.barBtnConfigNotify.Caption = "Cấu hình thông báo";
+            this.barBtnConfigNotify.Enabled = false;
             this.barBtnConfigNotify.Id = 6;
             this.barBtnConfigNotify.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnConfigNotify.ImageOptions.SvgImage")));
             this.barBtnConfigNotify.Name = "barBtnConfigNotify";
@@ -144,6 +151,7 @@ namespace Analyze.DesktopApp.GUI
             // barBtnBlackList
             // 
             this.barBtnBlackList.Caption = "Danh sách đen";
+            this.barBtnBlackList.Enabled = false;
             this.barBtnBlackList.Id = 7;
             this.barBtnBlackList.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnBlackList.ImageOptions.SvgImage")));
             this.barBtnBlackList.Name = "barBtnBlackList";
@@ -152,6 +160,7 @@ namespace Analyze.DesktopApp.GUI
             // barBtnTop30
             // 
             this.barBtnTop30.Caption = "Top30";
+            this.barBtnTop30.Enabled = false;
             this.barBtnTop30.Id = 8;
             this.barBtnTop30.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnTop30.ImageOptions.SvgImage")));
             this.barBtnTop30.Name = "barBtnTop30";
@@ -160,6 +169,7 @@ namespace Analyze.DesktopApp.GUI
             // barBtnListTrade
             // 
             this.barBtnListTrade.Caption = "Danh sách Trade";
+            this.barBtnListTrade.Enabled = false;
             this.barBtnListTrade.Id = 9;
             this.barBtnListTrade.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnListTrade.ImageOptions.SvgImage")));
             this.barBtnListTrade.Name = "barBtnListTrade";
@@ -168,6 +178,7 @@ namespace Analyze.DesktopApp.GUI
             // barBtnRealTime
             // 
             this.barBtnRealTime.Caption = "Thời gian thực";
+            this.barBtnRealTime.Enabled = false;
             this.barBtnRealTime.Id = 10;
             this.barBtnRealTime.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnRealTime.ImageOptions.SvgImage")));
             this.barBtnRealTime.Name = "barBtnRealTime";
@@ -193,6 +204,7 @@ namespace Analyze.DesktopApp.GUI
             // barBtnVersion
             // 
             this.barBtnVersion.Caption = "Phiên bản";
+            this.barBtnVersion.Enabled = false;
             this.barBtnVersion.Id = 13;
             this.barBtnVersion.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnVersion.ImageOptions.SvgImage")));
             this.barBtnVersion.Name = "barBtnVersion";
@@ -200,6 +212,7 @@ namespace Analyze.DesktopApp.GUI
             // btn24h
             // 
             this.btn24h.Caption = "24 giờ";
+            this.btn24h.Enabled = false;
             this.btn24h.Id = 14;
             this.btn24h.ImageOptions.Image = global::Analyze.DesktopApp.Properties.Resources._24h;
             this.btn24h.Name = "btn24h";
@@ -258,6 +271,7 @@ namespace Analyze.DesktopApp.GUI
             // 
             // ribbonPageGroup1
             // 
+            this.ribbonPageGroup1.Enabled = false;
             this.ribbonPageGroup1.ItemLinks.Add(this.barBtnStart);
             this.ribbonPageGroup1.ItemLinks.Add(this.barBtnStop);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
@@ -265,10 +279,11 @@ namespace Analyze.DesktopApp.GUI
             // 
             // ribbonStatusBar
             // 
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 743);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 914);
+            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1022, 24);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1192, 30);
             // 
             // ribbonPage4
             // 
@@ -279,11 +294,12 @@ namespace Analyze.DesktopApp.GUI
             // 
             this.tabControl.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InTabControlHeader;
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 141);
+            this.tabControl.Location = new System.Drawing.Point(0, 171);
             this.tabControl.LookAndFeel.SkinName = "McSkin";
             this.tabControl.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.tabControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl.Name = "tabControl";
-            this.tabControl.Size = new System.Drawing.Size(1022, 602);
+            this.tabControl.Size = new System.Drawing.Size(1192, 743);
             this.tabControl.TabIndex = 2;
             this.tabControl.CloseButtonClick += new System.EventHandler(this.tabControl_CloseButtonClick);
             // 
@@ -310,12 +326,13 @@ namespace Analyze.DesktopApp.GUI
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1022, 767);
+            this.ClientSize = new System.Drawing.Size(1192, 944);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmMain";
             this.Ribbon = this.ribbon;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -355,7 +372,7 @@ namespace Analyze.DesktopApp.GUI
         private DevExpress.XtraBars.BarButtonItem barBtnStop;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.BarButtonItem barBtnVersion;
-        private DevExpress.XtraBars.BarButtonItem btn24h;
+        public DevExpress.XtraBars.BarButtonItem btn24h;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;

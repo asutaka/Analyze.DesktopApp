@@ -8,6 +8,17 @@ namespace Analyze.DesktopApp.Models
         public string password { get; set; }
     }
 
+    public class CoinFollowModel
+    {
+        public List<CoinFollowDetailModel> lData { get; set; }
+    }
+
+    public class CoinFollowDetailModel
+    {
+        public string Symbol { get; set; }
+        public double Value { get; set; }
+    }
+
     public class CheckUserModel : ProfileModel
     {
         public string signature { get; set; }

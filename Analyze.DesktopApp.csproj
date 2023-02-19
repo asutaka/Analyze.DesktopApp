@@ -220,6 +220,12 @@
     <Compile Include="GUI\Child\frm24H.Designer.cs">
       <DependentUpon>frm24H.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Child\frmCoinInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmCoinInfo.Designer.cs">
+      <DependentUpon>frmCoinInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,6 +269,9 @@
     <Content Include="Resources\yellow.png" />
     <EmbeddedResource Include="GUI\Child\frm24H.resx">
       <DependentUpon>frm24H.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Child\frmCoinInfo.resx">
+      <DependentUpon>frmCoinInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>

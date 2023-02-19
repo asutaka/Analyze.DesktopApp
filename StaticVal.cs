@@ -12,6 +12,7 @@ namespace Analyze.DesktopApp
         public static List<IBinanceMiniTick> binanceTicks = new List<IBinanceMiniTick>();
         public static List<CryptonDetailDataModel> lstCoin = new List<CryptonDetailDataModel>();
         public static List<CryptonDetailDataModel> lstCoinFilter = new List<CryptonDetailDataModel>();
+        public static List<API24hVM> lst24H = new List<API24hVM>();
         //Data Coin
         public static Dictionary<string, IEnumerable<LocalTicketModel>> dic1H = new Dictionary<string, IEnumerable<LocalTicketModel>>();
 

@@ -21,7 +21,6 @@ namespace Analyze.DesktopApp.GUI.Child
     public partial class frm24H : XtraForm
     {
         public static List<API24hVM> _lst24H = new List<API24hVM>();
-        public static List<API24hVM> _lstAdapter = new List<API24hVM>();
         private ScheduleMember jobValue = null;
         private frm24H()
         {
@@ -108,13 +107,13 @@ namespace Analyze.DesktopApp.GUI.Child
             var content = StaticClass.GetWebContent(settings.API24hr).GetAwaiter().GetResult();
             if (!string.IsNullOrWhiteSpace(content))
             {
-                _lstAdapter = JsonConvert.DeserializeObject<IEnumerable<TicketModel>>(content)
+                StaticVal.lst24H = JsonConvert.DeserializeObject<IEnumerable<TicketModel>>(content)
                             .Where(x => x.symbol.EndsWith("USDT"))
                             .OrderByDescending(x => x.priceChangePercent)
                             .ToList()
                             .To<List<API24hVM>>();
                 int index = 1;
-                foreach (var item in _lstAdapter)
+                foreach (var item in StaticVal.lst24H)
                 {
                     var entityCoin = StaticVal.lstCoin.FirstOrDefault(x => x.S == item.Coin);
                     item.STT = index++;
@@ -127,11 +126,30 @@ namespace Analyze.DesktopApp.GUI.Child
         {
             this.Invoke((MethodInvoker)delegate
             {
-                _lst24H = _lstAdapter.Take(50).ToList();
+                _lst24H = StaticVal.lst24H.Take(50).ToList();
                 grid.BeginUpdate();
                 grid.DataSource = _lst24H;
                 grid.EndUpdate();
+                frmMain.Instance().btn24h.Enabled = true;
             });
+        }
+
+        private void gridView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.Button.IsRight())
+            {
+                var tmp = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Coin").ToString();
+                var tmp3 = 1;
+                //show form insert 
+                //DXMouseEventArgs ea = e as DXMouseEventArgs;
+                //GridHitInfo info = gridView1.CalcHitInfo(ea.Location);
+                //if (info.InRow || info.InRowCell)
+                //{
+                //    var cellValue = gridView1.GetRowCellValue(info.RowHandle, "Coin").ToString();
+                //    ProcessStartInfo sInfo = new ProcessStartInfo($"{ConstVal.COIN_SINGLE}{cellValue.Replace("USDT", "_USDT")}");
+                //    Process.Start(sInfo);
+                //}
+            }
         }
     }
 
@@ -145,7 +163,7 @@ namespace Analyze.DesktopApp.GUI.Child
                 //if (StaticVal.IsRealTimeAction)
                 //    return;
                 var lstTask = new List<Task>();
-                foreach (var item in frm24H._lstAdapter)
+                foreach (var item in StaticVal.lst24H)
                 {
                     var task = Task.Run(() =>
                     {
@@ -165,7 +183,7 @@ namespace Analyze.DesktopApp.GUI.Child
                 Task.WaitAll(lstTask.ToArray());
                 //if (StaticVal.IsRealTimeAction)
                 //    return;
-                frm24H._lst24H = frm24H._lstAdapter.OrderByDescending(x => x.PriceChangePercent).Take(50).ToList();
+                frm24H._lst24H = StaticVal.lst24H.OrderByDescending(x => x.PriceChangePercent).Take(50).ToList();
 
                 frm24H.Instance().InitData();
             }
