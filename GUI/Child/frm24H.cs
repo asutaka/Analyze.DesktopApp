@@ -103,6 +103,8 @@ namespace Analyze.DesktopApp.GUI.Child
                 grid.DataSource = _lst24H;
                 grid.EndUpdate();
                 frmMain.Instance().barBtn24h.Enabled = true;
+                frmMain.Instance().barBtnAdd.Enabled = true;
+                frmMain.Instance().barBtnMyList.Enabled = true;
                 StaticVal.frm24HReady = true;
             });
         }

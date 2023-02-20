@@ -117,8 +117,9 @@ namespace Analyze.DesktopApp.GUI
             // barBtnMyList
             // 
             this.barBtnMyList.Caption = "My List";
+            this.barBtnMyList.Enabled = false;
             this.barBtnMyList.Id = 3;
-            this.barBtnMyList.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnInfo.ImageOptions.SvgImage")));
+            this.barBtnMyList.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnMyList.ImageOptions.SvgImage")));
             this.barBtnMyList.Name = "barBtnMyList";
             this.barBtnMyList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnInfo_ItemClick);
             // 
@@ -222,9 +223,10 @@ namespace Analyze.DesktopApp.GUI
             // barBtnAdd
             // 
             this.barBtnAdd.Caption = "Thêm";
+            this.barBtnAdd.Enabled = false;
             this.barBtnAdd.Id = 15;
-            this.barBtnAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.ImageOptions.Image")));
-            this.barBtnAdd.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnAdd.ImageOptions.LargeImage")));
+            this.barBtnAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barBtnAdd.ImageOptions.Image")));
+            this.barBtnAdd.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barBtnAdd.ImageOptions.LargeImage")));
             this.barBtnAdd.Name = "barBtnAdd";
             this.barBtnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnAdd_ItemClick);
             // 
@@ -364,7 +366,7 @@ namespace Analyze.DesktopApp.GUI
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonGroup3;
         private DevExpress.XtraBars.BarButtonItem barBtnListFollow;
         private DevExpress.XtraBars.BarButtonItem barBtnSupport;
-        private DevExpress.XtraBars.BarButtonItem barBtnMyList;
+        public DevExpress.XtraBars.BarButtonItem barBtnMyList;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
         private DevExpress.XtraBars.BarButtonItem barBtnMCDX;
         private DevExpress.XtraBars.BarButtonItem barBtnConfigFx;
@@ -383,6 +385,6 @@ namespace Analyze.DesktopApp.GUI
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
-        private DevExpress.XtraBars.BarButtonItem barBtnAdd;
+        public DevExpress.XtraBars.BarButtonItem barBtnAdd;
     }
 }

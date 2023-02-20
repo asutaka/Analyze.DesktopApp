@@ -283,7 +283,10 @@ namespace Analyze.DesktopApp.GUI
 
         private void barBtnInfo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //frmProfile.Instance().Show();
+            this.Invoke((MethodInvoker)delegate
+            {
+                tabControl.AddTab(frmMyList.Instance());
+            });
         }
 
         private void barBtnTop30_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

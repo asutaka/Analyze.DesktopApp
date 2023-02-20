@@ -2,6 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Analyze.DesktopApp.Common
 {
@@ -24,6 +25,37 @@ namespace Analyze.DesktopApp.Common
 
             return Convert.ToBase64String(hashBytes);
         }
+
+        public static void MesSuccess(string mes = "", string title = "")
+        {
+            var mesContent = "Đã lưu dữ liệu!";
+            var mesTitle = "Phản hồi";
+            if (!string.IsNullOrWhiteSpace(mes))
+            {
+                mesContent = mes;
+            }
+            if(!string.IsNullOrWhiteSpace(title))
+            {
+                mesTitle = title;
+            }
+            MessageBox.Show(mesContent, mesTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static void MesError(string mes = "", string title = "")
+        {
+            var mesContent = "Lỗi không xác định!";
+            var mesTitle = "Cảnh báo";
+            if (!string.IsNullOrWhiteSpace(mes))
+            {
+                mesContent = mes;
+            }
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                mesTitle = title;
+            }
+            MessageBox.Show(mesContent, mesTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
         //public static string MD5Hash(string input)
         //{
         //    using (MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider())

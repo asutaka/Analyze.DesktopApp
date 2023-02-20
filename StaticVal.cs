@@ -17,6 +17,7 @@ namespace Analyze.DesktopApp
 
         //State Form
         public static bool frm24HReady = false;
+        public static bool frmMyList = false;
         //Function
         public static IBinanceMiniTick GetCoinBinanceTick(string coin)
         {

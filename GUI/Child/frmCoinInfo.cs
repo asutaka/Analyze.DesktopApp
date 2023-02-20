@@ -4,7 +4,6 @@ using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace Analyze.DesktopApp.GUI.Child
 {
@@ -50,13 +49,13 @@ namespace Analyze.DesktopApp.GUI.Child
             var check = double.TryParse(txtValue.Text, out var val);
             if (!check)
             {
-                MessageBox.Show($"Giá trị Coin không hợp lệ!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Security.MesError("Giá trị Coin không hợp lệ!");
                 return false;
             }
 
             if (val <= 0)
             {
-                MessageBox.Show($"Giá trị Coin không hợp lệ!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Security.MesError("Giá trị Coin không hợp lệ!");
                 return false;
             }
 
@@ -72,7 +71,8 @@ namespace Analyze.DesktopApp.GUI.Child
                 _coinFollowModel.lData.Remove(entity);
             _coinFollowModel.lData.Add(new CoinFollowDetailModel { Symbol = cmbCoin.EditValue.ToString(), Value = double.Parse(txtValue.Text) });
             _coinFollowModel.UpdateJson(_fileName);
-            MessageBox.Show($"Đã lưu dữ liệu!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Security.MesSuccess();
+            frmMyList.Instance().InitList();
             this.Close();
         }
 

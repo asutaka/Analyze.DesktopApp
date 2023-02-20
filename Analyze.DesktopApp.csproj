@@ -214,6 +214,12 @@
   <ItemGroup>
     <Compile Include="CalculateMng.cs" />
     <Compile Include="ConfigVal.cs" />
+    <Compile Include="GUI\Child\frmMyList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmMyList.Designer.cs">
+      <DependentUpon>frmMyList.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Child\frm24H.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,6 +274,9 @@
     <Content Include="Resources\telegram_64x64.png" />
     <Content Include="Resources\up_24x24.png" />
     <Content Include="Resources\yellow.png" />
+    <EmbeddedResource Include="GUI\Child\frmMyList.resx">
+      <DependentUpon>frmMyList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Child\frm24H.resx">
       <DependentUpon>frm24H.cs</DependentUpon>
     </EmbeddedResource>

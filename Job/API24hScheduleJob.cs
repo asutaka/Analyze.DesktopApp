@@ -43,6 +43,11 @@ namespace Analyze.DesktopApp.Job
                     frm24H._lst24H = StaticVal.lst24H.OrderByDescending(x => x.PriceChangePercent).Take(50).ToList();
                     frm24H.Instance().InitData();
                 }
+
+                if (StaticVal.frmMyList)
+                {
+                    frmMyList.Instance().InitData();
+                }
             }
             catch (Exception ex)
             {
