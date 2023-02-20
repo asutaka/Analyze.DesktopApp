@@ -1,5 +1,4 @@
 ﻿using Analyze.DesktopApp.Common;
-using Analyze.DesktopApp.Job.ScheduleJob;
 using Analyze.DesktopApp.Models;
 using Analyze.DesktopApp.Utils;
 using DevExpress.Utils;
@@ -7,13 +6,11 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Quartz;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Analyze.DesktopApp.GUI.Child
@@ -21,12 +18,10 @@ namespace Analyze.DesktopApp.GUI.Child
     public partial class frm24H : XtraForm
     {
         public static List<API24hVM> _lst24H = new List<API24hVM>();
-        private ScheduleMember jobValue = null;
+       
         private frm24H()
         {
             InitializeComponent();
-            var settings = Program.Configuration.GetSection("Job").Get<JobModel>();
-            jobValue = new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<API24hScheduleJob>(), settings.DefaultJob, nameof(API24hScheduleJob));
             InitData();
         }
 
@@ -39,10 +34,6 @@ namespace Analyze.DesktopApp.GUI.Child
 
         public void InitData()
         {
-            if (!this.Visible)
-            {
-                jobValue.Pause();
-            }
             if (!this.IsHandleCreated)
                 return;
             this.Invoke((MethodInvoker)delegate
@@ -52,25 +43,6 @@ namespace Analyze.DesktopApp.GUI.Child
                 grid.EndUpdate();
             });
             
-        }
-
-        private void frmTop30_VisibleChanged(object sender, EventArgs e)
-        {
-            if (!this.Visible)
-            {
-                jobValue.Pause();
-            }
-            else
-            {
-                if (!jobValue.IsStarted())
-                {
-                    jobValue.Start();
-                }
-                else
-                {
-                    jobValue.Resume();
-                }
-            }
         }
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
@@ -130,67 +102,11 @@ namespace Analyze.DesktopApp.GUI.Child
                 grid.BeginUpdate();
                 grid.DataSource = _lst24H;
                 grid.EndUpdate();
-                frmMain.Instance().btn24h.Enabled = true;
+                frmMain.Instance().barBtn24h.Enabled = true;
+                StaticVal.frm24HReady = true;
             });
         }
-
-        private void gridView1_MouseDown(object sender, MouseEventArgs e)
-        {
-            if(e.Button.IsRight())
-            {
-                var tmp = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Coin").ToString();
-                var tmp3 = 1;
-                //show form insert 
-                //DXMouseEventArgs ea = e as DXMouseEventArgs;
-                //GridHitInfo info = gridView1.CalcHitInfo(ea.Location);
-                //if (info.InRow || info.InRowCell)
-                //{
-                //    var cellValue = gridView1.GetRowCellValue(info.RowHandle, "Coin").ToString();
-                //    ProcessStartInfo sInfo = new ProcessStartInfo($"{ConstVal.COIN_SINGLE}{cellValue.Replace("USDT", "_USDT")}");
-                //    Process.Start(sInfo);
-                //}
-            }
-        }
     }
 
-    [DisallowConcurrentExecution] /*impt: no multiple instances executed concurrently*/
-    public class API24hScheduleJob : IJob
-    {
-        public void Execute(IJobExecutionContext context)
-        {
-            try
-            {
-                //if (StaticVal.IsRealTimeAction)
-                //    return;
-                var lstTask = new List<Task>();
-                foreach (var item in StaticVal.lst24H)
-                {
-                    var task = Task.Run(() =>
-                    {
-                        var coin = item.Coin;
-                        var entityBinanceTick =  StaticVal.GetCoinBinanceTick(coin);
-                        if (entityBinanceTick == null)
-                        {
-                            return;
-                        }
-                        item.lastPrice = (float)entityBinanceTick.LastPrice;
-                        item.Div = (float)Math.Round(((-1 + item.lastPrice / item.PriceRef) * 100), 1);
-                        item.PriceChange = Math.Round(item.lastPrice - item.prevClosePrice, 2);
-                        item.PriceChangePercent = Math.Round(((-1 + item.lastPrice / item.prevClosePrice) * 100), 1);
-                    });
-                    lstTask.Add(task);
-                }
-                Task.WaitAll(lstTask.ToArray());
-                //if (StaticVal.IsRealTimeAction)
-                //    return;
-                frm24H._lst24H = StaticVal.lst24H.OrderByDescending(x => x.PriceChangePercent).Take(50).ToList();
-
-                frm24H.Instance().InitData();
-            }
-            catch (Exception ex)
-            {
-                NLogLogger.PublishException(ex, $"Top30ScheduleJob.Execute|EXCEPTION| {ex.Message}");
-            }
-        }
-    }
+    
 }

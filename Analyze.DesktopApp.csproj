@@ -238,6 +238,7 @@
     <Compile Include="GUI\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Job\API24hScheduleJob.cs" />
     <Compile Include="Job\ScheduleJob\Schedule.cs" />
     <Compile Include="Job\ScheduleJob\ScheduleContext.cs" />
     <Compile Include="Job\ScheduleJob\ScheduleJobListener.cs" />

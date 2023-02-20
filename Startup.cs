@@ -26,6 +26,7 @@ namespace Analyze.DesktopApp
         {
             var settings = Program.Configuration.GetSection("Job").Get<JobModel>();
             new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<SubcribeJob>(), settings.SubcribeJob, nameof(SubcribeJob)).Start();
+            new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<API24hScheduleJob>(), settings.DefaultJob, nameof(API24hScheduleJob)).Start(); 
 
             var settingsAPI = Program.Configuration.GetSection("API").Get<APIModel>();
             var content = StaticClass.GetWebContent(settingsAPI.Coin).GetAwaiter().GetResult();
@@ -35,7 +36,6 @@ namespace Analyze.DesktopApp
                             .Where(x => x.S.EndsWith("USDT"))
                             .OrderBy(x => x.S).ToList();
             }
-
 
             ////Load JSonFile
             //StaticValues.basicModel = new BasicSettingModel().LoadJsonFile("basic_setting.json");

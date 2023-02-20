@@ -2,7 +2,6 @@
 using Binance.Net.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
 namespace Analyze.DesktopApp
 {
@@ -16,11 +15,15 @@ namespace Analyze.DesktopApp
         //Data Coin
         public static Dictionary<string, IEnumerable<LocalTicketModel>> dic1H = new Dictionary<string, IEnumerable<LocalTicketModel>>();
 
+        //State Form
+        public static bool frm24HReady = false;
         //Function
         public static IBinanceMiniTick GetCoinBinanceTick(string coin)
         {
             if (binanceTicks == null)
-                Thread.Sleep(100);
+            {
+                return null;
+            }
             var entity = binanceTicks.FirstOrDefault(x => x.Symbol == coin);
             return entity;
         }

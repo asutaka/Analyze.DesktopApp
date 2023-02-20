@@ -243,7 +243,6 @@ namespace Analyze.DesktopApp.GUI.Child
             this.gridView1.OptionsBehavior.Editable = false;
             this.gridView1.OptionsSelection.EnableAppearanceFocusedRow = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
-            this.gridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridView1_MouseDown);
             this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 
             // STT
@@ -375,7 +374,6 @@ namespace Analyze.DesktopApp.GUI.Child
             this.Name = "frm24H";
             this.Text = "24 giờ";
             this.Load += new System.EventHandler(this.frm24H_Load);
-            this.VisibleChanged += new System.EventHandler(this.frmTop30_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);

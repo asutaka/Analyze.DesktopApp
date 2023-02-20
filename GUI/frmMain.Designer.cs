@@ -35,7 +35,7 @@ namespace Analyze.DesktopApp.GUI
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barBtnListFollow = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnSupport = new DevExpress.XtraBars.BarButtonItem();
-            this.barBtnInfo = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnMyList = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnMCDX = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnConfigFx = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnConfigNotify = new DevExpress.XtraBars.BarButtonItem();
@@ -46,7 +46,8 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnStart = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnStop = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnVersion = new DevExpress.XtraBars.BarButtonItem();
-            this.btn24h = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtn24h = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -60,7 +61,6 @@ namespace Analyze.DesktopApp.GUI
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
-            this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.SuspendLayout();
@@ -73,7 +73,7 @@ namespace Analyze.DesktopApp.GUI
             this.ribbon.SearchEditItem,
             this.barBtnListFollow,
             this.barBtnSupport,
-            this.barBtnInfo,
+            this.barBtnMyList,
             this.barBtnMCDX,
             this.barBtnConfigFx,
             this.barBtnConfigNotify,
@@ -84,8 +84,8 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnStart,
             this.barBtnStop,
             this.barBtnVersion,
-            this.btn24h,
-            this.btnAdd});
+            this.barBtn24h,
+            this.barBtnAdd});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
             this.ribbon.MaxItemId = 16;
             this.ribbon.Name = "ribbon";
@@ -114,14 +114,13 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnSupport.Name = "barBtnSupport";
             this.barBtnSupport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnSupport_ItemClick);
             // 
-            // barBtnInfo
+            // barBtnMyList
             // 
-            this.barBtnInfo.Caption = "My List";
-            this.barBtnInfo.Enabled = false;
-            this.barBtnInfo.Id = 3;
-            this.barBtnInfo.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnInfo.ImageOptions.SvgImage")));
-            this.barBtnInfo.Name = "barBtnInfo";
-            this.barBtnInfo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnInfo_ItemClick);
+            this.barBtnMyList.Caption = "My List";
+            this.barBtnMyList.Id = 3;
+            this.barBtnMyList.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnInfo.ImageOptions.SvgImage")));
+            this.barBtnMyList.Name = "barBtnMyList";
+            this.barBtnMyList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnInfo_ItemClick);
             // 
             // barBtnMCDX
             // 
@@ -210,15 +209,24 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnVersion.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnVersion.ImageOptions.SvgImage")));
             this.barBtnVersion.Name = "barBtnVersion";
             // 
-            // btn24h
+            // barBtn24h
             // 
-            this.btn24h.Caption = "24 giờ";
-            this.btn24h.Enabled = false;
-            this.btn24h.Id = 14;
-            this.btn24h.ImageOptions.Image = global::Analyze.DesktopApp.Properties.Resources._24h;
-            this.btn24h.Name = "btn24h";
-            this.btn24h.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            this.btn24h.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn24h_ItemClick);
+            this.barBtn24h.Caption = "24 giờ";
+            this.barBtn24h.Enabled = false;
+            this.barBtn24h.Id = 14;
+            this.barBtn24h.ImageOptions.Image = global::Analyze.DesktopApp.Properties.Resources._24h;
+            this.barBtn24h.Name = "barBtn24h";
+            this.barBtn24h.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barBtn24h.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtn24h_ItemClick);
+            // 
+            // barBtnAdd
+            // 
+            this.barBtnAdd.Caption = "Thêm";
+            this.barBtnAdd.Id = 15;
+            this.barBtnAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.ImageOptions.Image")));
+            this.barBtnAdd.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnAdd.ImageOptions.LargeImage")));
+            this.barBtnAdd.Name = "barBtnAdd";
+            this.barBtnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnAdd_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -234,14 +242,14 @@ namespace Analyze.DesktopApp.GUI
             // 
             // ribbonGroup1
             // 
-            this.ribbonGroup1.ItemLinks.Add(this.barBtnInfo);
-            this.ribbonGroup1.ItemLinks.Add(this.btnAdd);
+            this.ribbonGroup1.ItemLinks.Add(this.barBtnMyList);
+            this.ribbonGroup1.ItemLinks.Add(this.barBtnAdd);
             this.ribbonGroup1.Name = "ribbonGroup1";
             this.ribbonGroup1.Text = "Thông tin";
             // 
             // ribbonGroup2
             // 
-            this.ribbonGroup2.ItemLinks.Add(this.btn24h);
+            this.ribbonGroup2.ItemLinks.Add(this.barBtn24h);
             this.ribbonGroup2.ItemLinks.Add(this.barBtnRealTime);
             this.ribbonGroup2.ItemLinks.Add(this.barBtnTop30);
             this.ribbonGroup2.ItemLinks.Add(this.barBtnMCDX);
@@ -324,15 +332,6 @@ namespace Analyze.DesktopApp.GUI
             this.barButtonItem4.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem4.ImageOptions.SvgImage")));
             this.barButtonItem4.Name = "barButtonItem4";
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Caption = "Thêm";
-            this.btnAdd.Id = 15;
-            this.btnAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
-            this.btnAdd.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -347,7 +346,6 @@ namespace Analyze.DesktopApp.GUI
             this.StatusBar = this.ribbonStatusBar;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.ResumeLayout(false);
@@ -366,7 +364,7 @@ namespace Analyze.DesktopApp.GUI
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonGroup3;
         private DevExpress.XtraBars.BarButtonItem barBtnListFollow;
         private DevExpress.XtraBars.BarButtonItem barBtnSupport;
-        private DevExpress.XtraBars.BarButtonItem barBtnInfo;
+        private DevExpress.XtraBars.BarButtonItem barBtnMyList;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
         private DevExpress.XtraBars.BarButtonItem barBtnMCDX;
         private DevExpress.XtraBars.BarButtonItem barBtnConfigFx;
@@ -381,10 +379,10 @@ namespace Analyze.DesktopApp.GUI
         private DevExpress.XtraBars.BarButtonItem barBtnStop;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.BarButtonItem barBtnVersion;
-        public DevExpress.XtraBars.BarButtonItem btn24h;
+        public DevExpress.XtraBars.BarButtonItem barBtn24h;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
-        private DevExpress.XtraBars.BarButtonItem btnAdd;
+        private DevExpress.XtraBars.BarButtonItem barBtnAdd;
     }
 }

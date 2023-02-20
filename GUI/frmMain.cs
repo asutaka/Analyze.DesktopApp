@@ -413,7 +413,7 @@ namespace Analyze.DesktopApp.GUI
             barBtnSupport.Enabled = true;
         }
 
-        private void btn24h_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void barBtn24h_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             this.Invoke((MethodInvoker)delegate
             {
@@ -429,12 +429,7 @@ namespace Analyze.DesktopApp.GUI
             _bkgr.RunWorkerAsync();
         }
 
-        private void frmMain_KeyDown(object sender, KeyEventArgs e)
-        {
-            MessageBox.Show("press");
-        }
-
-        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void barBtnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             frmCoinInfo.Instance().MakeShow();
         }
