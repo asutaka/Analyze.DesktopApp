@@ -23,7 +23,7 @@ namespace Analyze.DesktopApp.GUI
         private static frmLogin _instance = null;
         public static frmLogin Instance()
         {
-            _instance = _instance ?? new frmLogin();
+            _instance = (_instance == null || _instance.IsDisposed) ? new frmLogin() : _instance;
             return _instance;
         }
 

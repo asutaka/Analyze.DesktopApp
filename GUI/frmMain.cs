@@ -38,7 +38,7 @@ namespace Analyze.DesktopApp.GUI
         private static frmMain _instance = null;
         public static frmMain Instance()
         {
-            _instance = _instance ?? new frmMain();
+            _instance = (_instance == null || _instance.IsDisposed) ? new frmMain() : _instance;
             return _instance;
         }
 
@@ -427,6 +427,16 @@ namespace Analyze.DesktopApp.GUI
             _bkgr.DoWork += bkgrConfig_DoWork;
             _bkgr.RunWorkerCompleted += bkgrConfig_RunWorkerCompleted;
             _bkgr.RunWorkerAsync();
+        }
+
+        private void frmMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("press");
+        }
+
+        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmCoinInfo.Instance().MakeShow();
         }
     }
 }

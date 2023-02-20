@@ -10,21 +10,24 @@ namespace Analyze.DesktopApp.GUI.Child
 {
     public partial class frmCoinInfo : XtraForm
     {
+        private static frmCoinInfo _instance = null;
         private readonly string _fileName = "coin_follow.json";
-        private readonly string _symbol;
-        private double _currentValue;
         private CoinFollowModel _coinFollowModel;
-        public frmCoinInfo()
+        private frmCoinInfo()
         {
             InitializeComponent();
         }
 
-        public frmCoinInfo(string symbol, double currentValue)
+        public static frmCoinInfo Instance()
         {
-            InitializeComponent();
-            _symbol = symbol;
-            _currentValue = currentValue;
+            _instance = (_instance == null || _instance.IsDisposed) ? new frmCoinInfo() : _instance;
+            return _instance;
+        }
+
+        public void MakeShow()
+        {
             InitData();
+            this.Show();
         }
 
         private void InitData()
@@ -34,20 +37,24 @@ namespace Analyze.DesktopApp.GUI.Child
             {
                 _coinFollowModel = new CoinFollowModel { lData = new List<CoinFollowDetailModel>() };
             }
-            txtCoin.Text = _symbol;
-            txtValue.Text = _currentValue.ToString();//.ToString("#,##0.#########");
+
+            cmbCoin.Properties.ValueMember = "S";
+            cmbCoin.Properties.DisplayMember = "S";
+            cmbCoin.Properties.DataSource = StaticVal.lstCoin;
+            
+            txtValue.Text = string.Empty;
         }
 
         private bool CheckData()
         {
             var check = double.TryParse(txtValue.Text, out var val);
-            if(!check)
+            if (!check)
             {
                 MessageBox.Show($"Giá trị Coin không hợp lệ!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
-            if(val <= 0)
+            if (val <= 0)
             {
                 MessageBox.Show($"Giá trị Coin không hợp lệ!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -60,18 +67,28 @@ namespace Analyze.DesktopApp.GUI.Child
         {
             if (!CheckData())
                 return;
-            var entity = _coinFollowModel.lData.FirstOrDefault(x => x.Symbol.Equals(txtCoin.Text.Trim()));
+            var entity = _coinFollowModel.lData.FirstOrDefault(x => x.Symbol.Equals(cmbCoin.EditValue.ToString()));
             if (entity != null)
                 _coinFollowModel.lData.Remove(entity);
-            _coinFollowModel.lData.Add(new CoinFollowDetailModel { Symbol = txtCoin.Text.Trim(), Value = double.Parse(txtValue.Text) });
+            _coinFollowModel.lData.Add(new CoinFollowDetailModel { Symbol = cmbCoin.EditValue.ToString(), Value = double.Parse(txtValue.Text) });
             _coinFollowModel.UpdateJson(_fileName);
-            MessageBox.Show("Đã lưu dữ liệu!");
+            MessageBox.Show($"Đã lưu dữ liệu!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cmbCoin_EditValueChanged(object sender, EventArgs e)
+        {
+            if (cmbCoin.EditValue == null
+               || string.IsNullOrWhiteSpace(cmbCoin.EditValue.ToString()))
+                return;
+            var entity = StaticVal.lst24H.FirstOrDefault(x => x.Coin.Equals(cmbCoin.EditValue.ToString()));
+            if (entity != null)
+                txtValue.Text = entity.lastPrice.ToString(); 
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Analyze.DesktopApp.GUI.Child
         private static frm24H _instance = null;
         public static frm24H Instance()
         {
-            _instance = _instance ?? new frm24H();
+            _instance = (_instance == null || _instance.IsDisposed) ? new frm24H() : _instance;
             return _instance;
         }
 
