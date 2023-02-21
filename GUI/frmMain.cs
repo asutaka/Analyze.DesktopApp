@@ -49,79 +49,21 @@ namespace Analyze.DesktopApp.GUI
                 tabControl.AddTab(frm24H.Instance());
             });
 
-            var settings = Program.Configuration.GetSection("Domain").Get<DomainModel>();
-            //var dt = DateTime.Now;
-            var lstTask = new List<Task>();
-            //1
-            lstTask.Add(Task.Run(() =>
+            var settings = Program.Configuration.GetSection("API").Get<APIModel>();
+            foreach (var item in StaticVal.lstCoin)
             {
-                GetData(settings.Sub1, ConfigVal._lstSub1);
-            }));
-            //2
-            lstTask.Add(Task.Run(() =>
-            {
-                GetData(settings.Sub2, ConfigVal._lstSub2);
-            }));
-            //3
-            lstTask.Add(Task.Run(() =>
-            {
-                GetData(settings.Sub3, ConfigVal._lstSub3);
-            }));
-            //4
-            lstTask.Add(Task.Run(() =>
-            {
-                GetData(settings.Sub4, ConfigVal._lstSub4);
-            }));
-            //5
-            lstTask.Add(Task.Run(() =>
-            {
-                GetData(settings.Sub5, ConfigVal._lstSub5);
-            }));
-            //6
-            lstTask.Add(Task.Run(() =>
-            {
-                GetData(settings.Sub6, ConfigVal._lstSub6);
-            }));
-            //7
-            lstTask.Add(Task.Run(() =>
-            {
-                GetData(settings.Sub7, ConfigVal._lstSub7);
-            }));
-            //8
-            lstTask.Add(Task.Run(() =>
-            {
-                GetData(settings.Sub8, ConfigVal._lstSub8);
-            }));
-            Task.WaitAll(lstTask.ToArray());
-            //TimeSpan span = DateTime.Now - dt;
-        }
-        List<string> _lstCoinError = new List<string>();
-        private void GetData(string url, List<string> _lst)
-        {
-            int index = 1;
-            foreach (var item in _lst)
-            {
-                try
-                {
-                    var coin = StaticVal.lstCoin.FirstOrDefault(x => x.S == item.ToUpper());
-                    if (coin != null)
-                    {
-                        var content = StaticClass.GetWebContent($"{url}/symbol/{index++}").GetAwaiter().GetResult();
-                        if (!string.IsNullOrWhiteSpace(content))
-                        {
-                            StaticVal.dic1H.Add(coin.S, JsonConvert.DeserializeObject<List_LocalTicketModel>(content).data);
-                        }
-                        else
-                        {
-                            _lstCoinError.Add(item);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _lstCoinError.Add(item);
-                    NLogLogger.PublishException(ex, $"frmMain.GetData|EXCEPTION|INPUT: {JsonConvert.SerializeObject(item)}| {ex.Message}");
-                }
+                //try
+                //{
+                //    var content = StaticClass.GetWebContent(string.Format(settings.History, item.S)).GetAwaiter().GetResult();
+                //    if (!string.IsNullOrWhiteSpace(content))
+                //    {
+                //        StaticVal.dic1H.Add(item.S, JsonConvert.DeserializeObject<List_LocalTicketModel>(content).data);
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    NLogLogger.PublishException(ex, $"frmMain.GetWebContent|EXCEPTION|INPUT: {JsonConvert.SerializeObject(item)}| {ex.Message}");
+                //}
             }
         }
 

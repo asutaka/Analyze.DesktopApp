@@ -31,11 +31,6 @@ namespace Analyze.DesktopApp.Models
         public string Sub1 { get; set; }
         public string Sub2 { get; set; }
         public string Sub3 { get; set; }
-        public string Sub4 { get; set; }
-        public string Sub5 { get; set; }
-        public string Sub6 { get; set; }
-        public string Sub7 { get; set; }
-        public string Sub8 { get; set; }
     } 
 
     public class ViewWebModel
@@ -47,6 +42,7 @@ namespace Analyze.DesktopApp.Models
     {
         public string API24hr { get; set; }
         public string Coin { get; set; }
+        public string History { get; set; }
     }
 
     public class JobModel
