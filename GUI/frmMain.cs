@@ -13,6 +13,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace Analyze.DesktopApp.GUI
 {
@@ -48,23 +49,45 @@ namespace Analyze.DesktopApp.GUI
             {
                 tabControl.AddTab(frm24H.Instance());
             });
-
+            var start = DateTime.Now;
+            var lError = new List<string> { };
             var settings = Program.Configuration.GetSection("API").Get<APIModel>();
             foreach (var item in StaticVal.lstCoin)
             {
-                //try
-                //{
-                //    var content = StaticClass.GetWebContent(string.Format(settings.History, item.S)).GetAwaiter().GetResult();
-                //    if (!string.IsNullOrWhiteSpace(content))
-                //    {
-                //        StaticVal.dic1H.Add(item.S, JsonConvert.DeserializeObject<List_LocalTicketModel>(content).data);
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    NLogLogger.PublishException(ex, $"frmMain.GetWebContent|EXCEPTION|INPUT: {JsonConvert.SerializeObject(item)}| {ex.Message}");
-                //}
+                try
+                {
+                    var content = StaticClass.GetWebContent(string.Format(settings.History, item.S)).GetAwaiter().GetResult();
+                    if (!string.IsNullOrWhiteSpace(content))
+                    {
+                        var time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                        var arr = JArray.Parse(content);
+                        StaticVal.dic1H.Add(item.S, arr.Select(x => new LocalTicketModel
+                        {
+                            name = item.S.ToLower(),
+                            e = (long)x[0],
+                            o = float.Parse(x[1].ToString()),
+                            h = float.Parse(x[2].ToString()),
+                            l = float.Parse(x[3].ToString()),
+                            c = float.Parse(x[4].ToString()),
+                            v = float.Parse(x[5].ToString()),
+                            q = float.Parse(x[7].ToString()),
+                            state = true,
+                            ut = time
+                        }));
+                    }
+                    else
+                    {
+                        lError.Add(item.S);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lError.Add(item.S);
+                    NLogLogger.PublishException(ex, $"frmMain.GetWebContent|EXCEPTION|INPUT: {JsonConvert.SerializeObject(item)}| {ex.Message}");
+                }
             }
+            TimeSpan operationDuration = DateTime.Now - start;
+            var tmp = 1;
         }
 
         private void bkgrConfig_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
