@@ -6,13 +6,11 @@ using DevExpress.XtraTab;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 using System.Linq;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
 namespace Analyze.DesktopApp.GUI
@@ -50,7 +48,6 @@ namespace Analyze.DesktopApp.GUI
                 tabControl.AddTab(frm24H.Instance());
             });
             var start = DateTime.Now;
-            var lError = new List<string> { };
             var settings = Program.Configuration.GetSection("API").Get<APIModel>();
             foreach (var item in StaticVal.lstCoin)
             {
@@ -77,17 +74,20 @@ namespace Analyze.DesktopApp.GUI
                     }
                     else
                     {
-                        lError.Add(item.S);
+                        StaticVal.lstError.Add(item.S);
                     }
                 }
                 catch (Exception ex)
                 {
-                    lError.Add(item.S);
+                    StaticVal.lstError.Add(item.S);
                     NLogLogger.PublishException(ex, $"frmMain.GetWebContent|EXCEPTION|INPUT: {JsonConvert.SerializeObject(item)}| {ex.Message}");
                 }
             }
             TimeSpan operationDuration = DateTime.Now - start;
-            var tmp = 1;
+            if (StaticVal.lstError.Any())
+            {
+                StaticVal.jobError.Start();
+            }
         }
 
         private void bkgrConfig_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

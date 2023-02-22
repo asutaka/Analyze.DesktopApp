@@ -249,6 +249,7 @@
     <Compile Include="Job\ScheduleJob\ScheduleContext.cs" />
     <Compile Include="Job\ScheduleJob\ScheduleJobListener.cs" />
     <Compile Include="Job\ScheduleJob\ScheduleMng.cs" />
+    <Compile Include="Job\RecallErrorSymbolJob.cs" />
     <Compile Include="Job\SubcribeJob.cs" />
     <Compile Include="Models\MyModel.cs" />
     <Compile Include="Models\MyViewModel.cs" />
