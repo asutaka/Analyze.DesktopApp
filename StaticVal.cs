@@ -1,4 +1,5 @@
-﻿using Analyze.DesktopApp.Job;
+﻿using Analyze.DesktopApp.GUI;
+using Analyze.DesktopApp.Job;
 using Analyze.DesktopApp.Job.ScheduleJob;
 using Analyze.DesktopApp.Models;
 using Binance.Net.Interfaces;
@@ -17,6 +18,7 @@ namespace Analyze.DesktopApp
         public static List<CryptonDetailDataModel> lstCoinFilter = new List<CryptonDetailDataModel>();
         public static List<API24hVM> lst24H = new List<API24hVM>();
         public static List<string> lstError = new List<string>();
+        public static List<MCDXVM> lstMCDX = new List<MCDXVM>();
         //Data Coin
         public static Dictionary<string, IEnumerable<LocalTicketModel>> dic1H = new Dictionary<string, IEnumerable<LocalTicketModel>>();
         //Job
@@ -24,7 +26,8 @@ namespace Analyze.DesktopApp
 
         //State Form
         public static bool frm24HReady = false;
-        public static bool frmMyList = false;
+        public static bool frmMyListReady = false;
+        public static bool frmMCDXReady = false;
         //Function
         public static IBinanceMiniTick GetCoinBinanceTick(string coin)
         {

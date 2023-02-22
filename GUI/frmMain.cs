@@ -20,11 +20,11 @@ namespace Analyze.DesktopApp.GUI
         //private WaitFunc _frmWaitForm = new WaitFunc();
         private BackgroundWorker _bkgr;
         //private bool _checkConnection;
-        private frmMain()
+        public frmMain()
         {
             InitializeComponent();
             DevExpress.LookAndFeel.UserLookAndFeel.Default.SetSkinStyle("McSkin");
-            ribbon.Enabled = false;
+            //ribbon.Enabled = false;
             //StaticValues.IsAccessMain = true;
             //_bkgr = new BackgroundWorker();
             //_bkgr.DoWork += bkgrConfig_DoWork;
@@ -43,11 +43,7 @@ namespace Analyze.DesktopApp.GUI
 
         private void bkgrConfig_DoWork(object sender, DoWorkEventArgs e)
         {
-            this.Invoke((MethodInvoker)delegate
-            {
-                tabControl.AddTab(frm24H.Instance());
-            });
-            var start = DateTime.Now;
+            LogM.Start();
             var settings = Program.Configuration.GetSection("API").Get<APIModel>();
             foreach (var item in StaticVal.lstCoin)
             {
@@ -83,7 +79,7 @@ namespace Analyze.DesktopApp.GUI
                     NLogLogger.PublishException(ex, $"frmMain.GetWebContent|EXCEPTION|INPUT: {JsonConvert.SerializeObject(item)}| {ex.Message}");
                 }
             }
-            TimeSpan operationDuration = DateTime.Now - start;
+            LogM.Stop();
             if (StaticVal.lstError.Any())
             {
                 StaticVal.jobError.Start();
@@ -101,15 +97,12 @@ namespace Analyze.DesktopApp.GUI
 
         private void bkgrAnalyze_DoWork(object sender, DoWorkEventArgs e)
         {
-            //dtStartCalculate = DateTime.Now;
-            //_frmWaitForm.Show("Phân tích dữ liệu");
-            //StaticValues.lstCryptonRank = CalculateMng.Top30();
-            //Thread.Sleep(200);
-            //_frmWaitForm.Close();
+            StaticVal.lstMCDX = CalculateMng.MCDX();
+            barBtnMCDX.Enabled = true;
         }
         private void bkgrAnalyze_RunWorkerCompleted(object sender1, RunWorkerCompletedEventArgs e1)
         {
-            ribbon.Enabled = true;
+            //ribbon.Enabled = true;
             _bkgr.DoWork -= bkgrAnalyze_DoWork;
             _bkgr.RunWorkerCompleted -= bkgrAnalyze_RunWorkerCompleted;
             //_bkgr.DoWork += bkgrPrepareRealTime_DoWork;
@@ -367,10 +360,10 @@ namespace Analyze.DesktopApp.GUI
 
         private void barBtnMCDX_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //this.Invoke((MethodInvoker)delegate
-            //{
-            //    tabControl.AddTab(frmMCDX.Instance());
-            //});
+            this.Invoke((MethodInvoker)delegate
+            {
+                tabControl.AddTab(frmMCDX.Instance());
+            });
         }
 
         private void barBtnSupport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -391,10 +384,15 @@ namespace Analyze.DesktopApp.GUI
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            this.Invoke((MethodInvoker)delegate
+            {
+                tabControl.AddTab(frm24H.Instance());
+            });
             _bkgr = new BackgroundWorker();
             _bkgr.DoWork += bkgrConfig_DoWork;
             _bkgr.RunWorkerCompleted += bkgrConfig_RunWorkerCompleted;
             _bkgr.RunWorkerAsync();
+            
         }
 
         private void barBtnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

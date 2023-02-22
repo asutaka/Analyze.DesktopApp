@@ -44,7 +44,7 @@ namespace Analyze.DesktopApp.Job
                     frm24H.Instance().InitData();
                 }
 
-                if (StaticVal.frmMyList)
+                if (StaticVal.frmMyListReady)
                 {
                     frmMyList.Instance().InitData();
                 }

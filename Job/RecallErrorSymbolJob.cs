@@ -55,6 +55,7 @@ namespace Analyze.DesktopApp.Job
                 {
                     //stop job
                     StaticVal.jobError.Pause();
+                    LogM.Stop();
                 }
             }
             catch(Exception exm)

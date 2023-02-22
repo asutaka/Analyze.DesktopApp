@@ -94,7 +94,7 @@ namespace Analyze.DesktopApp.Utils
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"StaticClass.GetWebContent|EXCEPTION| INPUT: {url}| {ex.Message}");
+                //Console.WriteLine($"StaticClass.GetWebContent|EXCEPTION| INPUT: {url}| {ex.Message}");
                 return null;
             }
         }

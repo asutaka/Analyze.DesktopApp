@@ -149,7 +149,7 @@ namespace Analyze.DesktopApp
             var count = 1;
             var lstResult = new List<MCDXVM>();
             var lstTask = new List<Task>();
-            foreach (var item in StaticVal.lstCoinFilter)
+            foreach (var item in StaticVal.lstCoin)
             {
                 var task = Task.Run(() =>
                 {
@@ -178,7 +178,7 @@ namespace Analyze.DesktopApp
         public static (bool, double) MCDX(string coin)
         {
             var data = StaticVal.dic1H.FirstOrDefault(x => x.Key == coin);
-            if (!data.Value.Any())
+            if (data.Key == null || !data.Value.Any())
                 return (false, 0);
             var settings = Program.Configuration.GetSection("Calculate").Get<CalculateModel>();
 

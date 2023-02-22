@@ -79,7 +79,7 @@ namespace Analyze.DesktopApp.GUI.Child
 
         public void InitList()
         {
-            StaticVal.frmMyList = false;
+            StaticVal.frmMyListReady = false;
             Thread.Sleep(1000);
             _coinFollowModel = new CoinFollowModel().LoadJsonFile(_fileName);
             if (_coinFollowModel != null)
@@ -93,7 +93,7 @@ namespace Analyze.DesktopApp.GUI.Child
                 item.PriceRef = entity != null ? (float)entity.Value : 0;
                 item.STT = STT++;
             }
-            StaticVal.frmMyList = true;
+            StaticVal.frmMyListReady = true;
             grid.BeginUpdate();
             grid.DataSource = _lst24H;
             grid.EndUpdate();

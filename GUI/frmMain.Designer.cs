@@ -252,9 +252,9 @@ namespace Analyze.DesktopApp.GUI
             // ribbonGroup2
             // 
             this.ribbonGroup2.ItemLinks.Add(this.barBtn24h);
+            this.ribbonGroup2.ItemLinks.Add(this.barBtnMCDX);
             this.ribbonGroup2.ItemLinks.Add(this.barBtnRealTime);
             this.ribbonGroup2.ItemLinks.Add(this.barBtnTop30);
-            this.ribbonGroup2.ItemLinks.Add(this.barBtnMCDX);
             this.ribbonGroup2.Name = "ribbonGroup2";
             this.ribbonGroup2.Text = "Thống kê";
             // 

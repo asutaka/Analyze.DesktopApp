@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -63,7 +64,6 @@ namespace Analyze.DesktopApp.GUI
                 MessageBox.Show(resModel.msg, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             //show Main
             this.Invoke((MethodInvoker)delegate
             {
