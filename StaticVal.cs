@@ -18,7 +18,7 @@ namespace Analyze.DesktopApp
         public static List<CryptonDetailDataModel> lstCoinFilter = new List<CryptonDetailDataModel>();
         public static List<API24hVM> lst24H = new List<API24hVM>();
         public static List<string> lstError = new List<string>();
-        public static List<MCDXVM> lstMCDX = new List<MCDXVM>();
+        public static List<CoinFollowDetailModel> lstMCDX = new List<CoinFollowDetailModel>();
         //Data Coin
         public static Dictionary<string, IEnumerable<LocalTicketModel>> dic1H = new Dictionary<string, IEnumerable<LocalTicketModel>>();
         //Job
@@ -27,7 +27,7 @@ namespace Analyze.DesktopApp
         //State Form
         public static bool frm24HReady = false;
         public static bool frmMyListReady = false;
-        public static bool frmMCDXReady = false;
+        public static bool isAllowCalculate = true;
         //Function
         public static IBinanceMiniTick GetCoinBinanceTick(string coin)
         {

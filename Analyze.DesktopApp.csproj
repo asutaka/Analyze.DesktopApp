@@ -217,12 +217,6 @@
   <ItemGroup>
     <Compile Include="CalculateMng.cs" />
     <Compile Include="ConfigVal.cs" />
-    <Compile Include="GUI\Child\frmMCDX.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Child\frmMCDX.Designer.cs">
-      <DependentUpon>frmMCDX.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Child\frmMyList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -254,12 +248,14 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Job\API24hScheduleJob.cs" />
+    <Compile Include="Job\CaculateJob.cs" />
     <Compile Include="Job\ScheduleJob\Schedule.cs" />
     <Compile Include="Job\ScheduleJob\ScheduleContext.cs" />
     <Compile Include="Job\ScheduleJob\ScheduleJobListener.cs" />
     <Compile Include="Job\ScheduleJob\ScheduleMng.cs" />
     <Compile Include="Job\RecallErrorSymbolJob.cs" />
     <Compile Include="Job\SubcribeJob.cs" />
+    <Compile Include="Job\SyncDataJob.cs" />
     <Compile Include="LogM.cs" />
     <Compile Include="Models\MyModel.cs" />
     <Compile Include="Models\MyViewModel.cs" />
@@ -285,9 +281,6 @@
     <Content Include="Resources\telegram_64x64.png" />
     <Content Include="Resources\up_24x24.png" />
     <Content Include="Resources\yellow.png" />
-    <EmbeddedResource Include="GUI\Child\frmMCDX.resx">
-      <DependentUpon>frmMCDX.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Child\frmMyList.resx">
       <DependentUpon>frmMyList.cs</DependentUpon>
     </EmbeddedResource>

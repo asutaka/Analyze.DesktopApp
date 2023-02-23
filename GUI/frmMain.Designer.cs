@@ -36,7 +36,6 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnListFollow = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnSupport = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnMyList = new DevExpress.XtraBars.BarButtonItem();
-            this.barBtnMCDX = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnConfigFx = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnConfigNotify = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnBlackList = new DevExpress.XtraBars.BarButtonItem();
@@ -74,7 +73,6 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnListFollow,
             this.barBtnSupport,
             this.barBtnMyList,
-            this.barBtnMCDX,
             this.barBtnConfigFx,
             this.barBtnConfigNotify,
             this.barBtnBlackList,
@@ -122,15 +120,6 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnMyList.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnMyList.ImageOptions.SvgImage")));
             this.barBtnMyList.Name = "barBtnMyList";
             this.barBtnMyList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnInfo_ItemClick);
-            // 
-            // barBtnMCDX
-            // 
-            this.barBtnMCDX.Caption = "MCDX";
-            this.barBtnMCDX.Enabled = false;
-            this.barBtnMCDX.Id = 4;
-            this.barBtnMCDX.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnMCDX.ImageOptions.SvgImage")));
-            this.barBtnMCDX.Name = "barBtnMCDX";
-            this.barBtnMCDX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnMCDX_ItemClick);
             // 
             // barBtnConfigFx
             // 
@@ -252,7 +241,6 @@ namespace Analyze.DesktopApp.GUI
             // ribbonGroup2
             // 
             this.ribbonGroup2.ItemLinks.Add(this.barBtn24h);
-            this.ribbonGroup2.ItemLinks.Add(this.barBtnMCDX);
             this.ribbonGroup2.ItemLinks.Add(this.barBtnRealTime);
             this.ribbonGroup2.ItemLinks.Add(this.barBtnTop30);
             this.ribbonGroup2.Name = "ribbonGroup2";
@@ -368,7 +356,6 @@ namespace Analyze.DesktopApp.GUI
         private DevExpress.XtraBars.BarButtonItem barBtnSupport;
         public DevExpress.XtraBars.BarButtonItem barBtnMyList;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
-        private DevExpress.XtraBars.BarButtonItem barBtnMCDX;
         private DevExpress.XtraBars.BarButtonItem barBtnConfigFx;
         private DevExpress.XtraBars.BarButtonItem barBtnConfigNotify;
         private DevExpress.XtraBars.BarButtonItem barBtnBlackList;

@@ -32,6 +32,12 @@ namespace Analyze.DesktopApp.Job
                         item.Div = (float)Math.Round(((-1 + item.lastPrice / item.PriceRef) * 100), 1);
                         item.PriceChange = Math.Round(item.lastPrice - item.prevClosePrice, 2);
                         item.PriceChangePercent = Math.Round(((-1 + item.lastPrice / item.prevClosePrice) * 100), 1);
+
+                        var entityMCDX = StaticVal.lstMCDX.FirstOrDefault(x => x.Symbol.Equals(coin));
+                        if(entityMCDX != null)
+                        {
+                            item.MCDX = entityMCDX.Value >= 18 ? 2 : 1;
+                        }
                     });
                     lstTask.Add(task);
                 }
@@ -40,7 +46,7 @@ namespace Analyze.DesktopApp.Job
                 //    return;
                 if (StaticVal.frm24HReady)
                 {
-                    frm24H._lst24H = StaticVal.lst24H.OrderByDescending(x => x.PriceChangePercent).Take(50).ToList();
+                    frm24H._lst24H = StaticVal.lst24H.OrderByDescending(x => x.PriceChangePercent).ToList();
                     frm24H.Instance().InitData();
                 }
 

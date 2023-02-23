@@ -12,6 +12,9 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using Analyze.DesktopApp.Job.ScheduleJob;
+using Quartz;
+using Analyze.DesktopApp.Job;
 
 namespace Analyze.DesktopApp.GUI
 {
@@ -43,7 +46,6 @@ namespace Analyze.DesktopApp.GUI
 
         private void bkgrConfig_DoWork(object sender, DoWorkEventArgs e)
         {
-            LogM.Start();
             var settings = Program.Configuration.GetSection("API").Get<APIModel>();
             foreach (var item in StaticVal.lstCoin)
             {
@@ -79,7 +81,6 @@ namespace Analyze.DesktopApp.GUI
                     NLogLogger.PublishException(ex, $"frmMain.GetWebContent|EXCEPTION|INPUT: {JsonConvert.SerializeObject(item)}| {ex.Message}");
                 }
             }
-            LogM.Stop();
             if (StaticVal.lstError.Any())
             {
                 StaticVal.jobError.Start();
@@ -98,7 +99,9 @@ namespace Analyze.DesktopApp.GUI
         private void bkgrAnalyze_DoWork(object sender, DoWorkEventArgs e)
         {
             StaticVal.lstMCDX = CalculateMng.MCDX();
-            barBtnMCDX.Enabled = true;
+            var settings = Program.Configuration.GetSection("Job").Get<JobModel>();
+            new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<SyncDataJob>(), settings.SyncDataJob, nameof(SyncDataJob)).Start();
+            new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<CaculateJob>(), settings.CaculateJob, nameof(CaculateJob)).Start();
         }
         private void bkgrAnalyze_RunWorkerCompleted(object sender1, RunWorkerCompletedEventArgs e1)
         {
@@ -356,14 +359,6 @@ namespace Analyze.DesktopApp.GUI
             barBtnStop.Enabled = false;
 
             //StaticValues.ScheduleMngObj.StopAllJob();
-        }
-
-        private void barBtnMCDX_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            this.Invoke((MethodInvoker)delegate
-            {
-                tabControl.AddTab(frmMCDX.Instance());
-            });
         }
 
         private void barBtnSupport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

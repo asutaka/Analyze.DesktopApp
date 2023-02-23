@@ -144,10 +144,9 @@ namespace Analyze.DesktopApp
             return entity;
         }
 
-        public static List<MCDXVM> MCDX()
+        public static List<CoinFollowDetailModel> MCDX()
         {
-            var count = 1;
-            var lstResult = new List<MCDXVM>();
+            var lstResult = new List<CoinFollowDetailModel>();
             var lstTask = new List<Task>();
             foreach (var item in StaticVal.lstCoin)
             {
@@ -156,22 +155,17 @@ namespace Analyze.DesktopApp
                     var val = MCDX(item.S);
                     if (val.Item1)
                     {
-                        lstResult.Add(new MCDXVM
+                        lstResult.Add(new CoinFollowDetailModel
                         {
-                            Coin = item.S,
-                            CoinName = item.AN,
-                            MCDXValue = val.Item2,
+                            Symbol = item.S,
+                            Value = val.Item2,
                         });
                     }
                 });
                 lstTask.Add(task);
             }
             Task.WaitAll(lstTask.ToArray());
-            lstResult = lstResult.OrderByDescending(x => x.MCDXValue).Take(30).ToList();
-            if (lstResult != null)
-            {
-                lstResult.ForEach(x => x.STT = count++);
-            }
+            lstResult = lstResult.OrderByDescending(x => x.Value).ToList();
             return lstResult;
         }
 
