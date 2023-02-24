@@ -28,6 +28,9 @@ namespace Analyze.DesktopApp
         public static bool frm24HReady = false;
         public static bool frmMyListReady = false;
         public static bool isAllowCalculate = true;
+        //Value Storage
+        public static int TimeSynData = 2;
+
         //Function
         public static IBinanceMiniTick GetCoinBinanceTick(string coin)
         {

@@ -18,26 +18,9 @@ namespace Analyze.DesktopApp.Job
         private static bool hasUpdate = false;
         public void Execute(IJobExecutionContext context)
         {
-            var time = DateTime.Now;
-            if(time.Minute == 5 && !hasUpdate)
-            {
-                //cập nhật bằng tay
-                hasUpdate = true;
-                return;
-            }
-            if(time.Minute > 5 && hasUpdate)
-            {
-                hasUpdate = false;
-                return;
-            }    
-            if (time.Minute < 55 || time.Minute > 4)
-                return;
-            if (hasUpdate)
-                return;
-            
             var settings = Program.Configuration.GetSection("Domain").Get<DomainModel>();
             var content1 = StaticClass.GetWebContent10s($"{settings.Sub1}/mirror").GetAwaiter().GetResult();
-            
+
             if (!string.IsNullOrWhiteSpace(content1))
             {
                 var res = JsonConvert.DeserializeObject<List_LocalTicketModel>(content1);
@@ -59,14 +42,14 @@ namespace Analyze.DesktopApp.Job
                 foreach (var item in res1.data)
                 {
                     var entityDic = StaticVal.dic1H.FirstOrDefault(x => x.Key.Equals(item.name.ToUpper()));
-                    if(entityDic.Key != null)
+                    if (entityDic.Key != null)
                     {
                         var entityData = entityDic.Value.Last();
                         if (item.e < entityData.e)
                             return;
 
 
-                    }    
+                    }
                 }
 
 
@@ -86,11 +69,11 @@ namespace Analyze.DesktopApp.Job
 
                 //StaticVal.lstError.Remove(item.ToString());
             }
-            var content2 = StaticClass.GetWebContent10s($"{settings.Sub2}/mirror").GetAwaiter().GetResult();
-            var content3 = StaticClass.GetWebContent10s($"{settings.Sub3}/mirror").GetAwaiter().GetResult();
+            //var content2 = StaticClass.GetWebContent10s($"{settings.Sub2}/mirror").GetAwaiter().GetResult();
+            //var content3 = StaticClass.GetWebContent10s($"{settings.Sub3}/mirror").GetAwaiter().GetResult();
 
-            //var lMCDX = CalculateMng.MCDX();
-            //StaticVal.lstMCDX = lMCDX;
+            ////var lMCDX = CalculateMng.MCDX();
+            ////StaticVal.lstMCDX = lMCDX;
         }
     }
 }

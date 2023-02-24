@@ -50,7 +50,6 @@ namespace Analyze.DesktopApp.Models
         public string DefaultJob { get; set; }
         public string SubcribeJob { get; set; }
         public string CaculateJob { get; set; }
-        public string SyncDataJob { get; set; }
     }
 
     public class CalculateModel
@@ -129,5 +128,10 @@ namespace Analyze.DesktopApp.Models
     {
         public string S { get; set; }
         public string AN { get; set; }
+    }
+
+    public class TimeModel
+    {
+        public long Data { get; set; }
     }
 }

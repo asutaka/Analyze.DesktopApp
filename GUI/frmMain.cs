@@ -100,7 +100,7 @@ namespace Analyze.DesktopApp.GUI
         {
             StaticVal.lstMCDX = CalculateMng.MCDX();
             var settings = Program.Configuration.GetSection("Job").Get<JobModel>();
-            new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<SyncDataJob>(), settings.SyncDataJob, nameof(SyncDataJob)).Start();
+            new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<SyncDataJob>(), $"{StaticVal.TimeSynData} 0 * * * ?", nameof(SyncDataJob)).Start();
             new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<CaculateJob>(), settings.CaculateJob, nameof(CaculateJob)).Start();
         }
         private void bkgrAnalyze_RunWorkerCompleted(object sender1, RunWorkerCompletedEventArgs e1)
