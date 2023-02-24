@@ -3,12 +3,8 @@ using Analyze.DesktopApp.Utils;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Quartz;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Analyze.DesktopApp.Job
 {
@@ -20,54 +16,58 @@ namespace Analyze.DesktopApp.Job
         {
             var settings = Program.Configuration.GetSection("Domain").Get<DomainModel>();
             var content1 = StaticClass.GetWebContent10s($"{settings.Sub1}/mirror").GetAwaiter().GetResult();
+            UpdateData(content1);
+            var content2 = StaticClass.GetWebContent10s($"{settings.Sub2}/mirror").GetAwaiter().GetResult();
+            UpdateData(content2);
+            var content3 = StaticClass.GetWebContent10s($"{settings.Sub3}/mirror").GetAwaiter().GetResult();
+            UpdateData(content3);
+            StaticVal.isAllowCalculate = true;
 
-            if (!string.IsNullOrWhiteSpace(content1))
+            void UpdateData(string content)
             {
-                var res1 = JsonConvert.DeserializeObject<List_LocalTicketModel>(content1);
-                //check data
-                if (!res1.data.Any())
-                    return;
-
-                //Update
-                StaticVal.isAllowCalculate = false;
-                Thread.Sleep();
-
-
-                foreach (var item in res1.data)
+                if (!string.IsNullOrWhiteSpace(content))
                 {
-                    var entityDic = StaticVal.dic1H.FirstOrDefault(x => x.Key.Equals(item.name.ToUpper()));
-                    if (entityDic.Key != null)
+                    var response = JsonConvert.DeserializeObject<List_LocalTicketModel>(content);
+                    //check data
+                    if (response.data.Any())
                     {
-                        var entityData = entityDic.Value.Last();
-                        if (item.e < entityData.e)
-                            return;
-
-
+                        if (StaticVal.isAllowCalculate)
+                        {
+                            StaticVal.isAllowCalculate = false;
+                            Thread.Sleep(2000);
+                        }
+                        foreach (var item in response.data)
+                        {
+                            var entityDic = StaticVal.dic1H.FirstOrDefault(x => x.Key.Equals(item.name.ToUpper()));
+                            if (entityDic.Key != null)
+                            {
+                                var entityData = entityDic.Value.Last();
+                                if (item.e < entityData.e)
+                                    continue;
+                                if (item.e == entityData.e)
+                                {
+                                    entityDic.Value.Remove(entityData);
+                                }
+                                entityDic.Value.Add(new LocalTicketModel
+                                {
+                                    name = item.name,
+                                    e = item.e,
+                                    c = item.c,
+                                    o = item.o,
+                                    h = item.h,
+                                    l = item.l,
+                                    v = item.v,
+                                    q = item.q,
+                                    ut = item.ut,
+                                    state = item.state
+                                });
+                            }
+                            StaticVal.dic1H[entityDic.Key] = entityDic.Value;
+                        }
                     }
                 }
-
-
-                //StaticVal.dic1H.Add(item, arr.Select(x => new LocalTicketModel
-                //{
-                //    name = item.ToLower(),
-                //    e = (long)x[0],
-                //    o = float.Parse(x[1].ToString()),
-                //    h = float.Parse(x[2].ToString()),
-                //    l = float.Parse(x[3].ToString()),
-                //    c = float.Parse(x[4].ToString()),
-                //    v = float.Parse(x[5].ToString()),
-                //    q = float.Parse(x[7].ToString()),
-                //    state = true,
-                //    ut = time
-                //}));
-
-                //StaticVal.lstError.Remove(item.ToString());
             }
-            //var content2 = StaticClass.GetWebContent10s($"{settings.Sub2}/mirror").GetAwaiter().GetResult();
-            //var content3 = StaticClass.GetWebContent10s($"{settings.Sub3}/mirror").GetAwaiter().GetResult();
-
-            ////var lMCDX = CalculateMng.MCDX();
-            ////StaticVal.lstMCDX = lMCDX;
+            
         }
     }
 }

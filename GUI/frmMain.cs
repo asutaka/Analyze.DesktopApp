@@ -68,7 +68,7 @@ namespace Analyze.DesktopApp.GUI
                             q = float.Parse(x[7].ToString()),
                             state = true,
                             ut = time
-                        }));
+                        }).ToList());
                     }
                     else
                     {

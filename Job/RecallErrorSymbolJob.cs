@@ -40,7 +40,7 @@ namespace Analyze.DesktopApp.Job
                                 q = float.Parse(x[7].ToString()),
                                 state = true,
                                 ut = time
-                            }));
+                            }).ToList());
 
                             StaticVal.lstError.Remove(item.ToString());
                         }

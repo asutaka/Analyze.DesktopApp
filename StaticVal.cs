@@ -20,7 +20,7 @@ namespace Analyze.DesktopApp
         public static List<string> lstError = new List<string>();
         public static List<CoinFollowDetailModel> lstMCDX = new List<CoinFollowDetailModel>();
         //Data Coin
-        public static Dictionary<string, IEnumerable<LocalTicketModel>> dic1H = new Dictionary<string, IEnumerable<LocalTicketModel>>();
+        public static Dictionary<string, List<LocalTicketModel>> dic1H = new Dictionary<string, List<LocalTicketModel>>();
         //Job
         public static ScheduleMember jobError = new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<RecallErrorSymbolJob>(), Program.Configuration.GetSection("Job").Get<JobModel>().DefaultJob, nameof(RecallErrorSymbolJob));
 
