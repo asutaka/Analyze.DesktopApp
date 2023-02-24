@@ -23,17 +23,11 @@ namespace Analyze.DesktopApp.Job
 
             if (!string.IsNullOrWhiteSpace(content1))
             {
-                var res = JsonConvert.DeserializeObject<List_LocalTicketModel>(content1);
+                var res1 = JsonConvert.DeserializeObject<List_LocalTicketModel>(content1);
                 //check data
-                if (!res.data.Any())
+                if (!res1.data.Any())
                     return;
-                var firstRes = res.data.First();
-                var entityDic = StaticVal.dic1H.FirstOrDefault(x => x.Key.Equals(firstRes.name.ToUpper()));
-                if (entityDic.Key == null)
-                    return;
-                var entityData = entityDic.Value.Last();
-                if (firstRes.e < entityData.e)
-                    return;
+
                 //Update
                 StaticVal.isAllowCalculate = false;
                 Thread.Sleep();
