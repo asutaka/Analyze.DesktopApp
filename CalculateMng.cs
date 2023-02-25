@@ -2,6 +2,7 @@
 using Analyze.DesktopApp.Models;
 using Binance.Net.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -174,6 +175,8 @@ namespace Analyze.DesktopApp
             var data = StaticVal.dic1H.FirstOrDefault(x => x.Key == coin);
             if (data.Key == null || !data.Value.Any())
                 return (false, 0);
+            if (coin.Equals("1INCHUSDT"))
+                LogM.Log($"Log: {JsonConvert.SerializeObject(data.Value.Last())}");
             var settings = Program.Configuration.GetSection("Calculate").Get<CalculateModel>();
 
             var arrClose = data.Value.Select(x => (double)x.c).ToArray();

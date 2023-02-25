@@ -61,8 +61,8 @@ namespace Analyze.DesktopApp.Job
                                     ut = item.ut,
                                     state = item.state
                                 });
+                                StaticVal.dic1H[entityDic.Key] = entityDic.Value;
                             }
-                            StaticVal.dic1H[entityDic.Key] = entityDic.Value;
                         }
                     }
                 }
