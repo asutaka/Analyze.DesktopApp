@@ -11,7 +11,6 @@ namespace Analyze.DesktopApp.Job
     [DisallowConcurrentExecution]
     public class SyncDataJob : IJob
     {
-        private static bool hasUpdate = false;
         public void Execute(IJobExecutionContext context)
         {
             var settings = Program.Configuration.GetSection("Domain").Get<DomainModel>();
