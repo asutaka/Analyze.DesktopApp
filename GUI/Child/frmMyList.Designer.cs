@@ -47,8 +47,8 @@ namespace Analyze.DesktopApp.GUI.Child
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.STT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Coin = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.prevClosePrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lastPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.prevClosePrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PriceChange = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PriceRef = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
@@ -65,15 +65,16 @@ namespace Analyze.DesktopApp.GUI.Child
             this.Div.AppearanceHeader.Options.UseTextOptions = true;
             this.Div.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.Div.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.Div.Caption = "Độ lệch";
+            this.Div.Caption = "Gia tăng Lg(%)";
             this.Div.DisplayFormat.FormatString = "\"#,##0.0\"";
             this.Div.FieldName = "Div";
-            this.Div.MaxWidth = 75;
-            this.Div.MinWidth = 75;
+            this.Div.MaxWidth = 85;
+            this.Div.MinWidth = 85;
             this.Div.Name = "Div";
             this.Div.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.Div.Visible = true;
-            this.Div.VisibleIndex = 10;
+            this.Div.VisibleIndex = 7;
+            this.Div.Width = 85;
             // 
             // CoinName
             // 
@@ -107,7 +108,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.weightedAvgPrice.MinWidth = 120;
             this.weightedAvgPrice.Name = "weightedAvgPrice";
             this.weightedAvgPrice.Visible = true;
-            this.weightedAvgPrice.VisibleIndex = 8;
+            this.weightedAvgPrice.VisibleIndex = 9;
             this.weightedAvgPrice.Width = 120;
             // 
             // PriceChangePercent
@@ -127,11 +128,13 @@ namespace Analyze.DesktopApp.GUI.Child
             this.PriceChangePercent.Name = "PriceChangePercent";
             this.PriceChangePercent.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
             this.PriceChangePercent.Visible = true;
-            this.PriceChangePercent.VisibleIndex = 6;
+            this.PriceChangePercent.VisibleIndex = 5;
             this.PriceChangePercent.Width = 85;
             // 
             // volume
             // 
+            this.volume.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.volume.AppearanceCell.Options.UseBackColor = true;
             this.volume.AppearanceCell.Options.UseTextOptions = true;
             this.volume.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.volume.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -146,7 +149,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.volume.Name = "volume";
             this.volume.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.volume.Visible = true;
-            this.volume.VisibleIndex = 7;
+            this.volume.VisibleIndex = 8;
             this.volume.Width = 120;
             // 
             // grid
@@ -166,14 +169,14 @@ namespace Analyze.DesktopApp.GUI.Child
             this.STT,
             this.Coin,
             this.CoinName,
-            this.prevClosePrice,
             this.lastPrice,
-            this.volume,
+            this.prevClosePrice,
             this.PriceChange,
             this.PriceChangePercent,
-            this.weightedAvgPrice,
             this.PriceRef,
-            this.Div});
+            this.Div,
+            this.volume,
+            this.weightedAvgPrice});
             gridFormatRule1.ColumnApplyTo = this.Div;
             gridFormatRule1.Name = "FormatRate";
             formatConditionRuleIconSet1.AllowAnimation = DevExpress.Utils.DefaultBoolean.True;
@@ -280,22 +283,6 @@ namespace Analyze.DesktopApp.GUI.Child
             this.Coin.VisibleIndex = 1;
             this.Coin.Width = 90;
             // 
-            // prevClosePrice
-            // 
-            this.prevClosePrice.AppearanceCell.Options.UseTextOptions = true;
-            this.prevClosePrice.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.prevClosePrice.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.prevClosePrice.AppearanceHeader.Options.UseTextOptions = true;
-            this.prevClosePrice.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.prevClosePrice.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.prevClosePrice.Caption = "Giá trước đó";
-            this.prevClosePrice.FieldName = "prevClosePrice";
-            this.prevClosePrice.MaxWidth = 75;
-            this.prevClosePrice.MinWidth = 75;
-            this.prevClosePrice.Name = "prevClosePrice";
-            this.prevClosePrice.Visible = true;
-            this.prevClosePrice.VisibleIndex = 3;
-            // 
             // lastPrice
             // 
             this.lastPrice.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
@@ -315,7 +302,23 @@ namespace Analyze.DesktopApp.GUI.Child
             this.lastPrice.OptionsColumn.AllowEdit = false;
             this.lastPrice.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.lastPrice.Visible = true;
-            this.lastPrice.VisibleIndex = 4;
+            this.lastPrice.VisibleIndex = 3;
+            // 
+            // prevClosePrice
+            // 
+            this.prevClosePrice.AppearanceCell.Options.UseTextOptions = true;
+            this.prevClosePrice.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.prevClosePrice.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.prevClosePrice.AppearanceHeader.Options.UseTextOptions = true;
+            this.prevClosePrice.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.prevClosePrice.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.prevClosePrice.Caption = "Giá 24H";
+            this.prevClosePrice.FieldName = "prevClosePrice";
+            this.prevClosePrice.MaxWidth = 75;
+            this.prevClosePrice.MinWidth = 75;
+            this.prevClosePrice.Name = "prevClosePrice";
+            this.prevClosePrice.Visible = true;
+            this.prevClosePrice.VisibleIndex = 4;
             // 
             // PriceChange
             // 
@@ -333,8 +336,6 @@ namespace Analyze.DesktopApp.GUI.Child
             this.PriceChange.MaxWidth = 80;
             this.PriceChange.MinWidth = 80;
             this.PriceChange.Name = "PriceChange";
-            this.PriceChange.Visible = true;
-            this.PriceChange.VisibleIndex = 5;
             this.PriceChange.Width = 80;
             // 
             // PriceRef
@@ -345,7 +346,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.PriceRef.AppearanceHeader.Options.UseTextOptions = true;
             this.PriceRef.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.PriceRef.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.PriceRef.Caption = "Mốc giá";
+            this.PriceRef.Caption = "Giá Login";
             this.PriceRef.DisplayFormat.FormatString = "\"#,##0.0\"";
             this.PriceRef.FieldName = "PriceRef";
             this.PriceRef.MaxWidth = 75;
@@ -353,7 +354,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.PriceRef.Name = "PriceRef";
             this.PriceRef.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.PriceRef.Visible = true;
-            this.PriceRef.VisibleIndex = 9;
+            this.PriceRef.VisibleIndex = 6;
             // 
             // frmMyList
             // 

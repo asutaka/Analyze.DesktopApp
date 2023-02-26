@@ -30,8 +30,9 @@ namespace Analyze.DesktopApp.Job
                         }
                         item.lastPrice = (float)entityBinanceTick.LastPrice;
                         item.Div = (float)Math.Round(((-1 + item.lastPrice / item.PriceRef) * 100), 1);
-                        item.PriceChange = Math.Round(item.lastPrice - item.prevClosePrice, 2);
+                        //item.PriceChange = Math.Round(item.lastPrice - item.prevClosePrice, 2);
                         item.PriceChangePercent = Math.Round(((-1 + item.lastPrice / item.prevClosePrice) * 100), 1);
+                        item.volume = (float)entityBinanceTick.Volume;
 
                         var entityMCDX = StaticVal.lstMCDX.FirstOrDefault(x => x.Symbol.Equals(coin));
                         if(entityMCDX != null)

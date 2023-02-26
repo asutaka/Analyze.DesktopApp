@@ -17,7 +17,7 @@
         //
         public float PriceRef { get; set; }
         public float Div { get; set; }
-
+        public float volumeDiv { get; set; }
         //
         public int MCDX { get; set; }
     }

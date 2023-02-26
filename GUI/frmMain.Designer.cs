@@ -201,7 +201,7 @@ namespace Analyze.DesktopApp.GUI
             // 
             // barBtn24h
             // 
-            this.barBtn24h.Caption = "24 giờ";
+            this.barBtn24h.Caption = "24H";
             this.barBtn24h.Enabled = false;
             this.barBtn24h.Id = 14;
             this.barBtn24h.ImageOptions.Image = global::Analyze.DesktopApp.Properties.Resources._24h;
