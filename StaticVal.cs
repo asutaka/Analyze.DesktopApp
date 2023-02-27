@@ -1,5 +1,4 @@
-﻿using Analyze.DesktopApp.GUI;
-using Analyze.DesktopApp.Job;
+﻿using Analyze.DesktopApp.Job;
 using Analyze.DesktopApp.Job.ScheduleJob;
 using Analyze.DesktopApp.Models;
 using Binance.Net.Interfaces;
@@ -21,13 +20,16 @@ namespace Analyze.DesktopApp
         public static List<CoinFollowDetailModel> lstMCDX = new List<CoinFollowDetailModel>();
         //Data Coin
         public static Dictionary<string, List<LocalTicketModel>> dic1H = new Dictionary<string, List<LocalTicketModel>>();
+        public static Dictionary<string, float> dicVolumeFix = new Dictionary<string, float>();
+
         //Job
         public static ScheduleMember jobError = new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<RecallErrorSymbolJob>(), Program.Configuration.GetSection("Job").Get<JobModel>().DefaultJob, nameof(RecallErrorSymbolJob));
+        public static ScheduleMember jobVolumeFix = new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<VolumeFixJob>(), Program.Configuration.GetSection("Job").Get<JobModel>().DefaultJob, nameof(VolumeFixJob));
 
         //State Form
         public static bool frm24HReady = false;
         public static bool frmMyListReady = false;
-        public static bool isAllowCalculate = true;
+        public static bool isAllowCalculate = false;
         //Value Storage
         public static int TimeSynData = 2;
 

@@ -42,6 +42,11 @@ namespace Analyze.DesktopApp.Job
                                 ut = time
                             }).ToList());
 
+                            if(arr.Count() > 0)
+                            {
+                                StaticVal.dic1H[item].Remove(StaticVal.dic1H[item].Last());
+                            }
+
                             StaticVal.lstError.Remove(item.ToString());
                         }
                     }
@@ -50,17 +55,25 @@ namespace Analyze.DesktopApp.Job
                         NLogLogger.PublishException(ex, $"RecallErrorSymbolJob.Execute|EXCEPTION|INPUT: {JsonConvert.SerializeObject(item)}| {ex.Message}");
                     }
                 }
-
-                if (StaticVal.lstError.Count() < 10)
-                {
-                    //stop job
-                    StaticVal.jobError.Pause();
-                    LogM.Stop();
-                }
             }
             catch(Exception exm)
             {
                 NLogLogger.PublishException(exm, $"RecallErrorSymbolJob.Execute|EXCEPTION| {exm.Message}");
+            }
+
+            try
+            {
+                if (StaticVal.lstError.Count() < 10)
+                {
+                    //stop job
+                    StaticVal.jobError.Pause();
+                    StaticVal.jobVolumeFix.Start();
+                    LogM.Stop();
+                }
+            }
+            catch(Exception ex)
+            {
+                NLogLogger.PublishException(ex, $"RecallErrorSymbolJob.Execute|EXCEPTION(Cannot end Job)| {ex.Message}");
             }
         }
     }

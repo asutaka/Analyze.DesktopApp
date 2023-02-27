@@ -133,7 +133,7 @@ namespace Analyze.DesktopApp
 
         public static IEnumerable<LocalTicketModel> GetSource(string coin)
         {
-            IEnumerable<LocalTicketModel> lSource = StaticVal.dic1H.First(x => x.Key == coin).Value;
+            IEnumerable<LocalTicketModel> lSource = StaticVal.dic1H.First(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase)).Value;
             return lSource;
         }
 
@@ -141,7 +141,7 @@ namespace Analyze.DesktopApp
         {
             if (StaticVal.binanceTicks == null)
                 return null;
-            var entity = StaticVal.binanceTicks.FirstOrDefault(x => x.Symbol == coin);
+            var entity = StaticVal.binanceTicks.FirstOrDefault(x => x.Symbol.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
             return entity;
         }
 
@@ -172,12 +172,17 @@ namespace Analyze.DesktopApp
 
         public static (bool, double) MCDX(string coin)
         {
-            var data = StaticVal.dic1H.FirstOrDefault(x => x.Key == coin);
+            var data = StaticVal.dic1H.FirstOrDefault(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
             if (data.Key == null || !data.Value.Any())
                 return (false, 0);
+            var valTemp1H = StaticVal.binanceTicks.FirstOrDefault(x => x.Symbol.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
+            if(valTemp1H == null)
+                return (false, 0);
+
             var settings = Program.Configuration.GetSection("Calculate").Get<CalculateModel>();
 
             var arrClose = data.Value.Select(x => (double)x.c).ToArray();
+            arrClose = arrClose.Concat(new double[] { (double)valTemp1H.LastPrice }).ToArray();
             var count = arrClose.Count();
             if (count < 50)
                 return (false, 0);

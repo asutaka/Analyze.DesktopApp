@@ -91,6 +91,7 @@ namespace Analyze.DesktopApp.GUI.Child
                     item.STT = index++;
                     item.CoinName = entityCoin == null ? string.Empty : entityCoin.AN;
                     item.PriceRef = item.lastPrice;
+                    item.volume = 0;
                 }
             }
         }

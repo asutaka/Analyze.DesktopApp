@@ -66,7 +66,7 @@ namespace Analyze.DesktopApp.GUI.Child
         {
             if (!CheckData())
                 return;
-            var entity = _coinFollowModel.lData.FirstOrDefault(x => x.Symbol.Equals(cmbCoin.EditValue.ToString()));
+            var entity = _coinFollowModel.lData.FirstOrDefault(x => x.Symbol.Equals(cmbCoin.EditValue.ToString(), StringComparison.InvariantCultureIgnoreCase));
             if (entity != null)
                 _coinFollowModel.lData.Remove(entity);
             _coinFollowModel.lData.Add(new CoinFollowDetailModel { Symbol = cmbCoin.EditValue.ToString(), Value = double.Parse(txtValue.Text) });
@@ -86,7 +86,7 @@ namespace Analyze.DesktopApp.GUI.Child
             if (cmbCoin.EditValue == null
                || string.IsNullOrWhiteSpace(cmbCoin.EditValue.ToString()))
                 return;
-            var entity = StaticVal.lst24H.FirstOrDefault(x => x.Coin.Equals(cmbCoin.EditValue.ToString()));
+            var entity = StaticVal.lst24H.FirstOrDefault(x => x.Coin.Equals(cmbCoin.EditValue.ToString(), StringComparison.InvariantCultureIgnoreCase));
             if (entity != null)
                 txtValue.Text = entity.lastPrice.ToString(); 
         }

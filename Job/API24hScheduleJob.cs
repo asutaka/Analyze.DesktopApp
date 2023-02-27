@@ -32,9 +32,10 @@ namespace Analyze.DesktopApp.Job
                         item.Div = (float)Math.Round(((-1 + item.lastPrice / item.PriceRef) * 100), 1);
                         //item.PriceChange = Math.Round(item.lastPrice - item.prevClosePrice, 2);
                         item.PriceChangePercent = Math.Round(((-1 + item.lastPrice / item.prevClosePrice) * 100), 1);
-                        item.volume = (float)entityBinanceTick.Volume;
+                        var entityVol = StaticVal.dicVolumeFix.FirstOrDefault(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
+                        item.volume = entityVol.Key != null ? (float)entityBinanceTick.Volume - entityVol.Value : 0;
 
-                        var entityMCDX = StaticVal.lstMCDX.FirstOrDefault(x => x.Symbol.Equals(coin));
+                        var entityMCDX = StaticVal.lstMCDX.FirstOrDefault(x => x.Symbol.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
                         if(entityMCDX != null)
                         {
                             item.MCDX = entityMCDX.Value >= 18 ? 2 : 1;

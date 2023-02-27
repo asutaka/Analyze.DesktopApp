@@ -256,6 +256,7 @@
     <Compile Include="Job\RecallErrorSymbolJob.cs" />
     <Compile Include="Job\SubcribeJob.cs" />
     <Compile Include="Job\SyncDataJob.cs" />
+    <Compile Include="Job\VolumeFixJob.cs" />
     <Compile Include="LogM.cs" />
     <Compile Include="Models\MyModel.cs" />
     <Compile Include="Models\MyViewModel.cs" />

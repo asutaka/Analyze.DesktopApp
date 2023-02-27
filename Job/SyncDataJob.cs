@@ -3,6 +3,7 @@ using Analyze.DesktopApp.Utils;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Quartz;
+using System;
 using System.Linq;
 using System.Threading;
 
@@ -13,6 +14,12 @@ namespace Analyze.DesktopApp.Job
     {
         public void Execute(IJobExecutionContext context)
         {
+            LogM.Log("Start Sync");
+            if (StaticVal.isAllowCalculate)
+            {
+                StaticVal.isAllowCalculate = false;
+                Thread.Sleep(2000);
+            }
             var settings = Program.Configuration.GetSection("Domain").Get<DomainModel>();
             var content1 = StaticClass.GetWebContent10s($"{settings.Sub1}/mirror").GetAwaiter().GetResult();
             UpdateData(content1);
@@ -20,7 +27,9 @@ namespace Analyze.DesktopApp.Job
             UpdateData(content2);
             var content3 = StaticClass.GetWebContent10s($"{settings.Sub3}/mirror").GetAwaiter().GetResult();
             UpdateData(content3);
-            StaticVal.isAllowCalculate = true;
+            StaticVal.jobVolumeFix.Resume();
+            //StaticVal.isAllowCalculate = true;
+            LogM.Log("End Sync");
 
             void UpdateData(string content)
             {
@@ -30,14 +39,9 @@ namespace Analyze.DesktopApp.Job
                     //check data
                     if (response.data.Any())
                     {
-                        if (StaticVal.isAllowCalculate)
-                        {
-                            StaticVal.isAllowCalculate = false;
-                            Thread.Sleep(2000);
-                        }
                         foreach (var item in response.data)
                         {
-                            var entityDic = StaticVal.dic1H.FirstOrDefault(x => x.Key.Equals(item.name.ToUpper()));
+                            var entityDic = StaticVal.dic1H.FirstOrDefault(x => x.Key.Equals(item.name, StringComparison.InvariantCultureIgnoreCase));
                             if (entityDic.Key != null)
                             {
                                 var entityData = entityDic.Value.Last();

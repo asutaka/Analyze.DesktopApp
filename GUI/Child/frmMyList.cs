@@ -39,7 +39,7 @@ namespace Analyze.DesktopApp.GUI.Child
                 return;
             this.Invoke((MethodInvoker)delegate
             {
-                var lData = StaticVal.lst24H.Where(x => _coinFollowModel.lData.Any(y => y.Symbol.Equals(x.Coin)));
+                var lData = StaticVal.lst24H.Where(x => _coinFollowModel.lData.Any(y => y.Symbol.Equals(x.Coin, StringComparison.InvariantCultureIgnoreCase)));
                 foreach (var item in lData)
                 {
                     int rowHandle = gridView1.LocateByValue("Coin", item.Coin);
@@ -84,12 +84,12 @@ namespace Analyze.DesktopApp.GUI.Child
             _coinFollowModel = new CoinFollowModel().LoadJsonFile(_fileName);
             if (_coinFollowModel != null)
             {
-                _lst24H = StaticVal.lst24H.Where(x => _coinFollowModel.lData.Any(y => y.Symbol.Equals(x.Coin))).ToList();
+                _lst24H = StaticVal.lst24H.Where(x => _coinFollowModel.lData.Any(y => y.Symbol.Equals(x.Coin, StringComparison.InvariantCultureIgnoreCase))).ToList();
             }
             var STT = 1;
             foreach (var item in _lst24H)
             {
-                var entity = _coinFollowModel.lData.FirstOrDefault(x => x.Symbol.Equals(item.Coin));
+                var entity = _coinFollowModel.lData.FirstOrDefault(x => x.Symbol.Equals(item.Coin, StringComparison.InvariantCultureIgnoreCase));
                 item.PriceRef = entity != null ? (float)entity.Value : 0;
                 item.STT = STT++;
             }
@@ -109,7 +109,7 @@ namespace Analyze.DesktopApp.GUI.Child
                 var entityRow = (API24hVM)(((GridView)grid.MainView).GetRow(selRows[0]));
                 if (MessageBox.Show($"Xóa coin {entityRow.Coin} khỏi danh sách Follow?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    var entity = _coinFollowModel.lData.Find(x => x.Symbol.Equals(entityRow.Coin));
+                    var entity = _coinFollowModel.lData.Find(x => x.Symbol.Equals(entityRow.Coin, StringComparison.InvariantCultureIgnoreCase));
                     if(entity != null)
                     {
                         _coinFollowModel.lData.Remove(entity);

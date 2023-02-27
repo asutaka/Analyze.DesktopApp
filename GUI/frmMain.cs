@@ -69,6 +69,11 @@ namespace Analyze.DesktopApp.GUI
                             state = true,
                             ut = time
                         }).ToList());
+
+                        if (arr.Count() > 0)
+                        {
+                            StaticVal.dic1H[item.S].Remove(StaticVal.dic1H[item.S].Last());
+                        }
                     }
                     else
                     {
