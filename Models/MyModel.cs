@@ -50,6 +50,7 @@ namespace Analyze.DesktopApp.Models
         public string DefaultJob { get; set; }
         public string SubcribeJob { get; set; }
         public string CaculateJob { get; set; }
+        public string VolumeJob { get; set; }
     }
 
     public class CalculateModel

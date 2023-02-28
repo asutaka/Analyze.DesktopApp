@@ -20,11 +20,10 @@ namespace Analyze.DesktopApp
         public static List<CoinFollowDetailModel> lstMCDX = new List<CoinFollowDetailModel>();
         //Data Coin
         public static Dictionary<string, List<LocalTicketModel>> dic1H = new Dictionary<string, List<LocalTicketModel>>();
-        public static Dictionary<string, float> dicVolumeFix = new Dictionary<string, float>();
+        public static Dictionary<string, float> dicVolume = new Dictionary<string, float>();
 
         //Job
         public static ScheduleMember jobError = new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<RecallErrorSymbolJob>(), Program.Configuration.GetSection("Job").Get<JobModel>().DefaultJob, nameof(RecallErrorSymbolJob));
-        public static ScheduleMember jobVolumeFix = new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<VolumeFixJob>(), Program.Configuration.GetSection("Job").Get<JobModel>().DefaultJob, nameof(VolumeFixJob));
 
         //State Form
         public static bool frm24HReady = false;

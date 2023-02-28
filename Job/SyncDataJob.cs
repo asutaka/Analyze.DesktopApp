@@ -27,8 +27,7 @@ namespace Analyze.DesktopApp.Job
             UpdateData(content2);
             var content3 = StaticClass.GetWebContent10s($"{settings.Sub3}/mirror").GetAwaiter().GetResult();
             UpdateData(content3);
-            StaticVal.jobVolumeFix.Resume();
-            //StaticVal.isAllowCalculate = true;
+            StaticVal.isAllowCalculate = true;
             LogM.Log("End Sync");
 
             void UpdateData(string content)

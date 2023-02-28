@@ -39,6 +39,11 @@ namespace Analyze.DesktopApp
                     StaticVal.lstCoin = JsonConvert.DeserializeObject<CryptonDataModel>(content).Data
                                 .Where(x => x.S.EndsWith("USDT"))
                                 .OrderBy(x => x.S).ToList();
+                    foreach (var item in StaticVal.lstCoin)
+                    {
+                        StaticVal.dicVolume.Add(item.S, 0);
+                    }
+                    new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<VolumeJob>(), Program.Configuration.GetSection("Job").Get<JobModel>().VolumeJob, nameof(VolumeJob)).Start();
                 }
 
                 var settingDomain = Program.Configuration.GetSection("Domain").Get<DomainModel>();

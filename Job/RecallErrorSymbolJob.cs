@@ -67,7 +67,6 @@ namespace Analyze.DesktopApp.Job
                 {
                     //stop job
                     StaticVal.jobError.Pause();
-                    StaticVal.jobVolumeFix.Start();
                     LogM.Stop();
                 }
             }
