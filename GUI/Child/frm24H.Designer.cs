@@ -41,7 +41,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.MCDX = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Div = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CoinName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.weightedAvgPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.volumeMA20 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PriceChangePercent = new DevExpress.XtraGrid.Columns.GridColumn();
             this.volume = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grid = new DevExpress.XtraGrid.GridControl();
@@ -52,6 +52,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.prevClosePrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PriceChange = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PriceRef = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.volumeDiv = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
@@ -104,23 +105,23 @@ namespace Analyze.DesktopApp.GUI.Child
             this.CoinName.VisibleIndex = 2;
             this.CoinName.Width = 20;
             // 
-            // weightedAvgPrice
+            // volumeMA20
             // 
-            this.weightedAvgPrice.AppearanceCell.Options.UseTextOptions = true;
-            this.weightedAvgPrice.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.weightedAvgPrice.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.weightedAvgPrice.AppearanceHeader.Options.UseTextOptions = true;
-            this.weightedAvgPrice.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.weightedAvgPrice.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.weightedAvgPrice.Caption = "Khối lượng TB";
-            this.weightedAvgPrice.DisplayFormat.FormatString = "\"#,##0.0\"";
-            this.weightedAvgPrice.FieldName = "weightedAvgPrice";
-            this.weightedAvgPrice.MaxWidth = 120;
-            this.weightedAvgPrice.MinWidth = 120;
-            this.weightedAvgPrice.Name = "weightedAvgPrice";
-            this.weightedAvgPrice.Visible = true;
-            this.weightedAvgPrice.VisibleIndex = 9;
-            this.weightedAvgPrice.Width = 120;
+            this.volumeMA20.AppearanceCell.Options.UseTextOptions = true;
+            this.volumeMA20.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.volumeMA20.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.volumeMA20.AppearanceHeader.Options.UseTextOptions = true;
+            this.volumeMA20.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.volumeMA20.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.volumeMA20.Caption = "Khối lượng TB";
+            this.volumeMA20.DisplayFormat.FormatString = "\"#,##0.0\"";
+            this.volumeMA20.FieldName = "weightedAvgPrice";
+            this.volumeMA20.MaxWidth = 120;
+            this.volumeMA20.MinWidth = 120;
+            this.volumeMA20.Name = "volumeMA20";
+            this.volumeMA20.Visible = true;
+            this.volumeMA20.VisibleIndex = 9;
+            this.volumeMA20.Width = 120;
             // 
             // PriceChangePercent
             // 
@@ -187,7 +188,8 @@ namespace Analyze.DesktopApp.GUI.Child
             this.PriceRef,
             this.Div,
             this.volume,
-            this.weightedAvgPrice,
+            this.volumeMA20,
+            this.volumeDiv,
             this.MCDX});
             gridFormatRule1.Column = this.MCDX;
             gridFormatRule1.ColumnApplyTo = this.MCDX;
@@ -367,6 +369,17 @@ namespace Analyze.DesktopApp.GUI.Child
             this.PriceRef.Visible = true;
             this.PriceRef.VisibleIndex = 6;
             // 
+            // volumeDiv
+            // 
+            this.volumeDiv.Caption = "Tỉ lệ(%)";
+            this.volumeDiv.FieldName = "volumeDiv";
+            this.volumeDiv.MaxWidth = 85;
+            this.volumeDiv.MinWidth = 85;
+            this.volumeDiv.Name = "volumeDiv";
+            this.volumeDiv.Visible = true;
+            this.volumeDiv.VisibleIndex = 10;
+            this.volumeDiv.Width = 85;
+            // 
             // frm24H
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,10 +408,11 @@ namespace Analyze.DesktopApp.GUI.Child
         private DevExpress.XtraGrid.Columns.GridColumn PriceChangePercent;
         private DevExpress.XtraGrid.Columns.GridColumn volume;
         private DevExpress.XtraGrid.Columns.GridColumn PriceChange;
-        private DevExpress.XtraGrid.Columns.GridColumn weightedAvgPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn volumeMA20;
         private DevExpress.XtraGrid.Columns.GridColumn prevClosePrice;
         private DevExpress.XtraGrid.Columns.GridColumn PriceRef;
         private DevExpress.XtraGrid.Columns.GridColumn Div;
         private DevExpress.XtraGrid.Columns.GridColumn MCDX;
+        private DevExpress.XtraGrid.Columns.GridColumn volumeDiv;
     }
 }

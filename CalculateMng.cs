@@ -201,5 +201,77 @@ namespace Analyze.DesktopApp
             var signal = settings.MCDX;
             return (banker_rsi >= signal, banker_rsi);
         }
+
+        public static double ADX(double[] arrHigh, double[] arrLow, double[] arrClose, int period, int count)
+        {
+            try
+            {
+                var output = new double[1000];
+                Core.Adx(0, count - 1, arrHigh, arrLow, arrClose, period, out var outBegIdx, out var outNBElement, output);
+                return output[count - period];
+            }
+            catch (Exception ex)
+            {
+                NLogLogger.PublishException(ex, $"CalculateMng.ADX|EXCEPTION| {ex.Message}");
+            }
+            return 0;
+        }
+        public static double MA(double[] arrInput, Core.MAType type, int period, int count)
+        {
+            try
+            {
+                var output = new double[1000];
+                Core.MovingAverage(0, count - 1, arrInput, period, Core.MAType.Sma, out var outBegIdx, out var outNBElement, output);
+                return output[count - period];
+            }
+            catch (Exception ex)
+            {
+                NLogLogger.PublishException(ex, $"CalculateMng.MA|EXCEPTION| {ex.Message}");
+            }
+            return 0;
+        }
+        public static double MACD(double[] arrInput, int high, int low, int signal, int count)
+        {
+            try
+            {
+                var output = new double[1000];
+                Core.Macd(0, count - 1, arrInput, low, high, signal, out var outBegIdx, out var outNbElement, new double[1000], new double[1000], output);
+                return output[count - 1];
+            }
+            catch (Exception ex)
+            {
+                NLogLogger.PublishException(ex, $"CalculateMng.MACD|EXCEPTION| {ex.Message}");
+            }
+            return 0;
+        }
+        public static IEnumerable<double> MACD(double[] arrInput, int high, int low, int signal, int count, int take)
+        {
+            try
+            {
+                var output = new double[1000];
+                Core.Macd(0, count - 1, arrInput, low, high, signal, out var outBegIdx, out var outNbElement, new double[1000], new double[1000], output);
+                return output.Skip(count - (take + 1)).Take(take);
+            }
+            catch (Exception ex)
+            {
+                NLogLogger.PublishException(ex, $"CalculateMng.MACD|EXCEPTION| {ex.Message}");
+            }
+            return null;
+        }
+
+        public static double RSI(double[] arrInput, int period, int count)
+        {
+            try
+            {
+                var output = new double[1000];
+                Core.Rsi(0, count - 1, arrInput, period, out var outBegIdx, out var outNBElement, output);
+                return output[count - period];
+            }
+            catch (Exception ex)
+            {
+                NLogLogger.PublishException(ex, $"CalculateMng.RSI|EXCEPTION| {ex.Message}");
+            }
+            return 0;
+        }
     }
 }

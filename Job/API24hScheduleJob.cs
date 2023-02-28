@@ -33,7 +33,9 @@ namespace Analyze.DesktopApp.Job
                         //item.PriceChange = Math.Round(item.lastPrice - item.prevClosePrice, 2);
                         item.PriceChangePercent = Math.Round(((-1 + item.lastPrice / item.prevClosePrice) * 100), 1);
                         var entityVol = StaticVal.dicVolume.FirstOrDefault(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
-                        item.volume = entityVol.Key != null ? entityVol.Value : 0;
+                        item.volume = entityVol.Key != null ? entityVol.Value.Item1 : 0;
+                        item.volumeMA20 = entityVol.Key != null ? entityVol.Value.Item2 : 0;
+                        item.volumeDiv = entityVol.Key != null ? entityVol.Value.Item3 : 0;
 
                         var entityMCDX = StaticVal.lstMCDX.FirstOrDefault(x => x.Symbol.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
                         if(entityMCDX != null)

@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Quartz;
 using System;
 using System.Linq;
+using static TicTacTec.TA.Library.Core;
 
 namespace Analyze.DesktopApp.Job
 {
@@ -34,7 +35,24 @@ namespace Analyze.DesktopApp.Job
                             var entityDic = StaticVal.dicVolume.FirstOrDefault(x => x.Key.Equals(item.name, StringComparison.InvariantCultureIgnoreCase));
                             if (entityDic.Key != null)
                             {
-                                StaticVal.dicVolume[entityDic.Key] = item.v;
+                                double MA20 = 0;
+                                double percent = 0;
+                                var entityDicData = StaticVal.dic1H.FirstOrDefault(x => x.Key.Equals(item.name, StringComparison.InvariantCultureIgnoreCase));
+                                if(entityDicData.Key != null)
+                                {
+                                    var count = entityDicData.Value.Count();
+                                    if (count >= 20)
+                                    {
+                                        var list = entityDicData.Value.Select(x => (double)x.v).ToList();
+                                        list.Add(item.v);
+                                        MA20 = CalculateMng.MA(list.ToArray(), MAType.Sma, 20, count + 1);
+                                        if(MA20 > 0)
+                                        {
+                                            percent = Math.Round(item.v * 100 / MA20, 2);
+                                        }
+                                    }
+                                }
+                                StaticVal.dicVolume[entityDic.Key] = new Tuple<float, float, float>(item.v, (float)MA20, (float)percent);
                             }
                         }
                     }
