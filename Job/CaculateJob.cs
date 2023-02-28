@@ -7,6 +7,9 @@ namespace Analyze.DesktopApp.Job
     {
         public void Execute(IJobExecutionContext context)
         {
+            //var dic = StaticVal.dic1H;
+            //var dicVolume = StaticVal.dicVolume;
+
             if (!StaticVal.isAllowCalculate)
                 return;
             var lMCDX = CalculateMng.MCDX();

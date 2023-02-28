@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -31,7 +30,6 @@ namespace Analyze.DesktopApp.GUI
         private void InitData()
         {
             Startup.Instance();
-
             var model = new ProfileModel().LoadJsonFile(_fileName);
             if (model != null)
             {
