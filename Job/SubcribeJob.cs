@@ -33,27 +33,6 @@ namespace Analyze.DesktopApp.Job
                             binanceTick = binanceTick.Except(lExists).ToList();
                         }
                         binanceTick.AddRange(lData);
-                        ////for test
-                        //var tmp = lData.FirstOrDefault(x => x.Symbol.Equals("1INCHUSDT", StringComparison.InvariantCultureIgnoreCase));
-                        //if (tmp != null)
-                        //{
-                        //    var entity = StaticVal.dic1H.FirstOrDefault(x => x.Key.Equals("1INCHUSDT", StringComparison.InvariantCultureIgnoreCase));
-                        //    if(entity.Key != null)
-                        //    {
-                        //        var count = entity.Value.Count();
-                        //        var sum1 = entity.Value.Skip(count - 23).Sum(x => x.v);
-                        //        //LogM.Log($"sum1: {sum1}");
-                        //        //var sum1A = entity.Value.Skip(count - 24).Sum(x => x.v);
-                        //        //LogM.Log($"sum1A: {sum1A}");
-                        //        LogM.Log($"Socket: {tmp.Volume}");
-                        //        LogM.Log($"Last: {entity.Value.Last().v}");
-                        //        LogM.Log($"Count-1: {entity.Value[count-1].v}");
-                        //        var tmp2 = tmp.Volume - (decimal)sum1;
-                        //        LogM.Log($"tmp2: {tmp2}");
-                        //    }
-                            
-                        //}
-
                         StaticVal.binanceTicks = binanceTick;
                         isLock = false;
                     }

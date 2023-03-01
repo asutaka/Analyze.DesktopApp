@@ -215,7 +215,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculateMng.cs" />
+    <Compile Include="Job\VolumeJob.cs" />
+    <Compile Include="Utils\CalculateMng.cs" />
     <Compile Include="ConfigVal.cs" />
     <Compile Include="GUI\Child\frmMyList.cs">
       <SubType>Form</SubType>
@@ -256,7 +257,6 @@
     <Compile Include="Job\RecallErrorSymbolJob.cs" />
     <Compile Include="Job\SubcribeJob.cs" />
     <Compile Include="Job\SyncDataJob.cs" />
-    <Compile Include="Job\VolumeJob.cs" />
     <Compile Include="LogM.cs" />
     <Compile Include="Models\MyModel.cs" />
     <Compile Include="Models\MyViewModel.cs" />
@@ -265,10 +265,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="StaticVal.cs" />
+    <Compile Include="Utils\DataMng.cs" />
     <Compile Include="Utils\ExtensionMethod.cs" />
     <Compile Include="Utils\NLogLogger.cs" />
     <Compile Include="Utils\Security.cs" />
-    <Compile Include="Utils\StaticClass.cs" />
+    <Compile Include="Utils\WebClass.cs" />
     <None Include="Resources\24h.png" />
     <Content Include="Resources\cancel.png" />
     <Content Include="Resources\check.png" />

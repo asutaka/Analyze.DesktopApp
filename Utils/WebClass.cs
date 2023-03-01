@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Analyze.DesktopApp.Utils
 {
-    public static class StaticClass
+    public static class WebClass
     {
         private static HttpClient _client10s;
         private static HttpClient _client;

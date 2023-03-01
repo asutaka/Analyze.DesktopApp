@@ -29,10 +29,9 @@ namespace Analyze.DesktopApp
             {
                 var settings = Program.Configuration.GetSection("Job").Get<JobModel>();
                 new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<SubcribeJob>(), settings.SubcribeJob, nameof(SubcribeJob)).Start();
-                new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<API24hScheduleJob>(), settings.DefaultJob, nameof(API24hScheduleJob)).Start();
 
                 var settingsAPI = Program.Configuration.GetSection("API").Get<APIModel>();
-                var content = StaticClass.GetWebContent(settingsAPI.Coin).GetAwaiter().GetResult();
+                var content = WebClass.GetWebContent(settingsAPI.Coin).GetAwaiter().GetResult();
                 if (!string.IsNullOrWhiteSpace(content))
                 {
                     StaticVal.lstCoin = JsonConvert.DeserializeObject<CryptonDataModel>(content).Data
@@ -40,13 +39,14 @@ namespace Analyze.DesktopApp
                                 .OrderBy(x => x.S).ToList();
                     foreach (var item in StaticVal.lstCoin)
                     {
-                        StaticVal.dicVolume.Add(item.S, new Tuple<float, float, float>(0, 0, 0));
+                        StaticVal.dicVolume.Add(item.S, 0);
+                        StaticVal.dicVolumeCalculate.Add(item.S, new Tuple<float, float>(0, 0));
                     }
                     new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<VolumeJob>(), Program.Configuration.GetSection("Job").Get<JobModel>().VolumeJob, nameof(VolumeJob)).Start();
                 }
 
                 var settingDomain = Program.Configuration.GetSection("Domain").Get<DomainModel>();
-                var contentTime = StaticClass.GetWebContent10s($"{settingDomain.Sub1}/time").GetAwaiter().GetResult();
+                var contentTime = WebClass.GetWebContent10s($"{settingDomain.Sub1}/time").GetAwaiter().GetResult();
                 if (!string.IsNullOrWhiteSpace(contentTime))
                 {
                     var timeStart = DateTime.Now;

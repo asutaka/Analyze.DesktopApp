@@ -23,7 +23,7 @@ namespace Analyze.DesktopApp.Job
                 {
                     try
                     {
-                        var content = StaticClass.GetWebContent10s(string.Format(settings.History, item)).GetAwaiter().GetResult();
+                        var content = WebClass.GetWebContent10s(string.Format(settings.History, item)).GetAwaiter().GetResult();
                         if (!string.IsNullOrWhiteSpace(content))
                         {
                             var time = DateTimeOffset.Now.ToUnixTimeMilliseconds();

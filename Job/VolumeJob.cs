@@ -1,11 +1,13 @@
-﻿using Analyze.DesktopApp.Models;
+﻿using Analyze.DesktopApp.Common;
+using Analyze.DesktopApp.Models;
 using Analyze.DesktopApp.Utils;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Quartz;
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using static TicTacTec.TA.Library.Core;
+using System.Threading.Tasks;
 
 namespace Analyze.DesktopApp.Job
 {
@@ -14,49 +16,41 @@ namespace Analyze.DesktopApp.Job
     {
         public void Execute(IJobExecutionContext context)
         {
-            var settings = Program.Configuration.GetSection("Domain").Get<DomainModel>();
-            var content1 = StaticClass.GetWebContent10s($"{settings.Sub1}/current").GetAwaiter().GetResult();
-            UpdateData(content1);
-            var content2 = StaticClass.GetWebContent10s($"{settings.Sub2}/current").GetAwaiter().GetResult();
-            UpdateData(content2);
-            var content3 = StaticClass.GetWebContent10s($"{settings.Sub3}/current").GetAwaiter().GetResult();
-            UpdateData(content3);
-
-            void UpdateData(string content)
+            try
             {
-                if (!string.IsNullOrWhiteSpace(content))
+                var dicVolume = DataMng.AssignDicVolume();
+                var settings = Program.Configuration.GetSection("Domain").Get<DomainModel>();
+                var content1 = WebClass.GetWebContent10s($"{settings.Sub1}/current").GetAwaiter().GetResult();
+                UpdateData(content1);
+                var content2 = WebClass.GetWebContent10s($"{settings.Sub2}/current").GetAwaiter().GetResult();
+                UpdateData(content2);
+                var content3 = WebClass.GetWebContent10s($"{settings.Sub3}/current").GetAwaiter().GetResult();
+                UpdateData(content3);
+                StaticVal.dicVolume = dicVolume;
+
+                void UpdateData(string content)
                 {
-                    var response = JsonConvert.DeserializeObject<List_LocalTicketModel>(content);
-                    //check data
-                    if (response.data.Any())
+                    if (!string.IsNullOrWhiteSpace(content))
                     {
-                        foreach (var item in response.data)
+                        var response = JsonConvert.DeserializeObject<List_LocalTicketModel>(content);
+                        //check data
+                        if (response.data.Any())
                         {
-                            var entityDic = StaticVal.dicVolume.FirstOrDefault(x => x.Key.Equals(item.name, StringComparison.InvariantCultureIgnoreCase));
-                            if (entityDic.Key != null)
+                            foreach (var item in response.data)
                             {
-                                double MA20 = 0;
-                                double percent = 0;
-                                var entityDicData = StaticVal.dic1H.FirstOrDefault(x => x.Key.Equals(item.name, StringComparison.InvariantCultureIgnoreCase));
-                                if(entityDicData.Key != null)
+                                var entityDic = dicVolume.FirstOrDefault(x => x.Key.Equals(item.name, StringComparison.InvariantCultureIgnoreCase));
+                                if (entityDic.Key != null)
                                 {
-                                    var count = entityDicData.Value.Count();
-                                    if (count >= 20)
-                                    {
-                                        var list = entityDicData.Value.Select(x => (double)x.v).ToList();
-                                        list.Add(item.v);
-                                        MA20 = CalculateMng.MA(list.ToArray(), MAType.Sma, 20, count + 1);
-                                        if(MA20 > 0)
-                                        {
-                                            percent = Math.Round(item.v * 100 / MA20, 2);
-                                        }
-                                    }
+                                    dicVolume[entityDic.Key] = item.v;
                                 }
-                                StaticVal.dicVolume[entityDic.Key] = new Tuple<float, float, float>(item.v, (float)MA20, (float)percent);
                             }
                         }
                     }
                 }
+            }
+            catch(Exception ex)
+            {
+                NLogLogger.PublishException(ex, $"VolumeJob.Execute|EXCEPTION| {ex.Message}");
             }
         }
     }

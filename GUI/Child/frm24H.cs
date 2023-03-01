@@ -1,4 +1,6 @@
 ﻿using Analyze.DesktopApp.Common;
+using Analyze.DesktopApp.Job;
+using Analyze.DesktopApp.Job.ScheduleJob;
 using Analyze.DesktopApp.Models;
 using Analyze.DesktopApp.Utils;
 using DevExpress.Utils;
@@ -6,6 +8,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Quartz;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -76,7 +79,7 @@ namespace Analyze.DesktopApp.GUI.Child
         private void bkgrConfig_DoWork(object sender, DoWorkEventArgs e)
         {
             var settings = Program.Configuration.GetSection("API").Get<APIModel>();
-            var content = StaticClass.GetWebContent(settings.API24hr).GetAwaiter().GetResult();
+            var content = WebClass.GetWebContent(settings.API24hr).GetAwaiter().GetResult();
             if (!string.IsNullOrWhiteSpace(content))
             {
                 StaticVal.lst24H = JsonConvert.DeserializeObject<IEnumerable<TicketModel>>(content)
@@ -93,6 +96,8 @@ namespace Analyze.DesktopApp.GUI.Child
                     item.PriceRef = item.lastPrice;
                     item.volume = 0;
                 }
+                var settingsJob = Program.Configuration.GetSection("Job").Get<JobModel>();
+                new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<API24hScheduleJob>(), settingsJob.DefaultJob, nameof(API24hScheduleJob)).Start();
             }
         }
         private void bkgrConfig_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

@@ -51,7 +51,7 @@ namespace Analyze.DesktopApp.GUI
             {
                 try
                 {
-                    var content = StaticClass.GetWebContent(string.Format(settings.History, item.S)).GetAwaiter().GetResult();
+                    var content = WebClass.GetWebContent(string.Format(settings.History, item.S)).GetAwaiter().GetResult();
                     if (!string.IsNullOrWhiteSpace(content))
                     {
                         var time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
@@ -103,10 +103,9 @@ namespace Analyze.DesktopApp.GUI
 
         private void bkgrAnalyze_DoWork(object sender, DoWorkEventArgs e)
         {
-            StaticVal.lstMCDX = CalculateMng.MCDX();
+            CalculateMng.MCDX();
             var settings = Program.Configuration.GetSection("Job").Get<JobModel>();
             new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<SyncDataJob>(), $"{StaticVal.TimeSynData} 0 * * * ?", nameof(SyncDataJob)).Start();
-            //new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<SyncDataJob>(), $"{StaticVal.TimeSynData} * * * * ?", nameof(SyncDataJob)).Start();
             new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<CaculateJob>(), settings.CaculateJob, nameof(CaculateJob)).Start();
         }
         private void bkgrAnalyze_RunWorkerCompleted(object sender1, RunWorkerCompletedEventArgs e1)

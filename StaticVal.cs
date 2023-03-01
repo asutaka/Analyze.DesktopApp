@@ -21,7 +21,8 @@ namespace Analyze.DesktopApp
         public static List<CoinFollowDetailModel> lstMCDX = new List<CoinFollowDetailModel>();
         //Data Coin
         public static Dictionary<string, List<LocalTicketModel>> dic1H = new Dictionary<string, List<LocalTicketModel>>();
-        public static Dictionary<string, Tuple<float, float, float>> dicVolume = new Dictionary<string, Tuple<float, float, float>>();
+        public static Dictionary<string, float> dicVolume = new Dictionary<string, float>();
+        public static Dictionary<string, Tuple<float, float>> dicVolumeCalculate = new Dictionary<string, Tuple<float, float>>();
 
         //Job
         public static ScheduleMember jobError = new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<RecallErrorSymbolJob>(), Program.Configuration.GetSection("Job").Get<JobModel>().DefaultJob, nameof(RecallErrorSymbolJob));
@@ -32,16 +33,5 @@ namespace Analyze.DesktopApp
         public static bool isAllowCalculate = false;
         //Value Storage
         public static int TimeSynData = 2;
-
-        //Function
-        public static IBinanceMiniTick GetCoinBinanceTick(string coin)
-        {
-            if (binanceTicks == null)
-            {
-                return null;
-            }
-            var entity = binanceTicks.FirstOrDefault(x => x.Symbol == coin);
-            return entity;
-        }
     }
 }

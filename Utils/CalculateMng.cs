@@ -2,14 +2,13 @@
 using Analyze.DesktopApp.Models;
 using Binance.Net.Interfaces;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TicTacTec.TA.Library;
 
-namespace Analyze.DesktopApp
+namespace Analyze.DesktopApp.Utils
 {
     public static class CalculateMng
     {
@@ -145,61 +144,71 @@ namespace Analyze.DesktopApp
             return entity;
         }
 
-        public static List<CoinFollowDetailModel> MCDX()
+        public static void MCDX()
         {
             var lstResult = new List<CoinFollowDetailModel>();
-            var lstTask = new List<Task>();
-            foreach (var item in StaticVal.lstCoin)
+            try
             {
-                var task = Task.Run(() =>
+                var binanceTicks = StaticVal.binanceTicks;
+                var dic1H = DataMng.AssignDic1h();
+                var lstCoin = StaticVal.lstCoin;
+                var lstTask = new List<Task>();
+                foreach (var item in lstCoin)
                 {
-                    var val = MCDX(item.S);
-                    if (val.Item1)
+                    var task = Task.Run(() =>
                     {
-                        lstResult.Add(new CoinFollowDetailModel
+                        var val = MCDX(item.S);
+                        if (val.Item1)
                         {
-                            Symbol = item.S,
-                            Value = val.Item2,
-                        });
-                    }
-                });
-                lstTask.Add(task);
+                            lstResult.Add(new CoinFollowDetailModel
+                            {
+                                Symbol = item.S,
+                                Value = val.Item2,
+                            });
+                        }
+                    });
+                    lstTask.Add(task);
+                }
+                Task.WaitAll(lstTask.ToArray());
+                lstResult = lstResult.OrderByDescending(x => x.Value).ToList();
+                (bool, double) MCDX(string coin)
+                {
+                    var data = dic1H.FirstOrDefault(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
+                    if (data.Key == null || !data.Value.Any())
+                        return (false, 0);
+                    var valTemp1H = binanceTicks.FirstOrDefault(x => x.Symbol.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
+                    if (valTemp1H == null)
+                        return (false, 0);
+
+                    var settings = Program.Configuration.GetSection("Calculate").Get<CalculateModel>();
+
+                    var arrClose = data.Value.Select(x => (double)x.c).ToArray();
+                    arrClose = arrClose.Concat(new double[] { (double)valTemp1H.LastPrice }).ToArray();
+                    var count = arrClose.Count();
+                    if (count < 50)
+                        return (false, 0);
+
+                    double[] output1 = new double[1000];
+                    double[] output2 = new double[1000];
+                    Core.Rsi(0, count - 1, arrClose, 50, out int outBegIdx1, out int outNBElement1, output1);
+                    Core.Rsi(0, count - 1, arrClose, 40, out int outBegIdx2, out int outNBElement2, output2);
+                    var rsi50 = output1[count - 51];
+                    var rsi40 = output2[count - 41];
+                    var banker_rsi = 1.5 * (rsi50 - 50);
+                    if (banker_rsi > 20)
+                        banker_rsi = 20;
+                    if (banker_rsi < 0)
+                        banker_rsi = 0;
+                    var signal = settings.MCDX;
+                    return (banker_rsi >= signal, banker_rsi);
+                }
+
+                StaticVal.lstMCDX = lstResult;
             }
-            Task.WaitAll(lstTask.ToArray());
-            lstResult = lstResult.OrderByDescending(x => x.Value).ToList();
-            return lstResult;
-        }
-
-        public static (bool, double) MCDX(string coin)
-        {
-            var data = StaticVal.dic1H.FirstOrDefault(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
-            if (data.Key == null || !data.Value.Any())
-                return (false, 0);
-            var valTemp1H = StaticVal.binanceTicks.FirstOrDefault(x => x.Symbol.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
-            if(valTemp1H == null)
-                return (false, 0);
-
-            var settings = Program.Configuration.GetSection("Calculate").Get<CalculateModel>();
-
-            var arrClose = data.Value.Select(x => (double)x.c).ToArray();
-            arrClose = arrClose.Concat(new double[] { (double)valTemp1H.LastPrice }).ToArray();
-            var count = arrClose.Count();
-            if (count < 50)
-                return (false, 0);
-
-            double[] output1 = new double[1000];
-            double[] output2 = new double[1000];
-            Core.Rsi(0, count - 1, arrClose, 50, out int outBegIdx1, out int outNBElement1, output1);
-            Core.Rsi(0, count - 1, arrClose, 40, out int outBegIdx2, out int outNBElement2, output2);
-            var rsi50 = output1[count - 51];
-            var rsi40 = output2[count - 41];
-            var banker_rsi = 1.5 * (rsi50 - 50);
-            if (banker_rsi > 20)
-                banker_rsi = 20;
-            if (banker_rsi < 0)
-                banker_rsi = 0;
-            var signal = settings.MCDX;
-            return (banker_rsi >= signal, banker_rsi);
+            catch(Exception ex)
+            {
+                NLogLogger.PublishException(ex, $"CalculateMng.MCDX|EXCEPTION| {ex.Message}");
+            }
         }
 
         public static double ADX(double[] arrHigh, double[] arrLow, double[] arrClose, int period, int count)

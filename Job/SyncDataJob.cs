@@ -1,9 +1,11 @@
-﻿using Analyze.DesktopApp.Models;
+﻿using Analyze.DesktopApp.Common;
+using Analyze.DesktopApp.Models;
 using Analyze.DesktopApp.Utils;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Quartz;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
@@ -20,13 +22,16 @@ namespace Analyze.DesktopApp.Job
                 StaticVal.isAllowCalculate = false;
                 Thread.Sleep(2000);
             }
+            var dic1H = DataMng.AssignDic1h();
+
             var settings = Program.Configuration.GetSection("Domain").Get<DomainModel>();
-            var content1 = StaticClass.GetWebContent10s($"{settings.Sub1}/mirror").GetAwaiter().GetResult();
+            var content1 = WebClass.GetWebContent10s($"{settings.Sub1}/mirror").GetAwaiter().GetResult();
             UpdateData(content1);
-            var content2 = StaticClass.GetWebContent10s($"{settings.Sub2}/mirror").GetAwaiter().GetResult();
+            var content2 = WebClass.GetWebContent10s($"{settings.Sub2}/mirror").GetAwaiter().GetResult();
             UpdateData(content2);
-            var content3 = StaticClass.GetWebContent10s($"{settings.Sub3}/mirror").GetAwaiter().GetResult();
+            var content3 = WebClass.GetWebContent10s($"{settings.Sub3}/mirror").GetAwaiter().GetResult();
             UpdateData(content3);
+            StaticVal.dic1H = dic1H;
             StaticVal.isAllowCalculate = true;
             LogM.Log("End Sync");
 
@@ -40,7 +45,7 @@ namespace Analyze.DesktopApp.Job
                     {
                         foreach (var item in response.data)
                         {
-                            var entityDic = StaticVal.dic1H.FirstOrDefault(x => x.Key.Equals(item.name, StringComparison.InvariantCultureIgnoreCase));
+                            var entityDic = dic1H.FirstOrDefault(x => x.Key.Equals(item.name, StringComparison.InvariantCultureIgnoreCase));
                             if (entityDic.Key != null)
                             {
                                 var entityData = entityDic.Value.Last();
@@ -63,7 +68,7 @@ namespace Analyze.DesktopApp.Job
                                     ut = item.ut,
                                     state = item.state
                                 });
-                                StaticVal.dic1H[entityDic.Key] = entityDic.Value;
+                                dic1H[entityDic.Key] = entityDic.Value;
                             }
                         }
                     }
