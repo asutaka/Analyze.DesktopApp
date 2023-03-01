@@ -1,5 +1,5 @@
 ﻿
-namespace BinanceApp.GUI.Child
+namespace Analyze.DesktopApp.GUI.Child
 {
     partial class frmTop30
     {

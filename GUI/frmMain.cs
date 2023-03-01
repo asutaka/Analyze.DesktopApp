@@ -103,6 +103,8 @@ namespace Analyze.DesktopApp.GUI
 
         private void bkgrAnalyze_DoWork(object sender, DoWorkEventArgs e)
         {
+            CalculateMng._lstCoin = StaticVal.lstCoin;
+            CalculateMng._dic1H = DataMng.AssignDic1h();
             CalculateMng.MCDX();
             var settings = Program.Configuration.GetSection("Job").Get<JobModel>();
             new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<SyncDataJob>(), $"{StaticVal.TimeSynData} 0 * * * ?", nameof(SyncDataJob)).Start();
@@ -257,10 +259,10 @@ namespace Analyze.DesktopApp.GUI
 
         private void barBtnTop30_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //this.Invoke((MethodInvoker)delegate
-            //{
-            //    tabControl.AddTab(frmTop30.Instance());
-            //});
+            this.Invoke((MethodInvoker)delegate
+            {
+                tabControl.AddTab(frmTop30.Instance());
+            });
         }
 
         private void barBtnListTrade_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

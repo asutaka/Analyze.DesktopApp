@@ -7,11 +7,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TicTacTec.TA.Library;
+using static TicTacTec.TA.Library.Core;
 
 namespace Analyze.DesktopApp.Utils
 {
     public static class CalculateMng
     {
+        public static Dictionary<string, List<LocalTicketModel>> _dic1H = new Dictionary<string, List<LocalTicketModel>>();
+        public static Dictionary<string, float> _dicVolume = new Dictionary<string, float>();
+        public static Dictionary<string, Tuple<float, float>> _dicVolumeCal = new Dictionary<string, Tuple<float, float>>();
+        public static List<IBinanceMiniTick> _binanceTicks = new List<IBinanceMiniTick>();
+        public static List<CryptonDetailDataModel> _lstCoin = new List<CryptonDetailDataModel>();
+
         public static List<Top30VM> Top30()
         {
             var count = 1;
@@ -40,7 +47,10 @@ namespace Analyze.DesktopApp.Utils
             {
                 int count = 1;
                 decimal sum = 0;
-                IEnumerable<LocalTicketModel> lSource = GetSource(coin);
+                var entity = _dic1H.FirstOrDefault(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
+                if(entity.Key == null)
+                    return new Top30VM { Coin = coin, Count = count, Rate = (double)Math.Round(sum / count, 2) };
+                var lSource = entity.Value;
                 if (lSource == null || !lSource.Any())
                     return new Top30VM { Coin = coin, Count = count, Rate = (double)Math.Round(sum / count, 2) };
 
@@ -116,7 +126,7 @@ namespace Analyze.DesktopApp.Utils
                     }
                 }
                 var outputModel = new Top30VM { Coin = coin, CoinName = coinName, Count = count, Rate = (double)Math.Round(sum / count, 2) };
-                var entityBinanceTick = GetCoinBinanceTick(coin);
+                var entityBinanceTick = _binanceTicks.FirstOrDefault(x => x.Symbol.Equals(coin, StringComparison.InvariantCultureIgnoreCase)); 
                 if (entityBinanceTick != null)
                 {
                     outputModel.RefValue = (double)entityBinanceTick.LastPrice;
@@ -130,30 +140,13 @@ namespace Analyze.DesktopApp.Utils
             }
         }
 
-        public static IEnumerable<LocalTicketModel> GetSource(string coin)
-        {
-            IEnumerable<LocalTicketModel> lSource = StaticVal.dic1H.First(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase)).Value;
-            return lSource;
-        }
-
-        public static IBinanceMiniTick GetCoinBinanceTick(string coin)
-        {
-            if (StaticVal.binanceTicks == null)
-                return null;
-            var entity = StaticVal.binanceTicks.FirstOrDefault(x => x.Symbol.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
-            return entity;
-        }
-
         public static void MCDX()
         {
             var lstResult = new List<CoinFollowDetailModel>();
             try
             {
-                var binanceTicks = StaticVal.binanceTicks;
-                var dic1H = DataMng.AssignDic1h();
-                var lstCoin = StaticVal.lstCoin;
                 var lstTask = new List<Task>();
-                foreach (var item in lstCoin)
+                foreach (var item in _lstCoin)
                 {
                     var task = Task.Run(() =>
                     {
@@ -173,10 +166,10 @@ namespace Analyze.DesktopApp.Utils
                 lstResult = lstResult.OrderByDescending(x => x.Value).ToList();
                 (bool, double) MCDX(string coin)
                 {
-                    var data = dic1H.FirstOrDefault(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
+                    var data = _dic1H.FirstOrDefault(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
                     if (data.Key == null || !data.Value.Any())
                         return (false, 0);
-                    var valTemp1H = binanceTicks.FirstOrDefault(x => x.Symbol.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
+                    var valTemp1H = _binanceTicks.FirstOrDefault(x => x.Symbol.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
                     if (valTemp1H == null)
                         return (false, 0);
 
@@ -281,6 +274,39 @@ namespace Analyze.DesktopApp.Utils
                 NLogLogger.PublishException(ex, $"CalculateMng.RSI|EXCEPTION| {ex.Message}");
             }
             return 0;
+        }
+
+        public static void CalculateVolume()
+        {
+            foreach (var item in _dicVolume)
+            {
+                if (item.Value <= 0)
+                    continue;
+                var entityDicData = _dic1H.FirstOrDefault(x => x.Key.Equals(item.Key, StringComparison.InvariantCultureIgnoreCase));
+                if (entityDicData.Key != null)
+                {
+                    var count = entityDicData.Value.Count();
+                    if (count >= 20)
+                    {
+                        var entityCal = _dicVolumeCal.FirstOrDefault(x => x.Key == item.Key);
+                        if (entityCal.Key != null)
+                        {
+                            var list = entityDicData.Value.Select(x => (double)x.v).ToList();
+                            list.Add(item.Value);
+                            double MA20 = 0;
+                            double percent = 0;
+                            MA20 = MA(list.ToArray(), MAType.Sma, 20, count + 1);
+                            if (MA20 > 0)
+                            {
+                                percent = Math.Round(item.Value * 100 / MA20, 2);
+                            }
+                            _dicVolumeCal[entityCal.Key] = new Tuple<float, float>((float)MA20, (float)percent);
+                        }
+                    }
+                }
+            }
+
+            StaticVal.dicVolumeCalculate = _dicVolumeCal;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Analyze.DesktopApp
         public static List<API24hVM> lst24H = new List<API24hVM>();
         public static List<string> lstError = new List<string>();
         public static List<CoinFollowDetailModel> lstMCDX = new List<CoinFollowDetailModel>();
+        public static List<Top30VM> lstCryptonRank = new List<Top30VM>();
         //Data Coin
         public static Dictionary<string, List<LocalTicketModel>> dic1H = new Dictionary<string, List<LocalTicketModel>>();
         public static Dictionary<string, float> dicVolume = new Dictionary<string, float>();
