@@ -40,7 +40,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.Invoke((MethodInvoker)delegate
             {
                 grid.BeginUpdate();
-                grid.DataSource = StaticVal.lstCryptonRank;
+                grid.DataSource = StaticVal.cryptonRank.lData;
                 grid.EndUpdate();
             });
         }

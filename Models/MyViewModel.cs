@@ -1,4 +1,7 @@
-﻿namespace Analyze.DesktopApp.Models
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
+
+namespace Analyze.DesktopApp.Models
 {
     public class API24hVM
     {
@@ -39,5 +42,12 @@
         public decimal PrevDayClosePrice { get; set; }
         public decimal PriceChangePercent { get; set; }
         public decimal WeightedAveragePrice { get; set; }
+    }
+
+    public class ListTop30VM
+    {
+        public List<Top30VM> lData { get; set; }
+        public ConcurrentDictionary<string, int> dicTop30 { get; set; }
+        public bool IsSuccess { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using Analyze.DesktopApp.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace Analyze.DesktopApp.Utils
@@ -91,6 +92,20 @@ namespace Analyze.DesktopApp.Utils
         public static void AssignDicVolumeCalculate(ConcurrentDictionary<string, Tuple<float, float>> val)
         {
             StaticVal.dicVolumeCalculate = val;
+        }
+
+        public static void AssignTop30(List<Top30VM> val)
+        {
+            StaticVal.cryptonRank.lData = val;
+            StaticVal.cryptonRank.IsSuccess = (val.Count() > 0 && val.First().Count > 5);
+            if(StaticVal.cryptonRank.IsSuccess)
+            {
+                int i = 1;
+                foreach (var item in StaticVal.cryptonRank.lData)
+                {
+                    StaticVal.cryptonRank.dicTop30.TryAdd(item.Coin, i++);
+                }
+            }
         }
     }
 }

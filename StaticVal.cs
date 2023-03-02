@@ -7,7 +7,6 @@ using Quartz;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Analyze.DesktopApp
 {
@@ -20,7 +19,7 @@ namespace Analyze.DesktopApp
         public static List<API24hVM> lst24H = new List<API24hVM>();
         public static List<string> lstError = new List<string>();
         public static List<CoinFollowDetailModel> lstMCDX = new List<CoinFollowDetailModel>();
-        public static List<Top30VM> lstCryptonRank = new List<Top30VM>();
+        public static ListTop30VM cryptonRank = new ListTop30VM { lData = new List<Top30VM>(), dicTop30 = new ConcurrentDictionary<string, int>() };
         //Data Coin
         public static ConcurrentDictionary<string, List<LocalTicketModel>> dic1H = new ConcurrentDictionary<string, List<LocalTicketModel>>();
         public static ConcurrentDictionary<string, float> dicVolume = new ConcurrentDictionary<string, float>();

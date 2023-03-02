@@ -10,10 +10,12 @@ namespace Analyze.DesktopApp.Job
     [DisallowConcurrentExecution]
     public class CaculateJob : IJob
     {
+        private static long count = 0;
         public void Execute(IJobExecutionContext context)
         {
             if (!StaticVal.isAllowCalculate)
                 return;
+            count++;
             CalculateMng._dic1H = DataMng.AssignDic1h();
             CalculateMng._dicVolume = DataMng.AssignDicVolume();
             CalculateMng._dicVolumeCal = DataMng.AssignDicVolumeCalculate();
@@ -21,26 +23,28 @@ namespace Analyze.DesktopApp.Job
             CalculateMng._lstCoin = StaticVal.lstCoin;
 
             var lstTask = new List<Task>();
-            var task = Task.Run(() =>
+            var taskMCDX = Task.Run(() =>
             {
                 DataMng.AssignlMCDX(CalculateMng.MCDX());
             });
-            lstTask.Add(task);
+            lstTask.Add(taskMCDX);
 
-            var task1 = Task.Run(() =>
+            var taskVolumeCal = Task.Run(() =>
             {
                 DataMng.AssignDicVolumeCalculate(CalculateMng.CalculateVolume());
             });
-            lstTask.Add(task1);
+            lstTask.Add(taskVolumeCal);
+
+            var taskTop30 = Task.Run(() =>
+            {
+                if (count % 3600 == 0 || !StaticVal.cryptonRank.IsSuccess)
+                {
+                    DataMng.AssignTop30(CalculateMng.Top30());
+                }
+            });
+            lstTask.Add(taskTop30);
 
             Task.WaitAll(lstTask.ToArray());
-            
-            
-            //LogM.Start();
-            //var tmp = CalculateMng.Top30();
-            //LogM.Log(JsonConvert.SerializeObject(tmp.Select(x => new { x.Coin, x.Count })));
-            //LogM.Stop();
-            ////var tmp1 = 1;
         }
     }
 }
