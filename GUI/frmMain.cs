@@ -56,7 +56,7 @@ namespace Analyze.DesktopApp.GUI
                     {
                         var time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                         var arr = JArray.Parse(content);
-                        StaticVal.dic1H.Add(item.S, arr.Select(x => new LocalTicketModel
+                        StaticVal.dic1H.TryAdd(item.S, arr.Select(x => new LocalTicketModel
                         {
                             name = item.S.ToLower(),
                             e = (long)x[0],
@@ -103,9 +103,6 @@ namespace Analyze.DesktopApp.GUI
 
         private void bkgrAnalyze_DoWork(object sender, DoWorkEventArgs e)
         {
-            CalculateMng._lstCoin = StaticVal.lstCoin;
-            CalculateMng._dic1H = DataMng.AssignDic1h();
-            CalculateMng.MCDX();
             var settings = Program.Configuration.GetSection("Job").Get<JobModel>();
             new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<SyncDataJob>(), $"{StaticVal.TimeSynData} 0 * * * ?", nameof(SyncDataJob)).Start();
             new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<CaculateJob>(), settings.CaculateJob, nameof(CaculateJob)).Start();

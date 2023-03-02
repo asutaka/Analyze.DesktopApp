@@ -39,8 +39,8 @@ namespace Analyze.DesktopApp
                                 .OrderBy(x => x.S).ToList();
                     foreach (var item in StaticVal.lstCoin)
                     {
-                        StaticVal.dicVolume.Add(item.S, 0);
-                        StaticVal.dicVolumeCalculate.Add(item.S, new Tuple<float, float>(0, 0));
+                        StaticVal.dicVolume.TryAdd(item.S, 0);
+                        StaticVal.dicVolumeCalculate.TryAdd(item.S, new Tuple<float, float>(0, 0));
                     }
                     new ScheduleMember(ScheduleMng.Instance().GetScheduler(), JobBuilder.Create<VolumeJob>(), Program.Configuration.GetSection("Job").Get<JobModel>().VolumeJob, nameof(VolumeJob)).Start();
                 }

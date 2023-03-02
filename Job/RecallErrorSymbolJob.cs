@@ -28,7 +28,7 @@ namespace Analyze.DesktopApp.Job
                         {
                             var time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                             var arr = JArray.Parse(content);
-                            StaticVal.dic1H.Add(item, arr.Select(x => new LocalTicketModel
+                            StaticVal.dic1H.TryAdd(item, arr.Select(x => new LocalTicketModel
                             {
                                 name = item.ToLower(),
                                 e = (long)x[0],

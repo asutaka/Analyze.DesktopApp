@@ -3,6 +3,7 @@ using Analyze.DesktopApp.Models;
 using Binance.Net.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,9 +14,9 @@ namespace Analyze.DesktopApp.Utils
 {
     public static class CalculateMng
     {
-        public static Dictionary<string, List<LocalTicketModel>> _dic1H = new Dictionary<string, List<LocalTicketModel>>();
-        public static Dictionary<string, float> _dicVolume = new Dictionary<string, float>();
-        public static Dictionary<string, Tuple<float, float>> _dicVolumeCal = new Dictionary<string, Tuple<float, float>>();
+        public static ConcurrentDictionary<string, List<LocalTicketModel>> _dic1H = new ConcurrentDictionary<string, List<LocalTicketModel>>();
+        public static ConcurrentDictionary<string, float> _dicVolume = new ConcurrentDictionary<string, float>();
+        public static ConcurrentDictionary<string, Tuple<float, float>> _dicVolumeCal = new ConcurrentDictionary<string, Tuple<float, float>>();
         public static List<IBinanceMiniTick> _binanceTicks = new List<IBinanceMiniTick>();
         public static List<CryptonDetailDataModel> _lstCoin = new List<CryptonDetailDataModel>();
 
@@ -23,16 +24,22 @@ namespace Analyze.DesktopApp.Utils
         {
             var count = 1;
             var lstResult = new List<Top30VM>();
+            var qResult = new ConcurrentQueue<Top30VM>();
+
             var lstTask = new List<Task>();
-            foreach (var item in StaticVal.lstCoinFilter)
+            foreach (var item in StaticVal.lstCoin)
             {
                 var task = Task.Run(() =>
                 {
-                    lstResult.Add(CalculateCryptonRank(item.S, item.AN));
+                    var res = CalculateCryptonRank(item.S, item.AN);
+                    //lstResult.Add(res);
+                    qResult.Enqueue(res);
                 });
                 lstTask.Add(task);
             }
             Task.WaitAll(lstTask.ToArray());
+            lstResult = qResult.ToList();
+
             lstResult = lstResult.Where(x => x != null).OrderByDescending(x => x.Count).ThenByDescending(x => x.Rate).Take(30).ToList();
             if (lstResult != null)
             {
@@ -51,7 +58,7 @@ namespace Analyze.DesktopApp.Utils
                 if(entity.Key == null)
                     return new Top30VM { Coin = coin, Count = count, Rate = (double)Math.Round(sum / count, 2) };
                 var lSource = entity.Value;
-                if (lSource == null || !lSource.Any())
+                if (lSource == null || !lSource.Any() || lSource.Count() < 10)
                     return new Top30VM { Coin = coin, Count = count, Rate = (double)Math.Round(sum / count, 2) };
 
                 long dtMin = 0, dtMax = 0, dtMin_Temp = 0;
@@ -140,7 +147,7 @@ namespace Analyze.DesktopApp.Utils
             }
         }
 
-        public static void MCDX()
+        public static List<CoinFollowDetailModel> MCDX()
         {
             var lstResult = new List<CoinFollowDetailModel>();
             try
@@ -183,8 +190,8 @@ namespace Analyze.DesktopApp.Utils
 
                     double[] output1 = new double[1000];
                     double[] output2 = new double[1000];
-                    Core.Rsi(0, count - 1, arrClose, 50, out int outBegIdx1, out int outNBElement1, output1);
-                    Core.Rsi(0, count - 1, arrClose, 40, out int outBegIdx2, out int outNBElement2, output2);
+                    Rsi(0, count - 1, arrClose, 50, out int outBegIdx1, out int outNBElement1, output1);
+                    Rsi(0, count - 1, arrClose, 40, out int outBegIdx2, out int outNBElement2, output2);
                     var rsi50 = output1[count - 51];
                     var rsi40 = output2[count - 41];
                     var banker_rsi = 1.5 * (rsi50 - 50);
@@ -195,13 +202,13 @@ namespace Analyze.DesktopApp.Utils
                     var signal = settings.MCDX;
                     return (banker_rsi >= signal, banker_rsi);
                 }
-
-                StaticVal.lstMCDX = lstResult;
             }
             catch(Exception ex)
             {
                 NLogLogger.PublishException(ex, $"CalculateMng.MCDX|EXCEPTION| {ex.Message}");
             }
+
+            return lstResult;
         }
 
         public static double ADX(double[] arrHigh, double[] arrLow, double[] arrClose, int period, int count)
@@ -276,7 +283,7 @@ namespace Analyze.DesktopApp.Utils
             return 0;
         }
 
-        public static void CalculateVolume()
+        public static ConcurrentDictionary<string, Tuple<float, float>> CalculateVolume()
         {
             foreach (var item in _dicVolume)
             {
@@ -305,8 +312,7 @@ namespace Analyze.DesktopApp.Utils
                     }
                 }
             }
-
-            StaticVal.dicVolumeCalculate = _dicVolumeCal;
+            return _dicVolumeCal;
         }
     }
 }

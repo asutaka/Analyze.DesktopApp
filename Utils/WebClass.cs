@@ -20,6 +20,7 @@ namespace Analyze.DesktopApp.Utils
             if(_client == null)
             {
                 _client = new HttpClient { Timeout = TimeSpan.FromSeconds(3) };
+                _client.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml+json");
             }
             return _client;
         }
@@ -29,6 +30,7 @@ namespace Analyze.DesktopApp.Utils
             if (_client10s == null)
             {
                 _client10s = new HttpClient { Timeout = TimeSpan.FromSeconds(10) };
+                _client10s.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml+json");
             }
             return _client10s;
         }
@@ -36,7 +38,6 @@ namespace Analyze.DesktopApp.Utils
         public static async Task<string> GetWebContent10s(string url)
         {
             // Thiết lập các Header nếu cần
-            Http10sGetInstance().DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml+json");
             try
             {
                 // Thực hiện truy vấn GET
@@ -69,7 +70,6 @@ namespace Analyze.DesktopApp.Utils
         public static async Task<string> GetWebContent(string url)
         {
             // Thiết lập các Header nếu cần
-            HttpGetInstance().DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml+json");
             try
             {
                 // Thực hiện truy vấn GET

@@ -1,6 +1,7 @@
 ﻿using Analyze.DesktopApp.Common;
 using Analyze.DesktopApp.Models;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -8,9 +9,9 @@ namespace Analyze.DesktopApp.Utils
 {
     public static class DataMng
     {
-        public static Dictionary<string, List<LocalTicketModel>> AssignDic1h()
+        public static ConcurrentDictionary<string, List<LocalTicketModel>> AssignDic1h()
         {
-            Dictionary<string, List<LocalTicketModel>> val;
+            ConcurrentDictionary<string, List<LocalTicketModel>> val;
             try
             {
                 val = StaticVal.dic1H;
@@ -22,6 +23,11 @@ namespace Analyze.DesktopApp.Utils
                 val = StaticVal.dic1H;
             }
             return val;
+        }
+
+        public static void AssignDic1h(ConcurrentDictionary<string, List<LocalTicketModel>> val)
+        {
+            StaticVal.dic1H = val;
         }
 
         public static List<CoinFollowDetailModel> AssignlMCDX()
@@ -40,9 +46,14 @@ namespace Analyze.DesktopApp.Utils
             return lMCDX;
         }
 
-        public static Dictionary<string, float> AssignDicVolume()
+        public static void AssignlMCDX(List<CoinFollowDetailModel> val)
         {
-            Dictionary<string, float> dicVolume;
+            StaticVal.lstMCDX = val;
+        }
+
+        public static ConcurrentDictionary<string, float> AssignDicVolume()
+        {
+            ConcurrentDictionary<string, float> dicVolume;
             try
             {
                 dicVolume = StaticVal.dicVolume;
@@ -56,9 +67,14 @@ namespace Analyze.DesktopApp.Utils
             return dicVolume;
         }
 
-        public static Dictionary<string, Tuple<float, float>> AssignDicVolumeCalculate()
+        public static void AssignDicVolume(ConcurrentDictionary<string, float> val)
         {
-            Dictionary<string, Tuple<float, float>> dic;
+            StaticVal.dicVolume = val;
+        }
+
+        public static ConcurrentDictionary<string, Tuple<float, float>> AssignDicVolumeCalculate()
+        {
+            ConcurrentDictionary<string, Tuple<float, float>> dic;
             try
             {
                 dic = StaticVal.dicVolumeCalculate;
@@ -70,6 +86,11 @@ namespace Analyze.DesktopApp.Utils
                 dic = StaticVal.dicVolumeCalculate;
             }
             return dic;
+        }
+
+        public static void AssignDicVolumeCalculate(ConcurrentDictionary<string, Tuple<float, float>> val)
+        {
+            StaticVal.dicVolumeCalculate = val;
         }
     }
 }
