@@ -256,10 +256,7 @@ namespace Analyze.DesktopApp.GUI
 
         private void barBtnTop30_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            this.Invoke((MethodInvoker)delegate
-            {
-                tabControl.AddTab(frmTop30.Instance());
-            });
+         
         }
 
         private void barBtnListTrade_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

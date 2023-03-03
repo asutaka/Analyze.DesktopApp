@@ -31,7 +31,7 @@ namespace Analyze.DesktopApp.Utils
             {
                 var task = Task.Run(() =>
                 {
-                    var res = CalculateCryptonRank(item.S, item.AN);
+                    var res = CalculateCryptonRank(item.S);
                     //lstResult.Add(res);
                     qResult.Enqueue(res);
                 });
@@ -48,18 +48,18 @@ namespace Analyze.DesktopApp.Utils
             return lstResult;
         }
 
-        public static Top30VM CalculateCryptonRank(string coin, string coinName)
+        public static Top30VM CalculateCryptonRank(string coin)
         {
             try
             {
                 int count = 1;
                 decimal sum = 0;
                 var entity = _dic1H.FirstOrDefault(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
-                if(entity.Key == null)
-                    return new Top30VM { Coin = coin, Count = count, Rate = (double)Math.Round(sum / count, 2) };
+                if (entity.Key == null)
+                    return new Top30VM { Coin = coin, Count = 0, Rate = 0 };
                 var lSource = entity.Value;
                 if (lSource == null || !lSource.Any() || lSource.Count() < 10)
-                    return new Top30VM { Coin = coin, Count = count, Rate = (double)Math.Round(sum / count, 2) };
+                    return new Top30VM { Coin = coin, Count = 0, Rate = 0 };
 
                 long dtMin = 0, dtMax = 0, dtMin_Temp = 0;
                 int leftMax = 0, rightMin = 0, rightMax = 0;
@@ -132,18 +132,13 @@ namespace Analyze.DesktopApp.Utils
                         }
                     }
                 }
-                var outputModel = new Top30VM { Coin = coin, CoinName = coinName, Count = count, Rate = (double)Math.Round(sum / count, 2) };
-                var entityBinanceTick = _binanceTicks.FirstOrDefault(x => x.Symbol.Equals(coin, StringComparison.InvariantCultureIgnoreCase)); 
-                if (entityBinanceTick != null)
-                {
-                    outputModel.RefValue = (double)entityBinanceTick.LastPrice;
-                }
+                var outputModel = new Top30VM { Coin = coin, Count = count, Rate = (double)Math.Round(sum / count, 2) };
                 return outputModel;
             }
             catch (Exception ex)
             {
                 NLogLogger.PublishException(ex, $"CalculateMng.CalculateCryptonRank|EXCEPTION|{coin}| {ex.Message}");
-                return new Top30VM { Coin = coin, CoinName = coinName, Count = 1, Rate = 0 };
+                return new Top30VM { Coin = coin, Count = 1, Rate = 0 };
             }
         }
 
@@ -216,7 +211,7 @@ namespace Analyze.DesktopApp.Utils
             try
             {
                 var output = new double[1000];
-                Core.Adx(0, count - 1, arrHigh, arrLow, arrClose, period, out var outBegIdx, out var outNBElement, output);
+                Adx(0, count - 1, arrHigh, arrLow, arrClose, period, out var outBegIdx, out var outNBElement, output);
                 return output[count - period];
             }
             catch (Exception ex)
@@ -225,12 +220,12 @@ namespace Analyze.DesktopApp.Utils
             }
             return 0;
         }
-        public static double MA(double[] arrInput, Core.MAType type, int period, int count)
+        public static double MA(double[] arrInput, MAType type, int period, int count)
         {
             try
             {
                 var output = new double[1000];
-                Core.MovingAverage(0, count - 1, arrInput, period, Core.MAType.Sma, out var outBegIdx, out var outNBElement, output);
+                MovingAverage(0, count - 1, arrInput, period, MAType.Sma, out var outBegIdx, out var outNBElement, output);
                 return output[count - period];
             }
             catch (Exception ex)
@@ -244,7 +239,7 @@ namespace Analyze.DesktopApp.Utils
             try
             {
                 var output = new double[1000];
-                Core.Macd(0, count - 1, arrInput, low, high, signal, out var outBegIdx, out var outNbElement, new double[1000], new double[1000], output);
+                Macd(0, count - 1, arrInput, low, high, signal, out var outBegIdx, out var outNbElement, new double[1000], new double[1000], output);
                 return output[count - 1];
             }
             catch (Exception ex)
@@ -258,7 +253,7 @@ namespace Analyze.DesktopApp.Utils
             try
             {
                 var output = new double[1000];
-                Core.Macd(0, count - 1, arrInput, low, high, signal, out var outBegIdx, out var outNbElement, new double[1000], new double[1000], output);
+                Macd(0, count - 1, arrInput, low, high, signal, out var outBegIdx, out var outNbElement, new double[1000], new double[1000], output);
                 return output.Skip(count - (take + 1)).Take(take);
             }
             catch (Exception ex)
@@ -273,7 +268,7 @@ namespace Analyze.DesktopApp.Utils
             try
             {
                 var output = new double[1000];
-                Core.Rsi(0, count - 1, arrInput, period, out var outBegIdx, out var outNBElement, output);
+                Rsi(0, count - 1, arrInput, period, out var outBegIdx, out var outNBElement, output);
                 return output[count - period];
             }
             catch (Exception ex)
@@ -313,6 +308,52 @@ namespace Analyze.DesktopApp.Utils
                 }
             }
             return _dicVolumeCal;
+        }
+
+        public static List<Top30VM> Top30Detail()
+        {
+            var lTop30 = StaticVal.cryptonRank.lData.ToList();
+            foreach (var item in lTop30)
+            {
+                item.BottomRecent = GetBottomVal(item.Coin);
+                var valTemp1H = _binanceTicks.FirstOrDefault(x => x.Symbol.Equals(item.Coin, StringComparison.InvariantCultureIgnoreCase));
+                if(valTemp1H != null)
+                {
+                    item.WaveRecent = item.BottomRecent <= 0 ? 0 : Math.Round((-1 + ((double)valTemp1H.LastPrice / item.BottomRecent)) * 100, 2);
+                }
+                else
+                {
+                    item.WaveRecent = 0;
+                }
+            }
+            return lTop30;
+        }
+
+        public static float GetBottomVal(string coin)
+        {
+            var entity = _dic1H.FirstOrDefault(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
+            if (entity.Value == null || entity.Value.Count() < 15)
+                return 0;
+            var count = entity.Value.Count();
+            float min = entity.Value.ElementAt(count - 1).c;
+            var countConfirm = 0;
+            for (int i = count - 2; i > count - 15; i--)
+            {
+                var val = entity.Value.ElementAt(i - 1).c;
+                if (min <= val)
+                {
+                    if (++countConfirm == 3)
+                    {
+                        return min;
+                    }
+                }
+                else
+                {
+                    countConfirm = 0;
+                    min = val;
+                }
+            }
+            return min;
         }
     }
 }

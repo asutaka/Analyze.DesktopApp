@@ -1,8 +1,6 @@
 ﻿using Analyze.DesktopApp.Utils;
-using Newtonsoft.Json;
 using Quartz;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Analyze.DesktopApp.Job
@@ -41,6 +39,7 @@ namespace Analyze.DesktopApp.Job
                 {
                     DataMng.AssignTop30(CalculateMng.Top30());
                 }
+                DataMng.AssignTop30(CalculateMng.Top30Detail());
             });
             lstTask.Add(taskTop30);
 
