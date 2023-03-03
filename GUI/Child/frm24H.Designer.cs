@@ -53,6 +53,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.PriceChange = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PriceRef = new DevExpress.XtraGrid.Columns.GridColumn();
             this.volumeDiv = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Top30 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
@@ -190,7 +191,8 @@ namespace Analyze.DesktopApp.GUI.Child
             this.volume,
             this.volumeMA20,
             this.volumeDiv,
-            this.MCDX});
+            this.MCDX,
+            this.Top30});
             gridFormatRule1.Column = this.MCDX;
             gridFormatRule1.ColumnApplyTo = this.MCDX;
             gridFormatRule1.Name = "FormatRate";
@@ -380,6 +382,20 @@ namespace Analyze.DesktopApp.GUI.Child
             this.volumeDiv.VisibleIndex = 10;
             this.volumeDiv.Width = 85;
             // 
+            // Top30
+            // 
+            this.Top30.AppearanceCell.Options.UseTextOptions = true;
+            this.Top30.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.Top30.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.Top30.AppearanceHeader.Options.UseTextOptions = true;
+            this.Top30.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.Top30.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.Top30.Caption = "Top30";
+            this.Top30.FieldName = "Top30";
+            this.Top30.MaxWidth = 75;
+            this.Top30.MinWidth = 75;
+            this.Top30.Name = "Top30";
+            // 
             // frm24H
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,5 +430,6 @@ namespace Analyze.DesktopApp.GUI.Child
         private DevExpress.XtraGrid.Columns.GridColumn Div;
         private DevExpress.XtraGrid.Columns.GridColumn MCDX;
         private DevExpress.XtraGrid.Columns.GridColumn volumeDiv;
+        private DevExpress.XtraGrid.Columns.GridColumn Top30;
     }
 }
