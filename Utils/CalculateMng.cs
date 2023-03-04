@@ -41,10 +41,6 @@ namespace Analyze.DesktopApp.Utils
             lstResult = qResult.ToList();
 
             lstResult = lstResult.Where(x => x != null).OrderByDescending(x => x.Count).ThenByDescending(x => x.Rate).Take(30).ToList();
-            if (lstResult != null)
-            {
-                lstResult.ForEach(x => x.STT = count++);
-            }
             return lstResult;
         }
 

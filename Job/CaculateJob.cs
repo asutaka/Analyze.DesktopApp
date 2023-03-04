@@ -1,6 +1,8 @@
 ﻿using Analyze.DesktopApp.Utils;
+using Newtonsoft.Json;
 using Quartz;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Analyze.DesktopApp.Job
@@ -11,8 +13,8 @@ namespace Analyze.DesktopApp.Job
         private static long count = 0;
         public void Execute(IJobExecutionContext context)
         {
-            if (!StaticVal.isAllowCalculate)
-                return;
+            //if (!StaticVal.isAllowCalculate)
+            //    return;
             count++;
             CalculateMng._dic1H = DataMng.AssignDic1h();
             CalculateMng._dicVolume = DataMng.AssignDicVolume();

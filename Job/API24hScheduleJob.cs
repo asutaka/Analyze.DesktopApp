@@ -22,6 +22,7 @@ namespace Analyze.DesktopApp.Job
                 var lMCDX = DataMng.AssignlMCDX();
                 var dicVolume = DataMng.AssignDicVolume();
                 var dicVolumeCal = DataMng.AssignDicVolumeCalculate();
+                var lTop30 = DataMng.AssignTop30();
 
                 var lstTask = new List<Task>();
                 foreach (var item in StaticVal.lst24H)
@@ -42,8 +43,17 @@ namespace Analyze.DesktopApp.Job
                         var entityVol = dicVolume.FirstOrDefault(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
                         item.volume = entityVol.Key != null ? entityVol.Value : 0;
                         var entityVolCal = dicVolumeCal.FirstOrDefault(x => x.Key.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
-                        item.volumeMA20 = entityVol.Key != null ? entityVolCal.Value.Item1 : 0;
-                        item.volumeDiv = entityVol.Key != null ? entityVolCal.Value.Item2 : 0;
+                        if(entityVol.Key != null)
+                        {
+                            item.volumeMA20 = entityVolCal.Value.Item1;
+                            item.volumeDiv = entityVolCal.Value.Item2;
+                        }
+                       
+                        var entityTop30 = lTop30.FirstOrDefault(x => x.Coin.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
+                        if(entityTop30 != null)
+                        {
+                            item.Top30 = $"Số sóng: { entityTop30.Count }\nTrung bình: { entityTop30.Rate }%\nĐáy gần nhất: { entityTop30.BottomRecent }\n Sóng hiện tại: { entityTop30.WaveRecent }%";
+                        }
 
                         var entityMCDX = lMCDX.FirstOrDefault(x => x.Symbol.Equals(coin, StringComparison.InvariantCultureIgnoreCase));
                         if (entityMCDX != null)

@@ -107,5 +107,21 @@ namespace Analyze.DesktopApp.Utils
                 }
             }
         }
+
+        public static List<Top30VM> AssignTop30()
+        {
+            List<Top30VM> lTop30;
+            try
+            {
+                lTop30 = StaticVal.cryptonRank.lData;
+            }
+            catch (Exception exM)
+            {
+                NLogLogger.PublishException(exM, $"DataMng.AssignTop30|EXCEPTION(lTop30)| {exM.Message}");
+                Thread.Sleep(50);
+                lTop30 = StaticVal.cryptonRank.lData;
+            }
+            return lTop30;
+        }
     }
 }
