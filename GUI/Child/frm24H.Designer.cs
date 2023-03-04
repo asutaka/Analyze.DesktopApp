@@ -66,6 +66,8 @@ namespace Analyze.DesktopApp.GUI.Child
             this.MCDX.MinWidth = 50;
             this.MCDX.Name = "MCDX";
             this.MCDX.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
+            this.MCDX.Visible = true;
+            this.MCDX.VisibleIndex = 11;
             this.MCDX.Width = 50;
             // 
             // Div
@@ -395,6 +397,8 @@ namespace Analyze.DesktopApp.GUI.Child
             this.Top30.MaxWidth = 75;
             this.Top30.MinWidth = 75;
             this.Top30.Name = "Top30";
+            this.Top30.Visible = true;
+            this.Top30.VisibleIndex = 12;
             // 
             // frm24H
             // 
