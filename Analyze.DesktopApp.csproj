@@ -219,6 +219,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\Child\frmChartTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\frmChartTest.Designer.cs">
+      <DependentUpon>frmChartTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Child\frmFibonacy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -299,6 +305,9 @@
     <Content Include="Resources\telegram_64x64.png" />
     <Content Include="Resources\up_24x24.png" />
     <Content Include="Resources\yellow.png" />
+    <EmbeddedResource Include="GUI\Child\frmChartTest.resx">
+      <DependentUpon>frmChartTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Child\frmFibonacy.resx">
       <DependentUpon>frmFibonacy.cs</DependentUpon>
     </EmbeddedResource>

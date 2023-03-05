@@ -21,8 +21,8 @@ namespace Analyze.DesktopApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(frmLogin.Instance());
-            //Application.Run(frmChart.Instance());
-            Application.Run(new frmFibonacy());
+            Application.Run(frmChartTest.Instance());
+            //Application.Run(new frmFibonacy());
         }
     }
 }
