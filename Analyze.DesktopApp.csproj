@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{643FD3BA-D38D-4820-920C-D960C7F05D66}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>Analyze.DesktopApp</RootNamespace>
     <AssemblyName>Analyze.DesktopApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -219,11 +219,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\Child\frmChartTest.cs">
+    <Compile Include="GUI\Child\FinancialCharting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Child\frmChartTest.Designer.cs">
-      <DependentUpon>frmChartTest.cs</DependentUpon>
+    <Compile Include="GUI\Child\FinancialCharting.Designer.cs">
+      <DependentUpon>FinancialCharting.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Child\frmFibonacy.cs">
       <SubType>Form</SubType>
@@ -237,6 +237,7 @@
     <Compile Include="GUI\Child\frmChart.Designer.cs">
       <DependentUpon>frmChart.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Child\RealTimeFinancialDataGenerator.cs" />
     <Compile Include="Job\VolumeJob.cs" />
     <Compile Include="Utils\CalculateMng.cs" />
     <Compile Include="ConfigVal.cs" />
@@ -305,8 +306,8 @@
     <Content Include="Resources\telegram_64x64.png" />
     <Content Include="Resources\up_24x24.png" />
     <Content Include="Resources\yellow.png" />
-    <EmbeddedResource Include="GUI\Child\frmChartTest.resx">
-      <DependentUpon>frmChartTest.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Child\FinancialCharting.resx">
+      <DependentUpon>FinancialCharting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Child\frmFibonacy.resx">
       <DependentUpon>frmFibonacy.cs</DependentUpon>
