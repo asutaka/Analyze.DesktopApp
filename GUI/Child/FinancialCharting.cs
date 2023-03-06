@@ -39,8 +39,7 @@ namespace Analyze.DesktopApp.GUI.Child
         bool IsToolbarInteractionEnabled {
             get {
                 return trendLineBarCheckItem.Checked || fibbArcBarCheckItem.Checked || fibbFansBarCheckItem.Checked ||
-                    fibbRetrBarCheckItem.Checked || removeBarCheckItem.Checked || addTextAnnotationBarItem.Checked ||
-                    addImageAnnotationBarItem.Checked;
+                    fibbRetrBarCheckItem.Checked || removeBarCheckItem.Checked;
             }
         }
 

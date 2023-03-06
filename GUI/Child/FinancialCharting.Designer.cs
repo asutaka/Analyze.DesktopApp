@@ -1,7 +1,7 @@
 ﻿using DevExpress.XtraCharts;
-using DevExpress.XtraLayout;
 
-namespace Analyze.DesktopApp.GUI.Child {
+namespace Analyze.DesktopApp.GUI.Child
+{
     partial class FinancialChartingDemo {
         System.ComponentModel.IContainer components = null;
 
@@ -13,39 +13,38 @@ namespace Analyze.DesktopApp.GUI.Child {
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraCharts.XYDiagram xyDiagram1 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.CustomAxisLabel customAxisLabel1 = new DevExpress.XtraCharts.CustomAxisLabel();
-            DevExpress.XtraCharts.XYDiagramPane xyDiagramPane1 = new DevExpress.XtraCharts.XYDiagramPane();
-            DevExpress.XtraCharts.XYDiagramPane xyDiagramPane2 = new DevExpress.XtraCharts.XYDiagramPane();
-            DevExpress.XtraCharts.SecondaryAxisY secondaryAxisY1 = new DevExpress.XtraCharts.SecondaryAxisY();
-            DevExpress.XtraCharts.SecondaryAxisY secondaryAxisY2 = new DevExpress.XtraCharts.SecondaryAxisY();
-            DevExpress.XtraCharts.SecondaryAxisY secondaryAxisY3 = new DevExpress.XtraCharts.SecondaryAxisY();
-            DevExpress.XtraCharts.Legend legend1 = new DevExpress.XtraCharts.Legend();
-            DevExpress.XtraCharts.Legend legend2 = new DevExpress.XtraCharts.Legend();
-            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SideBySideBarSeriesView sideBySideBarSeriesView1 = new DevExpress.XtraCharts.SideBySideBarSeriesView();
-            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StockSeriesView stockSeriesView1 = new DevExpress.XtraCharts.StockSeriesView();
-            DevExpress.XtraCharts.BollingerBands bollingerBands1 = new DevExpress.XtraCharts.BollingerBands();
-            DevExpress.XtraCharts.MovingAverageConvergenceDivergence movingAverageConvergenceDivergence1 = new DevExpress.XtraCharts.MovingAverageConvergenceDivergence();
-            DevExpress.XtraCharts.ChaikinsVolatility chaikinsVolatility1 = new DevExpress.XtraCharts.ChaikinsVolatility();
-            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem1 = new DevExpress.XtraCharts.ChartIntervalItem();
-            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem2 = new DevExpress.XtraCharts.ChartIntervalItem();
-            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem3 = new DevExpress.XtraCharts.ChartIntervalItem();
-            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem4 = new DevExpress.XtraCharts.ChartIntervalItem();
-            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem5 = new DevExpress.XtraCharts.ChartIntervalItem();
-            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem6 = new DevExpress.XtraCharts.ChartIntervalItem();
-            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem7 = new DevExpress.XtraCharts.ChartIntervalItem();
-            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem8 = new DevExpress.XtraCharts.ChartIntervalItem();
-            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem9 = new DevExpress.XtraCharts.ChartIntervalItem();
-            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem10 = new DevExpress.XtraCharts.ChartIntervalItem();
+            DevExpress.XtraCharts.XYDiagram xyDiagram2 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.CustomAxisLabel customAxisLabel2 = new DevExpress.XtraCharts.CustomAxisLabel();
+            DevExpress.XtraCharts.XYDiagramPane xyDiagramPane3 = new DevExpress.XtraCharts.XYDiagramPane();
+            DevExpress.XtraCharts.XYDiagramPane xyDiagramPane4 = new DevExpress.XtraCharts.XYDiagramPane();
+            DevExpress.XtraCharts.SecondaryAxisY secondaryAxisY4 = new DevExpress.XtraCharts.SecondaryAxisY();
+            DevExpress.XtraCharts.SecondaryAxisY secondaryAxisY5 = new DevExpress.XtraCharts.SecondaryAxisY();
+            DevExpress.XtraCharts.SecondaryAxisY secondaryAxisY6 = new DevExpress.XtraCharts.SecondaryAxisY();
+            DevExpress.XtraCharts.Legend legend3 = new DevExpress.XtraCharts.Legend();
+            DevExpress.XtraCharts.Legend legend4 = new DevExpress.XtraCharts.Legend();
+            DevExpress.XtraCharts.Series series3 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.SideBySideBarSeriesView sideBySideBarSeriesView2 = new DevExpress.XtraCharts.SideBySideBarSeriesView();
+            DevExpress.XtraCharts.Series series4 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StockSeriesView stockSeriesView2 = new DevExpress.XtraCharts.StockSeriesView();
+            DevExpress.XtraCharts.BollingerBands bollingerBands2 = new DevExpress.XtraCharts.BollingerBands();
+            DevExpress.XtraCharts.MovingAverageConvergenceDivergence movingAverageConvergenceDivergence2 = new DevExpress.XtraCharts.MovingAverageConvergenceDivergence();
+            DevExpress.XtraCharts.ChaikinsVolatility chaikinsVolatility2 = new DevExpress.XtraCharts.ChaikinsVolatility();
+            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem11 = new DevExpress.XtraCharts.ChartIntervalItem();
+            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem12 = new DevExpress.XtraCharts.ChartIntervalItem();
+            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem13 = new DevExpress.XtraCharts.ChartIntervalItem();
+            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem14 = new DevExpress.XtraCharts.ChartIntervalItem();
+            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem15 = new DevExpress.XtraCharts.ChartIntervalItem();
+            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem16 = new DevExpress.XtraCharts.ChartIntervalItem();
+            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem17 = new DevExpress.XtraCharts.ChartIntervalItem();
+            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem18 = new DevExpress.XtraCharts.ChartIntervalItem();
+            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem19 = new DevExpress.XtraCharts.ChartIntervalItem();
+            DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem20 = new DevExpress.XtraCharts.ChartIntervalItem();
             this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
             this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroupIndicators = new DevExpress.XtraLayout.LayoutControlGroup();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.chart = new DevExpress.XtraCharts.ChartControl();
             this.chartBarController1 = new DevExpress.XtraCharts.UI.ChartBarController(this.components);
-            this.changeSeriesViewRepositoryItemComboBox1 = new DevExpress.XtraCharts.UI.ChangeSeriesViewRepositoryItemComboBox();
             this.trendLineBarCheckItem = new DevExpress.XtraCharts.UI.DrawTrendLineIndicatorBarItem();
             this.fibbArcBarCheckItem = new DevExpress.XtraCharts.UI.DrawFibonacciArcsIndicatorBarItem();
             this.fibbFansBarCheckItem = new DevExpress.XtraCharts.UI.DrawFibonacciFansIndicatorBarItem();
@@ -56,8 +55,6 @@ namespace Analyze.DesktopApp.GUI.Child {
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.selectAxisMeasureUnitBarItem1 = new DevExpress.XtraCharts.UI.SelectAxisMeasureUnitBarItem();
             this.selectAxisMeasureUnitRepositoryItemComboBox1 = new DevExpress.XtraCharts.UI.SelectAxisMeasureUnitRepositoryItemComboBox();
-            this.addTextAnnotationBarItem = new DevExpress.XtraCharts.UI.AddTextAnnotationBarItem();
-            this.addImageAnnotationBarItem = new DevExpress.XtraCharts.UI.AddImageAnnotationBarItem();
             this.createFinancialChartRibbonPage1 = new DevExpress.XtraCharts.UI.CreateFinancialChartRibbonPage();
             this.chartFinancialSeriesRibbonPageGroup1 = new DevExpress.XtraCharts.UI.ChartFinancialSeriesRibbonPageGroup();
             this.chartFinancialIndicatorsRibbonPageGroup1 = new DevExpress.XtraCharts.UI.ChartFinancialIndicatorsRibbonPageGroup();
@@ -68,21 +65,20 @@ namespace Analyze.DesktopApp.GUI.Child {
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupIndicators)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagramPane1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagramPane2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stockSeriesView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(bollingerBands1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(movingAverageConvergenceDivergence1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(chaikinsVolatility1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagramPane3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagramPane4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stockSeriesView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(bollingerBands2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(movingAverageConvergenceDivergence2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(chaikinsVolatility2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartBarController1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.changeSeriesViewRepositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectAxisMeasureUnitRepositoryItemComboBox1)).BeginInit();
@@ -136,135 +132,135 @@ namespace Analyze.DesktopApp.GUI.Child {
             this.chart.CrosshairOptions.ShowArgumentLabels = true;
             this.chart.CrosshairOptions.ShowOnlyInFocusedPane = false;
             this.chart.CrosshairOptions.ShowOutOfRangePoints = true;
-            xyDiagram1.AxisX.DateTimeScaleOptions.AggregateFunction = DevExpress.XtraCharts.AggregateFunction.Financial;
-            xyDiagram1.AxisX.DateTimeScaleOptions.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Minute;
-            xyDiagram1.AxisX.DateTimeScaleOptions.SkipRangesWithoutPoints = true;
-            xyDiagram1.AxisX.GridLines.Visible = true;
-            xyDiagram1.AxisX.Label.ResolveOverlappingOptions.AllowRotate = false;
-            xyDiagram1.AxisX.Label.ResolveOverlappingOptions.AllowStagger = false;
-            xyDiagram1.AxisX.Label.ResolveOverlappingOptions.MinIndent = 2;
-            xyDiagram1.AxisX.StickToEdge = true;
-            xyDiagram1.AxisX.VisibleInPanesSerializable = "1";
-            xyDiagram1.AxisX.VisualRange.Auto = false;
-            xyDiagram1.AxisX.VisualRange.AutoSideMargins = false;
-            xyDiagram1.AxisX.VisualRange.EndSideMargin = 2D;
-            xyDiagram1.AxisX.VisualRange.MaxValueSerializable = "03/06/2023 13:47:00.000";
-            xyDiagram1.AxisX.VisualRange.MinValueSerializable = "03/06/2023 13:38:00.000";
-            xyDiagram1.AxisX.VisualRange.StartSideMargin = 2D;
-            xyDiagram1.AxisX.WholeRange.AutoSideMargins = false;
-            xyDiagram1.AxisX.WholeRange.EndSideMargin = 2D;
-            xyDiagram1.AxisX.WholeRange.StartSideMargin = 2D;
-            xyDiagram1.AxisY.Alignment = DevExpress.XtraCharts.AxisAlignment.Far;
-            customAxisLabel1.AxisValueSerializable = "1";
-            customAxisLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(138)))), ((int)(((byte)(9)))));
-            customAxisLabel1.Border.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            customAxisLabel1.Name = "CurrentValueCustomLabel";
-            customAxisLabel1.TextColor = System.Drawing.Color.White;
-            xyDiagram1.AxisY.CustomLabels.AddRange(new DevExpress.XtraCharts.CustomAxisLabel[] {
-            customAxisLabel1});
-            xyDiagram1.AxisY.Label.TextPattern = "${V:0.###}";
-            xyDiagram1.AxisY.LabelVisibilityMode = DevExpress.XtraCharts.AxisLabelVisibilityMode.AutoGeneratedAndCustom;
-            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram1.AxisY.WholeRange.AlwaysShowZeroLevel = false;
-            xyDiagram1.DefaultPane.LayoutOptions.RowSpan = 100;
-            xyDiagram1.DefaultPane.ScrollBarOptions.XAxisScrollBarVisible = false;
-            xyDiagram1.DependentAxesYRange = DevExpress.Utils.DefaultBoolean.True;
-            xyDiagram1.EnableAxisXScrolling = true;
-            xyDiagram1.EnableAxisXZooming = true;
-            xyDiagramPane1.LayoutOptions.RowSpan = 50;
-            xyDiagramPane1.Name = "Pane 1";
-            xyDiagramPane1.PaneID = 0;
-            xyDiagramPane1.ScrollBarOptions.XAxisScrollBarVisible = false;
-            xyDiagramPane1.Tag = "Moving Average Convergence Divergence";
-            xyDiagramPane2.LayoutOptions.RowSpan = 65;
-            xyDiagramPane2.Name = "Pane 2";
-            xyDiagramPane2.PaneID = 1;
-            xyDiagramPane2.Tag = "Chaikin\'s Volatility";
-            xyDiagram1.Panes.AddRange(new DevExpress.XtraCharts.XYDiagramPane[] {
-            xyDiagramPane1,
-            xyDiagramPane2});
-            xyDiagram1.RuntimePaneResize = true;
-            secondaryAxisY1.AxisID = 0;
-            secondaryAxisY1.Name = "VolumeAxisY";
-            secondaryAxisY1.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            secondaryAxisY1.VisibleInPanesSerializable = "-1";
-            secondaryAxisY1.WholeRange.AutoSideMargins = false;
-            secondaryAxisY1.WholeRange.EndSideMargin = 2000000D;
-            secondaryAxisY1.WholeRange.StartSideMargin = 2000000D;
-            secondaryAxisY2.AxisID = 1;
-            secondaryAxisY2.Name = "Secondary AxisY 1";
-            secondaryAxisY2.Tag = "Moving Average Convergence Divergence";
-            secondaryAxisY2.VisibleInPanesSerializable = "0";
-            secondaryAxisY3.AxisID = 2;
-            secondaryAxisY3.Name = "Secondary AxisY 2";
-            secondaryAxisY3.Tag = "Chaikin\'s Volatility";
-            secondaryAxisY3.VisibleInPanesSerializable = "1";
-            xyDiagram1.SecondaryAxesY.AddRange(new DevExpress.XtraCharts.SecondaryAxisY[] {
-            secondaryAxisY1,
-            secondaryAxisY2,
-            secondaryAxisY3});
-            xyDiagram1.ZoomingOptions.AxisXMaxZoomPercent = 100000D;
-            this.chart.Diagram = xyDiagram1;
+            xyDiagram2.AxisX.DateTimeScaleOptions.AggregateFunction = DevExpress.XtraCharts.AggregateFunction.Financial;
+            xyDiagram2.AxisX.DateTimeScaleOptions.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Minute;
+            xyDiagram2.AxisX.DateTimeScaleOptions.SkipRangesWithoutPoints = true;
+            xyDiagram2.AxisX.GridLines.Visible = true;
+            xyDiagram2.AxisX.Label.ResolveOverlappingOptions.AllowRotate = false;
+            xyDiagram2.AxisX.Label.ResolveOverlappingOptions.AllowStagger = false;
+            xyDiagram2.AxisX.Label.ResolveOverlappingOptions.MinIndent = 2;
+            xyDiagram2.AxisX.StickToEdge = true;
+            xyDiagram2.AxisX.VisibleInPanesSerializable = "1";
+            xyDiagram2.AxisX.VisualRange.Auto = false;
+            xyDiagram2.AxisX.VisualRange.AutoSideMargins = false;
+            xyDiagram2.AxisX.VisualRange.EndSideMargin = 2D;
+            xyDiagram2.AxisX.VisualRange.MaxValueSerializable = "03/06/2023 16:06:00.000";
+            xyDiagram2.AxisX.VisualRange.MinValueSerializable = "03/06/2023 15:57:00.000";
+            xyDiagram2.AxisX.VisualRange.StartSideMargin = 2D;
+            xyDiagram2.AxisX.WholeRange.AutoSideMargins = false;
+            xyDiagram2.AxisX.WholeRange.EndSideMargin = 2D;
+            xyDiagram2.AxisX.WholeRange.StartSideMargin = 2D;
+            xyDiagram2.AxisY.Alignment = DevExpress.XtraCharts.AxisAlignment.Far;
+            customAxisLabel2.AxisValueSerializable = "1";
+            customAxisLabel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(138)))), ((int)(((byte)(9)))));
+            customAxisLabel2.Border.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            customAxisLabel2.Name = "CurrentValueCustomLabel";
+            customAxisLabel2.TextColor = System.Drawing.Color.White;
+            xyDiagram2.AxisY.CustomLabels.AddRange(new DevExpress.XtraCharts.CustomAxisLabel[] {
+            customAxisLabel2});
+            xyDiagram2.AxisY.Label.TextPattern = "${V:0.###}";
+            xyDiagram2.AxisY.LabelVisibilityMode = DevExpress.XtraCharts.AxisLabelVisibilityMode.AutoGeneratedAndCustom;
+            xyDiagram2.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram2.AxisY.WholeRange.AlwaysShowZeroLevel = false;
+            xyDiagram2.DefaultPane.LayoutOptions.RowSpan = 100;
+            xyDiagram2.DefaultPane.ScrollBarOptions.XAxisScrollBarVisible = false;
+            xyDiagram2.DependentAxesYRange = DevExpress.Utils.DefaultBoolean.True;
+            xyDiagram2.EnableAxisXScrolling = true;
+            xyDiagram2.EnableAxisXZooming = true;
+            xyDiagramPane3.LayoutOptions.RowSpan = 50;
+            xyDiagramPane3.Name = "Pane 1";
+            xyDiagramPane3.PaneID = 0;
+            xyDiagramPane3.ScrollBarOptions.XAxisScrollBarVisible = false;
+            xyDiagramPane3.Tag = "Moving Average Convergence Divergence";
+            xyDiagramPane4.LayoutOptions.RowSpan = 65;
+            xyDiagramPane4.Name = "Pane 2";
+            xyDiagramPane4.PaneID = 1;
+            xyDiagramPane4.Tag = "Chaikin\'s Volatility";
+            xyDiagram2.Panes.AddRange(new DevExpress.XtraCharts.XYDiagramPane[] {
+            xyDiagramPane3,
+            xyDiagramPane4});
+            xyDiagram2.RuntimePaneResize = true;
+            secondaryAxisY4.AxisID = 0;
+            secondaryAxisY4.Name = "VolumeAxisY";
+            secondaryAxisY4.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            secondaryAxisY4.VisibleInPanesSerializable = "-1";
+            secondaryAxisY4.WholeRange.AutoSideMargins = false;
+            secondaryAxisY4.WholeRange.EndSideMargin = 2000000D;
+            secondaryAxisY4.WholeRange.StartSideMargin = 2000000D;
+            secondaryAxisY5.AxisID = 1;
+            secondaryAxisY5.Name = "Secondary AxisY 1";
+            secondaryAxisY5.Tag = "Moving Average Convergence Divergence";
+            secondaryAxisY5.VisibleInPanesSerializable = "0";
+            secondaryAxisY6.AxisID = 2;
+            secondaryAxisY6.Name = "Secondary AxisY 2";
+            secondaryAxisY6.Tag = "Chaikin\'s Volatility";
+            secondaryAxisY6.VisibleInPanesSerializable = "1";
+            xyDiagram2.SecondaryAxesY.AddRange(new DevExpress.XtraCharts.SecondaryAxisY[] {
+            secondaryAxisY4,
+            secondaryAxisY5,
+            secondaryAxisY6});
+            xyDiagram2.ZoomingOptions.AxisXMaxZoomPercent = 100000D;
+            this.chart.Diagram = xyDiagram2;
             this.chart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chart.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Left;
             this.chart.Legend.Name = "Default Legend";
-            legend1.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Left;
-            legend1.DockTargetName = "Pane 1";
-            legend1.Name = "Legend1";
-            legend1.Tag = "Chaikin\'s Volatility";
-            legend2.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Left;
-            legend2.DockTargetName = "Pane 2";
-            legend2.Name = "Legend2";
-            legend2.Tag = "Moving Average Convergence Divergence";
+            legend3.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Left;
+            legend3.DockTargetName = "Pane 1";
+            legend3.Name = "Legend1";
+            legend3.Tag = "Chaikin\'s Volatility";
+            legend4.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Left;
+            legend4.DockTargetName = "Pane 2";
+            legend4.Name = "Legend2";
+            legend4.Tag = "Moving Average Convergence Divergence";
             this.chart.Legends.AddRange(new DevExpress.XtraCharts.Legend[] {
-            legend1,
-            legend2});
+            legend3,
+            legend4});
             this.chart.Location = new System.Drawing.Point(0, 150);
             this.chart.Margin = new System.Windows.Forms.Padding(0);
             this.chart.Name = "chart";
-            series1.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.DateTime;
-            series1.DataSourceSorted = true;
-            series1.Name = "Volume";
-            sideBySideBarSeriesView1.AggregateFunction = DevExpress.XtraCharts.SeriesAggregateFunction.Sum;
-            sideBySideBarSeriesView1.AxisYName = "VolumeAxisY";
-            sideBySideBarSeriesView1.BarWidth = 0.5D;
-            sideBySideBarSeriesView1.Border.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            sideBySideBarSeriesView1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            sideBySideBarSeriesView1.FillStyle.FillMode = DevExpress.XtraCharts.FillMode.Solid;
-            series1.View = sideBySideBarSeriesView1;
-            series2.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.DateTime;
-            series2.CrosshairLabelPattern = "Open:\t{OV:0.000}\nHigh:\t{HV:0.000}\nLow:\t{LV:0.000}\nClose:\t{CV:0.000}";
-            series2.DataSourceSorted = true;
-            series2.Name = "Price";
-            series2.ValueDataMembersSerializable = "Low;High;Open;Close";
-            stockSeriesView1.AggregateFunction = DevExpress.XtraCharts.SeriesAggregateFunction.Financial;
-            bollingerBands1.LegendText = "BB (20, 2)";
-            bollingerBands1.Name = "Bollinger Bands";
-            bollingerBands1.ShowInLegend = true;
-            movingAverageConvergenceDivergence1.AxisYName = "Secondary AxisY 1";
-            movingAverageConvergenceDivergence1.LegendName = "Legend1";
-            movingAverageConvergenceDivergence1.LegendText = "MACD (12, 26, 9)";
-            movingAverageConvergenceDivergence1.Name = "Moving Average Convergence Divergence";
-            movingAverageConvergenceDivergence1.PaneName = "Pane 1";
-            movingAverageConvergenceDivergence1.ShowInLegend = true;
-            movingAverageConvergenceDivergence1.SignalLineColor = System.Drawing.Color.LightGray;
-            movingAverageConvergenceDivergence1.Tag = "Moving Average Convergence Divergence";
-            chaikinsVolatility1.AxisYName = "Secondary AxisY 2";
-            chaikinsVolatility1.LegendName = "Legend2";
-            chaikinsVolatility1.LegendText = "ChV (10)";
-            chaikinsVolatility1.Name = "Chaikin\'s Volatility";
-            chaikinsVolatility1.PaneName = "Pane 2";
-            chaikinsVolatility1.ShowInLegend = true;
-            chaikinsVolatility1.Tag = "Chaikin\'s Volatility";
-            stockSeriesView1.Indicators.AddRange(new DevExpress.XtraCharts.Indicator[] {
-            bollingerBands1,
-            movingAverageConvergenceDivergence1,
-            chaikinsVolatility1});
-            stockSeriesView1.LineThickness = 1;
-            series2.View = stockSeriesView1;
+            series3.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.DateTime;
+            series3.DataSourceSorted = true;
+            series3.Name = "Volume";
+            sideBySideBarSeriesView2.AggregateFunction = DevExpress.XtraCharts.SeriesAggregateFunction.Sum;
+            sideBySideBarSeriesView2.AxisYName = "VolumeAxisY";
+            sideBySideBarSeriesView2.BarWidth = 0.5D;
+            sideBySideBarSeriesView2.Border.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            sideBySideBarSeriesView2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            sideBySideBarSeriesView2.FillStyle.FillMode = DevExpress.XtraCharts.FillMode.Solid;
+            series3.View = sideBySideBarSeriesView2;
+            series4.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.DateTime;
+            series4.CrosshairLabelPattern = "Open:\t{OV:0.000}\nHigh:\t{HV:0.000}\nLow:\t{LV:0.000}\nClose:\t{CV:0.000}";
+            series4.DataSourceSorted = true;
+            series4.Name = "Price";
+            series4.ValueDataMembersSerializable = "Low;High;Open;Close";
+            stockSeriesView2.AggregateFunction = DevExpress.XtraCharts.SeriesAggregateFunction.Financial;
+            bollingerBands2.LegendText = "BB (20, 2)";
+            bollingerBands2.Name = "Bollinger Bands";
+            bollingerBands2.ShowInLegend = true;
+            movingAverageConvergenceDivergence2.AxisYName = "Secondary AxisY 1";
+            movingAverageConvergenceDivergence2.LegendName = "Legend1";
+            movingAverageConvergenceDivergence2.LegendText = "MACD (12, 26, 9)";
+            movingAverageConvergenceDivergence2.Name = "Moving Average Convergence Divergence";
+            movingAverageConvergenceDivergence2.PaneName = "Pane 1";
+            movingAverageConvergenceDivergence2.ShowInLegend = true;
+            movingAverageConvergenceDivergence2.SignalLineColor = System.Drawing.Color.LightGray;
+            movingAverageConvergenceDivergence2.Tag = "Moving Average Convergence Divergence";
+            chaikinsVolatility2.AxisYName = "Secondary AxisY 2";
+            chaikinsVolatility2.LegendName = "Legend2";
+            chaikinsVolatility2.LegendText = "ChV (10)";
+            chaikinsVolatility2.Name = "Chaikin\'s Volatility";
+            chaikinsVolatility2.PaneName = "Pane 2";
+            chaikinsVolatility2.ShowInLegend = true;
+            chaikinsVolatility2.Tag = "Chaikin\'s Volatility";
+            stockSeriesView2.Indicators.AddRange(new DevExpress.XtraCharts.Indicator[] {
+            bollingerBands2,
+            movingAverageConvergenceDivergence2,
+            chaikinsVolatility2});
+            stockSeriesView2.LineThickness = 1;
+            series4.View = stockSeriesView2;
             this.chart.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series1,
-        series2};
+        series3,
+        series4};
             this.chart.Size = new System.Drawing.Size(1487, 284);
             this.chart.TabIndex = 1;
             this.chart.Zoom += new DevExpress.XtraCharts.ChartZoomEventHandler(this.chart_Zoom);
@@ -281,22 +277,7 @@ namespace Analyze.DesktopApp.GUI.Child {
             this.chartBarController1.BarItems.Add(this.removeBarCheckItem);
             this.chartBarController1.BarItems.Add(this.addIndicatorBarItem1);
             this.chartBarController1.BarItems.Add(this.selectAxisMeasureUnitBarItem1);
-            this.chartBarController1.BarItems.Add(this.addTextAnnotationBarItem);
-            this.chartBarController1.BarItems.Add(this.addImageAnnotationBarItem);
             this.chartBarController1.Control = this.chart;
-            // 
-            // changeSeriesViewRepositoryItemComboBox1
-            // 
-            this.changeSeriesViewRepositoryItemComboBox1.AutoHeight = false;
-            this.changeSeriesViewRepositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.changeSeriesViewRepositoryItemComboBox1.Items.AddRange(new object[] {
-            DevExpress.XtraCharts.ViewType.Stock,
-            DevExpress.XtraCharts.ViewType.CandleStick});
-            this.changeSeriesViewRepositoryItemComboBox1.Name = "changeSeriesViewRepositoryItemComboBox1";
-            this.changeSeriesViewRepositoryItemComboBox1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.changeSeriesViewRepositoryItemComboBox1.CloseUp += new DevExpress.XtraEditors.Controls.CloseUpEventHandler(this.CloseUp);
-            this.changeSeriesViewRepositoryItemComboBox1.BeforePopup += new System.EventHandler(this.BeforePopup);
             // 
             // trendLineBarCheckItem
             // 
@@ -379,16 +360,13 @@ namespace Analyze.DesktopApp.GUI.Child {
             this.fibbRetrBarCheckItem,
             this.removeBarCheckItem,
             this.addIndicatorBarItem1,
-            this.selectAxisMeasureUnitBarItem1,
-            this.addTextAnnotationBarItem,
-            this.addImageAnnotationBarItem});
+            this.selectAxisMeasureUnitBarItem1});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 55;
+            this.ribbonControl1.MaxItemId = 56;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.createFinancialChartRibbonPage1});
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.changeSeriesViewRepositoryItemComboBox1,
             this.selectAxisMeasureUnitRepositoryItemComboBox1,
             this.selectSeriesRepositoryItemComboBox1,
             this.selectPeriodRepositoryItemComboBox1});
@@ -397,7 +375,7 @@ namespace Analyze.DesktopApp.GUI.Child {
             // selectAxisMeasureUnitBarItem1
             // 
             this.selectAxisMeasureUnitBarItem1.Edit = this.selectAxisMeasureUnitRepositoryItemComboBox1;
-            this.selectAxisMeasureUnitBarItem1.EditValue = chartIntervalItem1;
+            this.selectAxisMeasureUnitBarItem1.EditValue = chartIntervalItem11;
             this.selectAxisMeasureUnitBarItem1.Id = 35;
             this.selectAxisMeasureUnitBarItem1.Name = "selectAxisMeasureUnitBarItem1";
             this.selectAxisMeasureUnitBarItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.Caption;
@@ -408,48 +386,36 @@ namespace Analyze.DesktopApp.GUI.Child {
             this.selectAxisMeasureUnitRepositoryItemComboBox1.AutoHeight = false;
             this.selectAxisMeasureUnitRepositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            chartIntervalItem1.Caption = "1 minute";
-            chartIntervalItem1.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Minute;
-            chartIntervalItem2.Caption = "5 minutes";
-            chartIntervalItem2.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Minute;
-            chartIntervalItem2.MeasureUnitMultiplier = 5;
-            chartIntervalItem3.Caption = "15 minutes";
-            chartIntervalItem3.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Minute;
-            chartIntervalItem3.MeasureUnitMultiplier = 15;
-            chartIntervalItem4.Caption = "1 hours";
-            chartIntervalItem4.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Hour;
-            chartIntervalItem5.Caption = "4 hours";
-            chartIntervalItem5.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Hour;
-            chartIntervalItem5.MeasureUnitMultiplier = 4;
-            chartIntervalItem6.Caption = "1 day";
-            chartIntervalItem6.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Day;
-            chartIntervalItem7.Caption = "1 week";
-            chartIntervalItem7.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Week;
+            chartIntervalItem11.Caption = "1 minute";
+            chartIntervalItem11.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Minute;
+            chartIntervalItem12.Caption = "5 minutes";
+            chartIntervalItem12.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Minute;
+            chartIntervalItem12.MeasureUnitMultiplier = 5;
+            chartIntervalItem13.Caption = "15 minutes";
+            chartIntervalItem13.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Minute;
+            chartIntervalItem13.MeasureUnitMultiplier = 15;
+            chartIntervalItem14.Caption = "1 hours";
+            chartIntervalItem14.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Hour;
+            chartIntervalItem15.Caption = "4 hours";
+            chartIntervalItem15.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Hour;
+            chartIntervalItem15.MeasureUnitMultiplier = 4;
+            chartIntervalItem16.Caption = "1 day";
+            chartIntervalItem16.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Day;
+            chartIntervalItem17.Caption = "1 week";
+            chartIntervalItem17.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Week;
             this.selectAxisMeasureUnitRepositoryItemComboBox1.Items.AddRange(new object[] {
-            chartIntervalItem1,
-            chartIntervalItem2,
-            chartIntervalItem3,
-            chartIntervalItem4,
-            chartIntervalItem5,
-            chartIntervalItem6,
-            chartIntervalItem7});
+            chartIntervalItem11,
+            chartIntervalItem12,
+            chartIntervalItem13,
+            chartIntervalItem14,
+            chartIntervalItem15,
+            chartIntervalItem16,
+            chartIntervalItem17});
             this.selectAxisMeasureUnitRepositoryItemComboBox1.Name = "selectAxisMeasureUnitRepositoryItemComboBox1";
             this.selectAxisMeasureUnitRepositoryItemComboBox1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.selectAxisMeasureUnitRepositoryItemComboBox1.SelectedIndexChanged += new System.EventHandler(this.selectChartMeasureUnitRepositoryItemComboBox1_SelectedIndexChanged);
             this.selectAxisMeasureUnitRepositoryItemComboBox1.CloseUp += new DevExpress.XtraEditors.Controls.CloseUpEventHandler(this.CloseUp);
             this.selectAxisMeasureUnitRepositoryItemComboBox1.BeforePopup += new System.EventHandler(this.BeforePopup);
-            // 
-            // addTextAnnotationBarItem
-            // 
-            this.addTextAnnotationBarItem.Id = 46;
-            this.addTextAnnotationBarItem.Name = "addTextAnnotationBarItem";
-            this.addTextAnnotationBarItem.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.chartCommandBarCheckItem_CheckedChanged);
-            // 
-            // addImageAnnotationBarItem
-            // 
-            this.addImageAnnotationBarItem.Id = 47;
-            this.addImageAnnotationBarItem.Name = "addImageAnnotationBarItem";
-            this.addImageAnnotationBarItem.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.chartCommandBarCheckItem_CheckedChanged);
             // 
             // createFinancialChartRibbonPage1
             // 
@@ -480,8 +446,6 @@ namespace Analyze.DesktopApp.GUI.Child {
             // chartAnnotationsRibbonPageGroup1
             // 
             this.chartAnnotationsRibbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
-            this.chartAnnotationsRibbonPageGroup1.ItemLinks.Add(this.addTextAnnotationBarItem);
-            this.chartAnnotationsRibbonPageGroup1.ItemLinks.Add(this.addImageAnnotationBarItem);
             this.chartAnnotationsRibbonPageGroup1.Name = "chartAnnotationsRibbonPageGroup1";
             // 
             // selectSeriesRepositoryItemComboBox1
@@ -500,18 +464,18 @@ namespace Analyze.DesktopApp.GUI.Child {
             this.selectPeriodRepositoryItemComboBox1.AutoHeight = false;
             this.selectPeriodRepositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            chartIntervalItem8.Caption = "6 month";
-            chartIntervalItem8.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Month;
-            chartIntervalItem8.MeasureUnitMultiplier = 6;
-            chartIntervalItem9.Caption = "1 year";
-            chartIntervalItem9.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Year;
-            chartIntervalItem10.Caption = "2 year";
-            chartIntervalItem10.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Year;
-            chartIntervalItem10.MeasureUnitMultiplier = 2;
+            chartIntervalItem18.Caption = "6 month";
+            chartIntervalItem18.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Month;
+            chartIntervalItem18.MeasureUnitMultiplier = 6;
+            chartIntervalItem19.Caption = "1 year";
+            chartIntervalItem19.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Year;
+            chartIntervalItem20.Caption = "2 year";
+            chartIntervalItem20.MeasureUnit = DevExpress.XtraCharts.DateTimeMeasureUnit.Year;
+            chartIntervalItem20.MeasureUnitMultiplier = 2;
             this.selectPeriodRepositoryItemComboBox1.Items.AddRange(new object[] {
-            chartIntervalItem8,
-            chartIntervalItem9,
-            chartIntervalItem10});
+            chartIntervalItem18,
+            chartIntervalItem19,
+            chartIntervalItem20});
             this.selectPeriodRepositoryItemComboBox1.Name = "selectPeriodRepositoryItemComboBox1";
             this.selectPeriodRepositoryItemComboBox1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
@@ -527,22 +491,21 @@ namespace Analyze.DesktopApp.GUI.Child {
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupIndicators)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagramPane1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagramPane2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(bollingerBands1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(movingAverageConvergenceDivergence1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(chaikinsVolatility1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stockSeriesView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagramPane3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagramPane4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(bollingerBands2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(movingAverageConvergenceDivergence2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(chaikinsVolatility2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stockSeriesView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartBarController1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.changeSeriesViewRepositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectAxisMeasureUnitRepositoryItemComboBox1)).EndInit();
@@ -561,7 +524,6 @@ namespace Analyze.DesktopApp.GUI.Child {
         private ChartControl chart;
         private DevExpress.XtraCharts.UI.ChartBarController chartBarController1;
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
-        private DevExpress.XtraCharts.UI.ChangeSeriesViewRepositoryItemComboBox changeSeriesViewRepositoryItemComboBox1;
         private DevExpress.XtraCharts.UI.AddIndicatorBarItem addIndicatorBarItem1;
         private DevExpress.XtraCharts.UI.SelectAxisMeasureUnitBarItem selectAxisMeasureUnitBarItem1;
         private DevExpress.XtraCharts.UI.SelectAxisMeasureUnitRepositoryItemComboBox selectAxisMeasureUnitRepositoryItemComboBox1;
@@ -575,8 +537,6 @@ namespace Analyze.DesktopApp.GUI.Child {
         private DevExpress.XtraCharts.UI.DrawFibonacciRetracementIndicatorBarItem fibbRetrBarCheckItem;
         private DevExpress.XtraCharts.UI.RemoveIndicatorBarItem removeBarCheckItem;
         private DevExpress.XtraCharts.UI.SelectSeriesRepositoryItemComboBox selectSeriesRepositoryItemComboBox1;
-        private DevExpress.XtraCharts.UI.AddTextAnnotationBarItem addTextAnnotationBarItem;
-        private DevExpress.XtraCharts.UI.AddImageAnnotationBarItem addImageAnnotationBarItem;
         private DevExpress.XtraCharts.UI.SelectPeriodRepositoryItemComboBox selectPeriodRepositoryItemComboBox1;
         private DevExpress.XtraCharts.UI.ChartAnnotationsRibbonPageGroup chartAnnotationsRibbonPageGroup1;
     }
