@@ -184,10 +184,10 @@ namespace Analyze.DesktopApp.GUI.Child
             generatingThread = null;
         }
         //phunv
+        private static List<FinancialDataPoint> lResult = new List<FinancialDataPoint>();
         internal void InitialData(string symbol)
         {
             var settings = Program.Configuration.GetSection("API").Get<APIModel>();
-            var lResult = new List<FinancialDataPoint>();
             try
             {
                 var content = WebClass.GetWebContent(string.Format(settings.History, symbol.ToUpper())).GetAwaiter().GetResult();
@@ -211,8 +211,14 @@ namespace Analyze.DesktopApp.GUI.Child
             }
 
             prevPoint = lResult.Last();
-            dataSource.AddRange(lResult);
+            dataSource.AddRange(lResult.Take(100).ToList());
             currentAggregatingPoint = prevPoint;
+        }
+
+        int index = 100;
+        internal void UpdateSource()
+        {
+            dataSource.Add(lResult.Skip(index++).Take(1).First());
         }
     }
 

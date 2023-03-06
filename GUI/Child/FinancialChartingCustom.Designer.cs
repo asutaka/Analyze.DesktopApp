@@ -26,7 +26,7 @@ namespace Analyze.DesktopApp.GUI.Child
             DevExpress.XtraCharts.Series series3 = new DevExpress.XtraCharts.Series();
             DevExpress.XtraCharts.SideBySideBarSeriesView sideBySideBarSeriesView2 = new DevExpress.XtraCharts.SideBySideBarSeriesView();
             DevExpress.XtraCharts.Series series4 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StockSeriesView stockSeriesView2 = new DevExpress.XtraCharts.StockSeriesView();
+            DevExpress.XtraCharts.CandleStickSeriesView candleStickSeriesView2 = new DevExpress.XtraCharts.CandleStickSeriesView();
             DevExpress.XtraCharts.BollingerBands bollingerBands2 = new DevExpress.XtraCharts.BollingerBands();
             DevExpress.XtraCharts.MovingAverageConvergenceDivergence movingAverageConvergenceDivergence2 = new DevExpress.XtraCharts.MovingAverageConvergenceDivergence();
             DevExpress.XtraCharts.ChaikinsVolatility chaikinsVolatility2 = new DevExpress.XtraCharts.ChaikinsVolatility();
@@ -75,7 +75,7 @@ namespace Analyze.DesktopApp.GUI.Child
             ((System.ComponentModel.ISupportInitialize)(series3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(series4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stockSeriesView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(candleStickSeriesView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(bollingerBands2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(movingAverageConvergenceDivergence2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(chaikinsVolatility2)).BeginInit();
@@ -122,7 +122,7 @@ namespace Analyze.DesktopApp.GUI.Child
             // 
             // timer
             // 
-            this.timer.Interval = 30;
+            this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // chart
@@ -145,8 +145,8 @@ namespace Analyze.DesktopApp.GUI.Child
             xyDiagram2.AxisX.VisualRange.Auto = false;
             xyDiagram2.AxisX.VisualRange.AutoSideMargins = false;
             xyDiagram2.AxisX.VisualRange.EndSideMargin = 2D;
-            xyDiagram2.AxisX.VisualRange.MaxValueSerializable = "03/06/2023 16:06:00.000";
-            xyDiagram2.AxisX.VisualRange.MinValueSerializable = "03/06/2023 15:57:00.000";
+            xyDiagram2.AxisX.VisualRange.MaxValueSerializable = "03/06/2023 22:13:00.000";
+            xyDiagram2.AxisX.VisualRange.MinValueSerializable = "03/06/2023 22:04:00.000";
             xyDiagram2.AxisX.VisualRange.StartSideMargin = 2D;
             xyDiagram2.AxisX.WholeRange.AutoSideMargins = false;
             xyDiagram2.AxisX.WholeRange.EndSideMargin = 2D;
@@ -220,7 +220,6 @@ namespace Analyze.DesktopApp.GUI.Child
             this.chart.Margin = new System.Windows.Forms.Padding(0);
             this.chart.Name = "chart";
             series3.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.DateTime;
-            series3.DataSourceSorted = true;
             series3.Name = "Volume";
             sideBySideBarSeriesView2.AggregateFunction = DevExpress.XtraCharts.SeriesAggregateFunction.Sum;
             sideBySideBarSeriesView2.AxisYName = "VolumeAxisY";
@@ -231,10 +230,11 @@ namespace Analyze.DesktopApp.GUI.Child
             series3.View = sideBySideBarSeriesView2;
             series4.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.DateTime;
             series4.CrosshairLabelPattern = "Open:\t{OV:0.000}\nHigh:\t{HV:0.000}\nLow:\t{LV:0.000}\nClose:\t{CV:0.000}";
-            series4.DataSourceSorted = true;
+            series4.LegendName = "Default Legend";
             series4.Name = "Price";
             series4.ValueDataMembersSerializable = "Low;High;Open;Close";
-            stockSeriesView2.AggregateFunction = DevExpress.XtraCharts.SeriesAggregateFunction.Financial;
+            candleStickSeriesView2.AggregateFunction = DevExpress.XtraCharts.SeriesAggregateFunction.Financial;
+            candleStickSeriesView2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             bollingerBands2.LegendText = "BB (20, 2)";
             bollingerBands2.Name = "Bollinger Bands";
             bollingerBands2.ShowInLegend = true;
@@ -253,12 +253,15 @@ namespace Analyze.DesktopApp.GUI.Child
             chaikinsVolatility2.PaneName = "Pane 2";
             chaikinsVolatility2.ShowInLegend = true;
             chaikinsVolatility2.Tag = "Chaikin\'s Volatility";
-            stockSeriesView2.Indicators.AddRange(new DevExpress.XtraCharts.Indicator[] {
+            candleStickSeriesView2.Indicators.AddRange(new DevExpress.XtraCharts.Indicator[] {
             bollingerBands2,
             movingAverageConvergenceDivergence2,
             chaikinsVolatility2});
-            stockSeriesView2.LineThickness = 1;
-            series4.View = stockSeriesView2;
+            candleStickSeriesView2.LineThickness = 1;
+            candleStickSeriesView2.ReductionOptions.Color = System.Drawing.Color.Red;
+            candleStickSeriesView2.ReductionOptions.FillMode = DevExpress.XtraCharts.CandleStickFillMode.AlwaysFilled;
+            candleStickSeriesView2.Shadow.Color = System.Drawing.Color.Coral;
+            series4.View = candleStickSeriesView2;
             this.chart.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series3,
         series4};
@@ -363,7 +366,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.addIndicatorBarItem1,
             this.selectAxisMeasureUnitBarItem1});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 56;
+            this.ribbonControl1.MaxItemId = 57;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.createFinancialChartRibbonPage1});
@@ -448,6 +451,7 @@ namespace Analyze.DesktopApp.GUI.Child
             // 
             this.chartAnnotationsRibbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             this.chartAnnotationsRibbonPageGroup1.Name = "chartAnnotationsRibbonPageGroup1";
+            this.chartAnnotationsRibbonPageGroup1.Text = "";
             // 
             // selectSeriesRepositoryItemComboBox1
             // 
@@ -480,7 +484,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.selectPeriodRepositoryItemComboBox1.Name = "selectPeriodRepositoryItemComboBox1";
             this.selectPeriodRepositoryItemComboBox1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
-            // FinancialChartingDemo
+            // FinancialChartingCustom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -488,7 +492,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.Controls.Add(this.chart);
             this.Controls.Add(this.ribbonControl1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "FinancialChartingDemo";
+            this.Name = "FinancialChartingCustom";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupIndicators)).EndInit();
@@ -503,7 +507,7 @@ namespace Analyze.DesktopApp.GUI.Child
             ((System.ComponentModel.ISupportInitialize)(bollingerBands2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(movingAverageConvergenceDivergence2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(chaikinsVolatility2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stockSeriesView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(candleStickSeriesView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(series4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartBarController1)).EndInit();

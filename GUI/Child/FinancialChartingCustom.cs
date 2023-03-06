@@ -93,15 +93,16 @@ namespace Analyze.DesktopApp.GUI.Child
             AxisY.CustomLabels[0].BackColor = chart.GetPaletteEntries(2)[1].Color;
         }
         void timer_Tick(object sender, EventArgs e) {
-            //if (dataGenerator != null)
-            //    dataGenerator.UpdateDataSource();
-            //CustomAxisLabel currentValueLabel = AxisY.CustomLabels[0];
-            //if (PriceSeries.Points.Count > 0) {
-            //    FinancialDataCollection dataSource = this.dataGenerator.DataSource;
-            //    double currentClose = dataSource[dataSource.Count - 1].Close;
-            //    currentValueLabel.AxisValue = currentClose;
-            //    currentValueLabel.Name = string.Format("{0:0.0000}", currentClose);
-            //}
+            if (dataGenerator != null)
+                dataGenerator.UpdateSource();
+            CustomAxisLabel currentValueLabel = AxisY.CustomLabels[0];
+            if (PriceSeries.Points.Count > 0)
+            {
+                FinancialDataCollection dataSource = this.dataGenerator.DataSource;
+                double currentClose = dataSource[dataSource.Count - 1].Close;
+                currentValueLabel.AxisValue = currentClose;
+                currentValueLabel.Name = string.Format("{0:0.0000}", currentClose);
+            }
         }
         void selectChartMeasureUnitRepositoryItemComboBox1_SelectedIndexChanged(object sender, EventArgs e) {  
             SetVisualRangesAndGridOptions();
