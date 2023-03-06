@@ -219,6 +219,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\Child\FinancialChartingCustom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Child\FinancialChartingCustom.Designer.cs">
+      <DependentUpon>FinancialChartingCustom.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Child\FinancialCharting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -306,6 +312,9 @@
     <Content Include="Resources\telegram_64x64.png" />
     <Content Include="Resources\up_24x24.png" />
     <Content Include="Resources\yellow.png" />
+    <EmbeddedResource Include="GUI\Child\FinancialChartingCustom.resx">
+      <DependentUpon>FinancialChartingCustom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Child\FinancialCharting.resx">
       <DependentUpon>FinancialCharting.cs</DependentUpon>
     </EmbeddedResource>

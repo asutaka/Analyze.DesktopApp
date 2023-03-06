@@ -114,7 +114,7 @@ namespace Analyze.DesktopApp.Common
             box.AppendText(line);
         }
 
-        public static DateTime UnixTimeStampToDateTime(this int unixTimeStamp)
+        public static DateTime UnixTimeStampToDateTime(this long unixTimeStamp)
         {
             DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();

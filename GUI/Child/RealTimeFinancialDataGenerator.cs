@@ -1,7 +1,13 @@
-﻿using System;
+﻿using Analyze.DesktopApp.Common;
+using Analyze.DesktopApp.Models;
+using Analyze.DesktopApp.Utils;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Threading;
 
 namespace Analyze.DesktopApp.GUI.Child
@@ -176,6 +182,37 @@ namespace Analyze.DesktopApp.GUI.Child
             if (generatingThread != null)
                 generatingThread.Join();
             generatingThread = null;
+        }
+        //phunv
+        internal void InitialData(string symbol)
+        {
+            var settings = Program.Configuration.GetSection("API").Get<APIModel>();
+            var lResult = new List<FinancialDataPoint>();
+            try
+            {
+                var content = WebClass.GetWebContent(string.Format(settings.History, symbol.ToUpper())).GetAwaiter().GetResult();
+                if (!string.IsNullOrWhiteSpace(content))
+                {
+                    var time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                    var arr = JArray.Parse(content);
+                    lResult.AddRange(arr.Select(x => 
+                    new FinancialDataPoint((((long)x[0]) / 1000).UnixTimeStampToDateTime(), 
+                                            double.Parse(x[1].ToString()), 
+                                            double.Parse(x[2].ToString()), 
+                                            double.Parse(x[3].ToString()), 
+                                            double.Parse(x[4].ToString()), 
+                                            double.Parse(x[5].ToString())))
+                                                .ToList());
+                }
+            }
+            catch (Exception ex)
+            {
+                NLogLogger.PublishException(ex, $"RealTimeFinancialDataGenerator.InitialData|EXCEPTION| {ex.Message}");
+            }
+
+            prevPoint = lResult.Last();
+            dataSource.AddRange(lResult);
+            currentAggregatingPoint = prevPoint;
         }
     }
 
