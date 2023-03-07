@@ -212,13 +212,15 @@ namespace Analyze.DesktopApp.GUI.Child
             }
 
             prevPoint = lResult.Last();
-            dataSource.AddRange(lResult.Take(100).ToList());
+            _lstCalculate = lResult.Take(100).ToList();
+            dataSource.AddRange(_lstCalculate);
             currentAggregatingPoint = prevPoint;
         }
 
         int count = 0;
-        int index = 100;
+        public int index = 100;
         bool isComplete = false;
+        public List<FinancialDataPoint> _lstCalculate = new List<FinancialDataPoint>();
         internal void UpdateSource()
         {
             if(isComplete)
@@ -228,8 +230,11 @@ namespace Analyze.DesktopApp.GUI.Child
             if(index >= count)
             {
                 isComplete = true;
+                return;
             }
-            dataSource.Add(lResult.Skip(index++).Take(1).First());
+            var item = lResult.Skip(index++).Take(1).First();
+            _lstCalculate.Add(item);
+            dataSource.Add(item);
         }
     }
 

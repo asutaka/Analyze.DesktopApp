@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
+using Analyze.DesktopApp.Utils;
 using DevExpress.Utils;
 using DevExpress.XtraCharts;
    
@@ -92,9 +95,13 @@ namespace Analyze.DesktopApp.GUI.Child
         void SetCustomLabelColor() {
             AxisY.CustomLabels[0].BackColor = chart.GetPaletteEntries(2)[1].Color;
         }
+
         void timer_Tick(object sender, EventArgs e) {
             if (dataGenerator != null)
+            {
                 dataGenerator.UpdateSource();
+                MACD();
+            }
             CustomAxisLabel currentValueLabel = AxisY.CustomLabels[0];
             if (PriceSeries.Points.Count > 0)
             {
@@ -104,6 +111,165 @@ namespace Analyze.DesktopApp.GUI.Child
                 currentValueLabel.Name = string.Format("{0:0.0000}", currentClose);
             }
         }
+
+        #region Calculate
+        private bool flag = false;
+        private double val = 0;
+        private DateTime dt;
+        private List<double> lstRate = new List<double>();
+        private void EMA5_12()
+        {
+            var EMA5 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Ema, 5, dataGenerator.index);
+            var EMA12 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Ema, 12, dataGenerator.index);
+            if (EMA5 >= EMA12 && flag)
+            {
+                flag = false;
+                var last = dataGenerator._lstCalculate.Last();
+                val = last.Close;
+                dt = last.DateTimeStamp;
+            }
+
+            if (EMA5 < EMA12)
+            {
+                flag = true;
+                if (val > 0)
+                {
+                    var cur = dataGenerator._lstCalculate.Last();
+                    var rate = (1 - val / cur.Close) * 100;
+                    var divTime = (cur.DateTimeStamp - dt).TotalHours;
+                    lstRate.Add(rate);
+                    LogM.Log($"START: {dt}; Value: {val}| END: {cur.DateTimeStamp}; Value: {cur.Close}|HOUR: {divTime}| Rate: {rate}%");
+                    if (lstRate.Count() > 0)
+                    {
+                        LogM.Log($"AVG: {lstRate.Sum() / lstRate.Count()}");
+                    }
+                    val = 0;
+                }
+            }
+        }
+        private void EMA5_12Advance()
+        {
+            var EMA5 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Ema, 5, dataGenerator.index);
+            var EMA12 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Ema, 12, dataGenerator.index);
+            var RSI = CalculateMng.RSI(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), 14, dataGenerator.index);
+            if (EMA5 >= EMA12 && RSI >= 50 && flag)
+            {
+                flag = false;
+                var last = dataGenerator._lstCalculate.Last();
+                val = last.Close;
+                dt = last.DateTimeStamp;
+            }
+
+            if (EMA5 < EMA12)
+            {
+                flag = true;
+                if (val > 0)
+                {
+                    var cur = dataGenerator._lstCalculate.Last();
+                    var rate = (1 - val / cur.Close) * 100;
+                    var divTime = (cur.DateTimeStamp - dt).TotalHours;
+                    lstRate.Add(rate);
+                    LogM.Log($"START: {dt}; Value: {val}| END: {cur.DateTimeStamp}; Value: {cur.Close}|HOUR: {divTime}| Rate: {rate}%");
+                    if (lstRate.Count() > 0)
+                    {
+                        LogM.Log($"AVG: {lstRate.Sum() / lstRate.Count()}");
+                    }
+                    val = 0;
+                }
+            }
+        }
+        private void EMA5_10()
+        {
+            var EMA5 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Ema, 5, dataGenerator.index);
+            var EMA12 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Ema, 10, dataGenerator.index);
+            if (EMA5 >= EMA12 && flag)
+            {
+                flag = false;
+                var last = dataGenerator._lstCalculate.Last();
+                val = last.Close;
+                dt = last.DateTimeStamp;
+            }
+
+            if (EMA5 < EMA12)
+            {
+                flag = true;
+                if (val > 0)
+                {
+                    var cur = dataGenerator._lstCalculate.Last();
+                    var rate = (1 - val / cur.Close) * 100;
+                    var divTime = (cur.DateTimeStamp - dt).TotalHours;
+                    lstRate.Add(rate);
+                    LogM.Log($"START: {dt}; Value: {val}| END: {cur.DateTimeStamp}; Value: {cur.Close}|HOUR: {divTime}| Rate: {rate}%");
+                    if (lstRate.Count() > 0)
+                    {
+                        LogM.Log($"AVG: {lstRate.Sum() / lstRate.Count()}");
+                    }
+                    val = 0;
+                }
+            }
+        }
+        private void MA5_10()
+        {
+            var EMA5 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 5, dataGenerator.index);
+            var EMA12 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 10, dataGenerator.index);
+            if (EMA5 >= EMA12 && flag)
+            {
+                flag = false;
+                var last = dataGenerator._lstCalculate.Last();
+                val = last.Close;
+                dt = last.DateTimeStamp;
+            }
+
+            if (EMA5 < EMA12)
+            {
+                flag = true;
+                if (val > 0)
+                {
+                    var cur = dataGenerator._lstCalculate.Last();
+                    var rate = (1 - val / cur.Close) * 100;
+                    var divTime = (cur.DateTimeStamp - dt).TotalHours;
+                    lstRate.Add(rate);
+                    LogM.Log($"START: {dt}; Value: {val}| END: {cur.DateTimeStamp}; Value: {cur.Close}|HOUR: {divTime}| Rate: {rate}%");
+                    if (lstRate.Count() > 0)
+                    {
+                        LogM.Log($"AVG: {lstRate.Sum() / lstRate.Count()}");
+                    }
+                    val = 0;
+                }
+            }
+        }
+        private void MACD()
+        {
+            var MACD = CalculateMng.MACD(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), 12, 26, 9, dataGenerator.index);
+            if (MACD >= 0 && flag)
+            {
+                flag = false;
+                var last = dataGenerator._lstCalculate.Last();
+                val = last.Close;
+                dt = last.DateTimeStamp;
+            }
+
+            if (MACD < 0)
+            {
+                flag = true;
+                if (val > 0)
+                {
+                    var cur = dataGenerator._lstCalculate.Last();
+                    var rate = (1 - val / cur.Close) * 100;
+                    var divTime = (cur.DateTimeStamp - dt).TotalHours;
+                    lstRate.Add(rate);
+                    LogM.Log($"START: {dt}; Value: {val}| END: {cur.DateTimeStamp}; Value: {cur.Close}|HOUR: {divTime}| Rate: {rate}%");
+                    if (lstRate.Count() > 0)
+                    {
+                        LogM.Log($"AVG: {lstRate.Sum() / lstRate.Count()}");
+                    }
+                    val = 0;
+                }
+            }
+        }
+        #endregion
+
+
         void selectChartMeasureUnitRepositoryItemComboBox1_SelectedIndexChanged(object sender, EventArgs e) {  
             SetVisualRangesAndGridOptions();
         }

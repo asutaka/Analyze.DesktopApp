@@ -221,7 +221,7 @@ namespace Analyze.DesktopApp.Utils
             try
             {
                 var output = new double[1000];
-                MovingAverage(0, count - 1, arrInput, period, MAType.Sma, out var outBegIdx, out var outNBElement, output);
+                MovingAverage(0, count - 1, arrInput, period, type, out var outBegIdx, out var outNBElement, output);
                 return output[count - period];
             }
             catch (Exception ex)
@@ -230,33 +230,19 @@ namespace Analyze.DesktopApp.Utils
             }
             return 0;
         }
-        public static double MACD(double[] arrInput, int high, int low, int signal, int count)
+        public static double MACD(double[] arrInput, int fast, int slow, int signal, int count)
         {
             try
             {
                 var output = new double[1000];
-                Macd(0, count - 1, arrInput, low, high, signal, out var outBegIdx, out var outNbElement, new double[1000], new double[1000], output);
-                return output[count - 1];
+                Macd(0, count - 1, arrInput, fast, slow, signal, out var outBegIdx, out var outNbElement, new double[1000], new double[1000], output);
+                return output[count - (slow + signal - 1)];
             }
             catch (Exception ex)
             {
                 NLogLogger.PublishException(ex, $"CalculateMng.MACD|EXCEPTION| {ex.Message}");
             }
             return 0;
-        }
-        public static IEnumerable<double> MACD(double[] arrInput, int high, int low, int signal, int count, int take)
-        {
-            try
-            {
-                var output = new double[1000];
-                Macd(0, count - 1, arrInput, low, high, signal, out var outBegIdx, out var outNbElement, new double[1000], new double[1000], output);
-                return output.Skip(count - (take + 1)).Take(take);
-            }
-            catch (Exception ex)
-            {
-                NLogLogger.PublishException(ex, $"CalculateMng.MACD|EXCEPTION| {ex.Message}");
-            }
-            return null;
         }
 
         public static double RSI(double[] arrInput, int period, int count)
@@ -265,7 +251,7 @@ namespace Analyze.DesktopApp.Utils
             {
                 var output = new double[1000];
                 Rsi(0, count - 1, arrInput, period, out var outBegIdx, out var outNBElement, output);
-                return output[count - period];
+                return output[count - 1 - period];
             }
             catch (Exception ex)
             {

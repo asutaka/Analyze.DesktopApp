@@ -122,7 +122,6 @@ namespace Analyze.DesktopApp.GUI.Child
             // 
             // timer
             // 
-            this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // chart
@@ -145,8 +144,8 @@ namespace Analyze.DesktopApp.GUI.Child
             xyDiagram1.AxisX.VisualRange.Auto = false;
             xyDiagram1.AxisX.VisualRange.AutoSideMargins = false;
             xyDiagram1.AxisX.VisualRange.EndSideMargin = 2D;
-            xyDiagram1.AxisX.VisualRange.MaxValueSerializable = "03/07/2023 10:32:00.000";
-            xyDiagram1.AxisX.VisualRange.MinValueSerializable = "03/07/2023 10:23:00.000";
+            xyDiagram1.AxisX.VisualRange.MaxValueSerializable = "03/07/2023 16:05:00.000";
+            xyDiagram1.AxisX.VisualRange.MinValueSerializable = "03/07/2023 15:56:00.000";
             xyDiagram1.AxisX.VisualRange.StartSideMargin = 2D;
             xyDiagram1.AxisX.WholeRange.AutoSideMargins = false;
             xyDiagram1.AxisX.WholeRange.EndSideMargin = 2D;
@@ -368,7 +367,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.addIndicatorBarItem1,
             this.selectAxisMeasureUnitBarItem1});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 59;
+            this.ribbonControl1.MaxItemId = 60;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.createFinancialChartRibbonPage1});
