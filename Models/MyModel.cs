@@ -43,6 +43,8 @@ namespace Analyze.DesktopApp.Models
         public string API24hr { get; set; }
         public string Coin { get; set; }
         public string History { get; set; }
+        public string HistoryM { get; set; }
+        public string HistoryTime { get; set; }
     }
 
     public class JobModel

@@ -193,7 +193,6 @@ namespace Analyze.DesktopApp.GUI.Child
                 var content = WebClass.GetWebContent(string.Format(settings.History, symbol.ToUpper())).GetAwaiter().GetResult();
                 if (!string.IsNullOrWhiteSpace(content))
                 {
-                    var time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                     var arr = JArray.Parse(content);
                     lResult.AddRange(arr.Select(x => 
                     new FinancialDataPoint((((long)x[0]) / 1000).UnixTimeStampToDateTime(), 
@@ -204,6 +203,55 @@ namespace Analyze.DesktopApp.GUI.Child
                                             double.Parse(x[5].ToString())))
                                                 .ToList());
                     count = lResult.Count();
+                }
+            }
+            catch (Exception ex)
+            {
+                NLogLogger.PublishException(ex, $"RealTimeFinancialDataGenerator.InitialData|EXCEPTION| {ex.Message}");
+            }
+
+            prevPoint = lResult.Last();
+            _lstCalculate = lResult.Take(100).ToList();
+            dataSource.AddRange(_lstCalculate);
+            currentAggregatingPoint = prevPoint;
+        }
+
+        internal void InitialDataALl(string symbol)
+        {
+            var settings = Program.Configuration.GetSection("API").Get<APIModel>();
+            try
+            {
+                var contentM = WebClass.GetWebContent(string.Format(settings.HistoryM, symbol.ToUpper())).GetAwaiter().GetResult();
+                if (!string.IsNullOrWhiteSpace(contentM))
+                {
+                    var arrM = JArray.Parse(contentM);
+                    var time = arrM[0][0];
+                    string content = string.Empty;
+                    JArray arr = null;
+                    int countArr = 0;
+                    LogM.Start();
+                    do
+                    {
+                        content = WebClass.GetWebContent(string.Format(settings.HistoryTime, symbol.ToUpper(), time)).GetAwaiter().GetResult();
+                        if (!string.IsNullOrWhiteSpace(content))
+                        {
+                            arr = JArray.Parse(content);
+                            countArr = arr.Count();
+                            lResult.AddRange(arr.Select(x =>
+                               new FinancialDataPoint((((long)x[0]) / 1000).UnixTimeStampToDateTime(),
+                                                       double.Parse(x[1].ToString()),
+                                                       double.Parse(x[2].ToString()),
+                                                       double.Parse(x[3].ToString()),
+                                                       double.Parse(x[4].ToString()),
+                                                       double.Parse(x[5].ToString())))
+                                                           .ToList());
+                            time = (countArr > 0) ? arr[countArr - 1][0] : 0;
+                        }
+                    }
+                    while (!string.IsNullOrWhiteSpace(content) && countArr >= 500);
+                    count = lResult.Count();
+                    LogM.Log($"count: {count}");
+                    LogM.Stop();
                 }
             }
             catch (Exception ex)

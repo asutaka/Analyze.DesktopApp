@@ -51,7 +51,7 @@ namespace Analyze.DesktopApp.GUI.Child
             //AutoMergeRibbon = true;
             chart.BeginInit();
             this.dataGenerator = new RealTimeFinancialDataGenerator();
-            this.dataGenerator.InitialData("BTCUSDT");
+            this.dataGenerator.InitialData("GMTUSDT");
             InitChartControl();
             SetVisualRangesAndGridOptions();
             chart.EndInit();
