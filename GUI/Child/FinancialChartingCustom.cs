@@ -51,7 +51,7 @@ namespace Analyze.DesktopApp.GUI.Child
             //AutoMergeRibbon = true;
             chart.BeginInit();
             this.dataGenerator = new RealTimeFinancialDataGenerator();
-            this.dataGenerator.InitialData("GMTUSDT");
+            this.dataGenerator.InitialDataFastAll("GMTUSDT");
             InitChartControl();
             SetVisualRangesAndGridOptions();
             chart.EndInit();
