@@ -203,6 +203,7 @@ namespace Analyze.DesktopApp.GUI.Child
                                             double.Parse(x[4].ToString()), 
                                             double.Parse(x[5].ToString())))
                                                 .ToList());
+                    count = lResult.Count();
                 }
             }
             catch (Exception ex)
@@ -215,9 +216,19 @@ namespace Analyze.DesktopApp.GUI.Child
             currentAggregatingPoint = prevPoint;
         }
 
+        int count = 0;
         int index = 100;
+        bool isComplete = false;
         internal void UpdateSource()
         {
+            if(isComplete)
+            {
+                return;
+            }
+            if(index >= count)
+            {
+                isComplete = true;
+            }
             dataSource.Add(lResult.Skip(index++).Take(1).First());
         }
     }
