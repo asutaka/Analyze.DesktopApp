@@ -299,7 +299,7 @@ namespace Analyze.DesktopApp.GUI.Child
             currentAggregatingPoint = prevPoint;
         }
 
-        internal void InitialDataFastAll(string symbol)
+        internal void InitialDataFastAll(string symbol, int max = 0)
         {
             var settings = Program.Configuration.GetSection("API").Get<APIModel>();
             try
@@ -329,6 +329,8 @@ namespace Analyze.DesktopApp.GUI.Child
                                                        double.Parse(x[5].ToString())))
                                                            .ToList());
                             time = (countArr > 0) ? arr[countArr - 1][0] : 0;
+                            if (max > 0 && lResult.Count() >= max)
+                                break;
                         }
                     }
                     while (!string.IsNullOrWhiteSpace(content) && countArr >= 500);
