@@ -252,6 +252,8 @@ namespace Analyze.DesktopApp.GUI.Child
                     if (entity.Open > MA20i || entity.Close > MA20i)
                         return false;
                 }
+                buyEntity = last;
+                lstTotalBuy.Add(90);
                 return true;
             }
             return false;
