@@ -56,6 +56,10 @@ namespace Analyze.DesktopApp.GUI.Child
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.selectAxisMeasureUnitBarItem1 = new DevExpress.XtraCharts.UI.SelectAxisMeasureUnitBarItem();
             this.selectAxisMeasureUnitRepositoryItemComboBox1 = new DevExpress.XtraCharts.UI.SelectAxisMeasureUnitRepositoryItemComboBox();
+            this.barBtnStart = new DevExpress.XtraBars.BarButtonItem();
+            this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
+            this.barEditInterval = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemSpinEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.createFinancialChartRibbonPage1 = new DevExpress.XtraCharts.UI.CreateFinancialChartRibbonPage();
             this.chartFinancialSeriesRibbonPageGroup1 = new DevExpress.XtraCharts.UI.ChartFinancialSeriesRibbonPageGroup();
             this.chartFinancialIndicatorsRibbonPageGroup1 = new DevExpress.XtraCharts.UI.ChartFinancialIndicatorsRibbonPageGroup();
@@ -83,6 +87,7 @@ namespace Analyze.DesktopApp.GUI.Child
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectAxisMeasureUnitRepositoryItemComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectSeriesRepositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectPeriodRepositoryItemComboBox1)).BeginInit();
             this.SuspendLayout();
@@ -122,7 +127,7 @@ namespace Analyze.DesktopApp.GUI.Child
             // 
             // timer
             // 
-            this.timer.Interval = 200;
+            this.timer.Interval = 500;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // chart
@@ -145,8 +150,8 @@ namespace Analyze.DesktopApp.GUI.Child
             xyDiagram1.AxisX.VisualRange.Auto = false;
             xyDiagram1.AxisX.VisualRange.AutoSideMargins = false;
             xyDiagram1.AxisX.VisualRange.EndSideMargin = 2D;
-            xyDiagram1.AxisX.VisualRange.MaxValueSerializable = "03/07/2023 22:38:00.000";
-            xyDiagram1.AxisX.VisualRange.MinValueSerializable = "03/07/2023 22:29:00.000";
+            xyDiagram1.AxisX.VisualRange.MaxValueSerializable = "03/11/2023 21:20:00.000";
+            xyDiagram1.AxisX.VisualRange.MinValueSerializable = "03/11/2023 21:11:00.000";
             xyDiagram1.AxisX.VisualRange.StartSideMargin = 2D;
             xyDiagram1.AxisX.WholeRange.AutoSideMargins = false;
             xyDiagram1.AxisX.WholeRange.EndSideMargin = 2D;
@@ -173,10 +178,12 @@ namespace Analyze.DesktopApp.GUI.Child
             xyDiagramPane1.PaneID = 0;
             xyDiagramPane1.ScrollBarOptions.XAxisScrollBarVisible = false;
             xyDiagramPane1.Tag = "Moving Average Convergence Divergence";
+            xyDiagramPane1.Visibility = DevExpress.XtraCharts.ChartElementVisibility.Hidden;
             xyDiagramPane2.LayoutOptions.RowSpan = 65;
             xyDiagramPane2.Name = "Pane 2";
             xyDiagramPane2.PaneID = 1;
             xyDiagramPane2.Tag = "Chaikin\'s Volatility";
+            xyDiagramPane2.Visibility = DevExpress.XtraCharts.ChartElementVisibility.Hidden;
             xyDiagram1.Panes.AddRange(new DevExpress.XtraCharts.XYDiagramPane[] {
             xyDiagramPane1,
             xyDiagramPane2});
@@ -366,16 +373,20 @@ namespace Analyze.DesktopApp.GUI.Child
             this.fibbRetrBarCheckItem,
             this.removeBarCheckItem,
             this.addIndicatorBarItem1,
-            this.selectAxisMeasureUnitBarItem1});
+            this.selectAxisMeasureUnitBarItem1,
+            this.barBtnStart,
+            this.barHeaderItem1,
+            this.barEditInterval});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 62;
+            this.ribbonControl1.MaxItemId = 71;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.createFinancialChartRibbonPage1});
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.selectAxisMeasureUnitRepositoryItemComboBox1,
             this.selectSeriesRepositoryItemComboBox1,
-            this.selectPeriodRepositoryItemComboBox1});
+            this.selectPeriodRepositoryItemComboBox1,
+            this.repositoryItemSpinEdit1});
             this.ribbonControl1.Size = new System.Drawing.Size(1487, 150);
             // 
             // selectAxisMeasureUnitBarItem1
@@ -423,6 +434,50 @@ namespace Analyze.DesktopApp.GUI.Child
             this.selectAxisMeasureUnitRepositoryItemComboBox1.CloseUp += new DevExpress.XtraEditors.Controls.CloseUpEventHandler(this.CloseUp);
             this.selectAxisMeasureUnitRepositoryItemComboBox1.BeforePopup += new System.EventHandler(this.BeforePopup);
             // 
+            // barBtnStart
+            // 
+            this.barBtnStart.Caption = "Pause";
+            this.barBtnStart.Id = 63;
+            this.barBtnStart.ImageOptions.Image = global::Analyze.DesktopApp.Properties.Resources.pause_16x16;
+            this.barBtnStart.ImageOptions.LargeImage = global::Analyze.DesktopApp.Properties.Resources.pause_32x32;
+            this.barBtnStart.Name = "barBtnStart";
+            this.barBtnStart.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnStart_ItemClick);
+            // 
+            // barHeaderItem1
+            // 
+            this.barHeaderItem1.Caption = "barHeaderItem1";
+            this.barHeaderItem1.Id = 67;
+            this.barHeaderItem1.Name = "barHeaderItem1";
+            // 
+            // barEditInterval
+            // 
+            this.barEditInterval.Edit = this.repositoryItemSpinEdit1;
+            this.barEditInterval.EditValue = "500";
+            this.barEditInterval.Id = 68;
+            this.barEditInterval.Name = "barEditInterval";
+            // 
+            // repositoryItemSpinEdit1
+            // 
+            this.repositoryItemSpinEdit1.AutoHeight = false;
+            this.repositoryItemSpinEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemSpinEdit1.Increment = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.repositoryItemSpinEdit1.MaxValue = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.repositoryItemSpinEdit1.MinValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.repositoryItemSpinEdit1.Name = "repositoryItemSpinEdit1";
+            // 
             // createFinancialChartRibbonPage1
             // 
             this.createFinancialChartRibbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -452,6 +507,8 @@ namespace Analyze.DesktopApp.GUI.Child
             // chartAnnotationsRibbonPageGroup1
             // 
             this.chartAnnotationsRibbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
+            this.chartAnnotationsRibbonPageGroup1.ItemLinks.Add(this.barBtnStart);
+            this.chartAnnotationsRibbonPageGroup1.ItemLinks.Add(this.barEditInterval);
             this.chartAnnotationsRibbonPageGroup1.Name = "chartAnnotationsRibbonPageGroup1";
             this.chartAnnotationsRibbonPageGroup1.Text = "";
             // 
@@ -516,6 +573,7 @@ namespace Analyze.DesktopApp.GUI.Child
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectAxisMeasureUnitRepositoryItemComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectSeriesRepositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectPeriodRepositoryItemComboBox1)).EndInit();
             this.ResumeLayout(false);
@@ -546,5 +604,9 @@ namespace Analyze.DesktopApp.GUI.Child
         private DevExpress.XtraCharts.UI.SelectSeriesRepositoryItemComboBox selectSeriesRepositoryItemComboBox1;
         private DevExpress.XtraCharts.UI.SelectPeriodRepositoryItemComboBox selectPeriodRepositoryItemComboBox1;
         private DevExpress.XtraCharts.UI.ChartAnnotationsRibbonPageGroup chartAnnotationsRibbonPageGroup1;
+        private DevExpress.XtraBars.BarButtonItem barBtnStart;
+        private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
+        private DevExpress.XtraBars.BarEditItem barEditInterval;
+        private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit repositoryItemSpinEdit1;
     }
 }

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using Analyze.DesktopApp.Utils;
 using DevExpress.Utils;
 using DevExpress.XtraCharts;
-   
+using Newtonsoft.Json;
 
 namespace Analyze.DesktopApp.GUI.Child
 {
@@ -51,7 +51,8 @@ namespace Analyze.DesktopApp.GUI.Child
             //AutoMergeRibbon = true;
             chart.BeginInit();
             this.dataGenerator = new RealTimeFinancialDataGenerator();
-            this.dataGenerator.InitialDataFastAll("GMTUSDT",1000);
+            //this.dataGenerator.InitialDataFastAll("GMTUSDT",3000);
+            this.dataGenerator.InitialData("GMTUSDT");
             InitChartControl();
             SetVisualRangesAndGridOptions();
             chart.EndInit();
@@ -100,7 +101,7 @@ namespace Analyze.DesktopApp.GUI.Child
             if (dataGenerator != null)
             {
                 dataGenerator.UpdateSource();
-                MACD();
+                CalculateNew();
             }
             CustomAxisLabel currentValueLabel = AxisY.CustomLabels[0];
             if (PriceSeries.Points.Count > 0)
@@ -238,6 +239,171 @@ namespace Analyze.DesktopApp.GUI.Child
                 }
             }
         }
+        
+        private bool CheckBuy(double MA20, FinancialDataPoint last)
+        {
+            if (last.Open <= MA20 && last.Close >= MA20)
+            {
+                for (int i = 1; i <= 10; i++)
+                {
+                    var index = dataGenerator.index - i;
+                    var entity = dataGenerator._lstCalculate.ElementAt(index - 1);
+                    var MA20i = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).Take(index).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 20, index);
+                    if (entity.Open > MA20i || entity.Close > MA20i)
+                        return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        private bool CheckSell(double MA20, FinancialDataPoint last)
+        {
+            if(last.Low <= buyEntity.Low)
+            {
+                priceSell = Math.Round((buyEntity.Low * 99 / 100), 2);
+                sellAll = true;
+                return true;
+            }
+            if (!flagSell && dataGenerator.index - indexBuy >= 15)
+            {
+                priceSell = last.Close;
+                sellAll = true;
+                return true;
+            }
+            var div50 = (-1 + last.High / buyEntity.Close) * 100;
+            if(div50 > 50 && !sellHalf)
+            {
+                priceSell = buyEntity.Close * 1.5;
+                sellHalf = true;
+                return true;
+            }
+
+            var close = last.Close;
+            var div = (-1 + close / buyEntity.Close)*100;
+            if(div >= 5)
+            {
+                var MA5 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 5, dataGenerator.index);
+                var MA10 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 10, dataGenerator.index);
+                var count = 0;
+                if(close < MA5)
+                {
+                    count++;
+                }
+                if (close < MA10)
+                {
+                    count++;
+                }
+                if (close < MA20)
+                {
+                    count++;
+                }
+
+                if(count >= tier)
+                {
+                    sellAll = true;
+                    priceSell = close;
+                    return true;
+                }
+                if (count == sellCount)
+                {
+                    return false;
+                }
+                else if (count < sellCount)
+                {
+                    tier--;
+                    sellCount = count;
+                    return false;
+                }
+                else 
+                {
+                    sellCount = count;
+                    priceSell = close;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void TakeProfit(FinancialDataPoint last)
+        {
+            if(sellCount >= tier)
+            {
+                sellAll = true;
+            }
+            //print
+            double moneySell = 0;
+            if(sellAll)
+            {
+                moneySell = balance;
+            }
+            if(sellHalf)
+            {
+                moneySell = balance / 2;
+            }
+            if(sellCount > 0)
+            {
+                moneySell = balance* sellCount / tier;
+            }
+            balance = balance - moneySell;
+            var rate = Math.Round((-1 + priceSell / buyEntity.Close) * 100, 2);
+            lstTotalSell.Add(moneySell * (1 + rate / 100));
+            LogM.Log($"|BUY|Date:{buyEntity.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")};Price: {buyEntity.Close}|SELL|Date:{last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")};Price: {last.Close}|PRICECELL: {priceSell}");
+            LogM.Log($"|Hour: {(last.DateTimeStamp - buyEntity.DateTimeStamp).TotalHours}|Balance: {balance}| Rate: {rate}| MONEYOUT: {lstTotalBuy.Sum()}| MONEYOUT: {lstTotalSell.Sum()}");
+
+            if (sellAll)
+            {
+                tier = 3;
+                balance = 90;//USD
+                hasBuy = false;
+                hasSell = false;
+                sellAll = false;
+                sellHalf = false;
+                sellPart = false;
+                sellCount = 0;
+                flagSell = false;
+                buyEntity = new FinancialDataPoint();
+                indexBuy = 0;
+            }
+        }
+
+        double priceSell = 0;
+        int tier = 3;
+        double balance = 90;//USD
+        bool hasBuy = false;
+        bool hasSell = false;
+        bool sellAll = false;
+        bool sellHalf = false;
+        bool sellPart = false;
+        int sellCount = 0;
+        bool flagSell = false;
+
+        FinancialDataPoint buyEntity = new FinancialDataPoint();
+        int indexBuy = 0;
+
+        List<double> lstTotalBuy = new List<double>();
+        List<double> lstTotalSell = new List<double>();
+
+        private void CalculateNew()
+        {
+            var MA20 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 20, dataGenerator.index);
+            var last = dataGenerator._lstCalculate.Last();
+            if (hasBuy)
+            {
+                hasSell = CheckSell(MA20, last);
+                if(hasSell)
+                {
+                    TakeProfit(last);
+                }
+            }
+
+            if (!hasBuy)
+            {
+                hasBuy = CheckBuy(MA20, last);
+            }
+        }
+
         private void MACD()
         {
             var MACD = CalculateMng.MACD(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), 12, 26, 9, dataGenerator.index);
@@ -312,6 +478,28 @@ namespace Analyze.DesktopApp.GUI.Child
         }
         void CloseUp(object sender, DevExpress.XtraEditors.Controls.CloseUpEventArgs e) {
             CloseUp(sender, (EventArgs)e);
+        }
+
+        private bool IsStart = true;
+        private void barBtnStart_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if(IsStart)
+            {
+                this.timer.Stop();
+                barBtnStart.Caption = "Start";
+                IsStart = false;
+                this.barBtnStart.ImageOptions.Image = Properties.Resources.media_16x16;
+                this.barBtnStart.ImageOptions.LargeImage = Properties.Resources.media_32x32;
+            }
+            else
+            {
+                this.timer.Interval = int.Parse(barEditInterval.EditValue.ToString());
+                this.timer.Start();
+                barBtnStart.Caption = "Stop";
+                IsStart = true;
+                this.barBtnStart.ImageOptions.Image = Properties.Resources.pause_16x16;
+                this.barBtnStart.ImageOptions.LargeImage = Properties.Resources.pause_32x32;
+            }
         }
     }
 }
