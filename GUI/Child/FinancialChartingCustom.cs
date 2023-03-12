@@ -253,6 +253,7 @@ namespace Analyze.DesktopApp.GUI.Child
                         return false;
                 }
                 buyEntity = last;
+                indexBuy = dataGenerator.index - 1;
                 lstTotalBuy.Add(90);
                 return true;
             }
