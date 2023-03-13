@@ -353,7 +353,7 @@ namespace Analyze.DesktopApp.GUI.Child
             var rate = Math.Round((-1 + priceSell / buyEntity.Close) * 100, 2);
             lstTotalSell.Add(moneySell * (1 + rate / 100));
             LogM.Log($"|BUY|Date:{buyEntity.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")};Price: {buyEntity.Close}|SELL|Date:{last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")};Price: {last.Close}|PRICECELL: {priceSell}");
-            LogM.Log($"|Hour: {(last.DateTimeStamp - buyEntity.DateTimeStamp).TotalHours}|Balance: {balance}| Rate: {rate}| MONEYOUT: {lstTotalBuy.Sum()}| MONEYOUT: {lstTotalSell.Sum()}");
+            LogM.Log($"|Hour: {(last.DateTimeStamp - buyEntity.DateTimeStamp).TotalHours}|Balance: {balance}|AVG: {dataGenerator._AVG}| Rate: {rate}| MONEYIN: {lstTotalBuy.Sum()}| MONEYOUT: {lstTotalSell.Sum()}");
 
             if (sellAll)
             {

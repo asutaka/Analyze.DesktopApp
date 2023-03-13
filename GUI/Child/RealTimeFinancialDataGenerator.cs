@@ -184,6 +184,7 @@ namespace Analyze.DesktopApp.GUI.Child
             generatingThread = null;
         }
         //phunv
+        public double _AVG = 0;
         private static List<FinancialDataPoint> lResult = new List<FinancialDataPoint>();
         internal void InitialData(string symbol)
         {
@@ -209,7 +210,7 @@ namespace Analyze.DesktopApp.GUI.Child
             {
                 NLogLogger.PublishException(ex, $"RealTimeFinancialDataGenerator.InitialData|EXCEPTION| {ex.Message}");
             }
-
+            _AVG = lResult.Sum(x => x.Close) / lResult.Count();
             prevPoint = lResult.Last();
             index = 100;
             _lstCalculate = lResult.Take(index).ToList();
@@ -241,7 +242,7 @@ namespace Analyze.DesktopApp.GUI.Child
             {
                 NLogLogger.PublishException(ex, $"RealTimeFinancialDataGenerator.InitialData|EXCEPTION| {ex.Message}");
             }
-
+            _AVG = lResult.Sum(x => x.Close) / lResult.Count();
             prevPoint = lResult.Last();
             index = count;
             _lstCalculate = lResult.ToList();
@@ -291,7 +292,7 @@ namespace Analyze.DesktopApp.GUI.Child
             {
                 NLogLogger.PublishException(ex, $"RealTimeFinancialDataGenerator.InitialData|EXCEPTION| {ex.Message}");
             }
-
+            _AVG = lResult.Sum(x => x.Close) / lResult.Count();
             prevPoint = lResult.Last();
             index = 100;
             _lstCalculate = lResult.Take(index).ToList();
@@ -343,7 +344,7 @@ namespace Analyze.DesktopApp.GUI.Child
             {
                 NLogLogger.PublishException(ex, $"RealTimeFinancialDataGenerator.InitialData|EXCEPTION| {ex.Message}");
             }
-
+            _AVG = lResult.Sum(x => x.Close) / lResult.Count();
             prevPoint = lResult.Last();
             index = count;
             _lstCalculate = lResult.ToList();
