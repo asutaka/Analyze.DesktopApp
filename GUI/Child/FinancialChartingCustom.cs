@@ -13,6 +13,7 @@ namespace Analyze.DesktopApp.GUI.Child
     public partial class FinancialChartingCustom : Form {
         const int InitialPointCountOnScreen = 90;
         const int MaxZoomPointCount = 300;
+        private string _symbol = string.Empty;
 
         RealTimeFinancialDataGenerator dataGenerator;
         object selectedObject = null;
@@ -48,18 +49,26 @@ namespace Analyze.DesktopApp.GUI.Child
 
         public FinancialChartingCustom() {
             InitializeComponent();
+        }
+        void checkConfig()
+        {
+            var symbol = bartxtSymbol.EditValue.ToString();
+            if (string.IsNullOrWhiteSpace(symbol))
+                return;
+            _symbol = symbol.Trim();
+            if (!symbol.Contains("USDT"))
+                symbol = $"{symbol.Trim().ToUpper()}USDT";
             //AutoMergeRibbon = true;
             chart.BeginInit();
             this.dataGenerator = new RealTimeFinancialDataGenerator();
             //this.dataGenerator.InitialDataFastAll("GMTUSDT",3000);
-            this.dataGenerator.InitialData("GMTUSDT");
+            this.dataGenerator.InitialData(symbol);
             InitChartControl();
             SetVisualRangesAndGridOptions();
             chart.EndInit();
             this.dataGenerator.Start();
-            this.timer.Enabled = true;
+            //this.timer.Enabled = true;
         }
-
         void InitChartControl() {
             chart.DataSource = this.dataGenerator.DataSource;
             PriceSeries.SetFinancialDataMembers("DateTimeStamp", "Low", "High", "Open", "Close");
@@ -101,7 +110,7 @@ namespace Analyze.DesktopApp.GUI.Child
             if (dataGenerator != null)
             {
                 dataGenerator.UpdateSource();
-                CalculateNew();
+                //CalculateNew();
             }
             CustomAxisLabel currentValueLabel = AxisY.CustomLabels[0];
             if (PriceSeries.Points.Count > 0)
@@ -483,7 +492,7 @@ namespace Analyze.DesktopApp.GUI.Child
             CloseUp(sender, (EventArgs)e);
         }
 
-        private bool IsStart = true;
+        private bool IsStart = false;
         private void barBtnStart_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if(IsStart)
@@ -496,6 +505,10 @@ namespace Analyze.DesktopApp.GUI.Child
             }
             else
             {
+                if (!bartxtSymbol.EditValue.ToString().Trim().Equals(_symbol))
+                {
+                    checkConfig();
+                }
                 this.timer.Interval = int.Parse(barEditInterval.EditValue.ToString());
                 this.timer.Start();
                 barBtnStart.Caption = "Stop";

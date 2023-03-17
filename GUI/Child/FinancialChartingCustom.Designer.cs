@@ -26,7 +26,7 @@ namespace Analyze.DesktopApp.GUI.Child
             DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
             DevExpress.XtraCharts.SideBySideBarSeriesView sideBySideBarSeriesView1 = new DevExpress.XtraCharts.SideBySideBarSeriesView();
             DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.CandleStickSeriesView candleStickSeriesView1 = new DevExpress.XtraCharts.CandleStickSeriesView();
+            DevExpress.XtraCharts.StockSeriesView stockSeriesView1 = new DevExpress.XtraCharts.StockSeriesView();
             DevExpress.XtraCharts.BollingerBands bollingerBands1 = new DevExpress.XtraCharts.BollingerBands();
             DevExpress.XtraCharts.MovingAverageConvergenceDivergence movingAverageConvergenceDivergence1 = new DevExpress.XtraCharts.MovingAverageConvergenceDivergence();
             DevExpress.XtraCharts.ChaikinsVolatility chaikinsVolatility1 = new DevExpress.XtraCharts.ChaikinsVolatility();
@@ -37,6 +37,7 @@ namespace Analyze.DesktopApp.GUI.Child
             DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem5 = new DevExpress.XtraCharts.ChartIntervalItem();
             DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem6 = new DevExpress.XtraCharts.ChartIntervalItem();
             DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem7 = new DevExpress.XtraCharts.ChartIntervalItem();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinancialChartingCustom));
             DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem8 = new DevExpress.XtraCharts.ChartIntervalItem();
             DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem9 = new DevExpress.XtraCharts.ChartIntervalItem();
             DevExpress.XtraCharts.ChartIntervalItem chartIntervalItem10 = new DevExpress.XtraCharts.ChartIntervalItem();
@@ -60,6 +61,8 @@ namespace Analyze.DesktopApp.GUI.Child
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barEditInterval = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemSpinEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
+            this.bartxtSymbol = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.createFinancialChartRibbonPage1 = new DevExpress.XtraCharts.UI.CreateFinancialChartRibbonPage();
             this.chartFinancialSeriesRibbonPageGroup1 = new DevExpress.XtraCharts.UI.ChartFinancialSeriesRibbonPageGroup();
             this.chartFinancialIndicatorsRibbonPageGroup1 = new DevExpress.XtraCharts.UI.ChartFinancialIndicatorsRibbonPageGroup();
@@ -79,7 +82,7 @@ namespace Analyze.DesktopApp.GUI.Child
             ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(candleStickSeriesView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stockSeriesView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(bollingerBands1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(movingAverageConvergenceDivergence1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(chaikinsVolatility1)).BeginInit();
@@ -88,6 +91,7 @@ namespace Analyze.DesktopApp.GUI.Child
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectAxisMeasureUnitRepositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectSeriesRepositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectPeriodRepositoryItemComboBox1)).BeginInit();
             this.SuspendLayout();
@@ -150,8 +154,8 @@ namespace Analyze.DesktopApp.GUI.Child
             xyDiagram1.AxisX.VisualRange.Auto = false;
             xyDiagram1.AxisX.VisualRange.AutoSideMargins = false;
             xyDiagram1.AxisX.VisualRange.EndSideMargin = 2D;
-            xyDiagram1.AxisX.VisualRange.MaxValueSerializable = "03/11/2023 21:20:00.000";
-            xyDiagram1.AxisX.VisualRange.MinValueSerializable = "03/11/2023 21:11:00.000";
+            xyDiagram1.AxisX.VisualRange.MaxValueSerializable = "03/17/2023 14:06:00.000";
+            xyDiagram1.AxisX.VisualRange.MinValueSerializable = "03/17/2023 13:57:00.000";
             xyDiagram1.AxisX.VisualRange.StartSideMargin = 2D;
             xyDiagram1.AxisX.WholeRange.AutoSideMargins = false;
             xyDiagram1.AxisX.WholeRange.EndSideMargin = 2D;
@@ -240,8 +244,8 @@ namespace Analyze.DesktopApp.GUI.Child
             series2.LegendName = "Default Legend";
             series2.Name = "Price";
             series2.ValueDataMembersSerializable = "Low;High;Open;Close";
-            candleStickSeriesView1.AggregateFunction = DevExpress.XtraCharts.SeriesAggregateFunction.Financial;
-            candleStickSeriesView1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            stockSeriesView1.AggregateFunction = DevExpress.XtraCharts.SeriesAggregateFunction.Financial;
+            stockSeriesView1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             bollingerBands1.BandsColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(141)))), ((int)(((byte)(212)))));
             bollingerBands1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(150)))), ((int)(((byte)(70)))));
             bollingerBands1.LegendText = "BB (20, 2)";
@@ -263,14 +267,14 @@ namespace Analyze.DesktopApp.GUI.Child
             chaikinsVolatility1.PaneName = "Pane 2";
             chaikinsVolatility1.ShowInLegend = true;
             chaikinsVolatility1.Tag = "Chaikin\'s Volatility";
-            candleStickSeriesView1.Indicators.AddRange(new DevExpress.XtraCharts.Indicator[] {
+            stockSeriesView1.Indicators.AddRange(new DevExpress.XtraCharts.Indicator[] {
             bollingerBands1,
             movingAverageConvergenceDivergence1,
             chaikinsVolatility1});
-            candleStickSeriesView1.LineThickness = 1;
-            candleStickSeriesView1.ReductionOptions.Color = System.Drawing.Color.Red;
-            candleStickSeriesView1.Shadow.Color = System.Drawing.Color.Coral;
-            series2.View = candleStickSeriesView1;
+            stockSeriesView1.LineThickness = 1;
+            stockSeriesView1.ReductionOptions.Color = System.Drawing.Color.Red;
+            stockSeriesView1.Shadow.Color = System.Drawing.Color.Coral;
+            series2.View = stockSeriesView1;
             this.chart.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series1,
         series2};
@@ -376,9 +380,10 @@ namespace Analyze.DesktopApp.GUI.Child
             this.selectAxisMeasureUnitBarItem1,
             this.barBtnStart,
             this.barHeaderItem1,
-            this.barEditInterval});
+            this.barEditInterval,
+            this.bartxtSymbol});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 71;
+            this.ribbonControl1.MaxItemId = 75;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.createFinancialChartRibbonPage1});
@@ -386,7 +391,8 @@ namespace Analyze.DesktopApp.GUI.Child
             this.selectAxisMeasureUnitRepositoryItemComboBox1,
             this.selectSeriesRepositoryItemComboBox1,
             this.selectPeriodRepositoryItemComboBox1,
-            this.repositoryItemSpinEdit1});
+            this.repositoryItemSpinEdit1,
+            this.repositoryItemTextEdit1});
             this.ribbonControl1.Size = new System.Drawing.Size(1487, 150);
             // 
             // selectAxisMeasureUnitBarItem1
@@ -436,10 +442,10 @@ namespace Analyze.DesktopApp.GUI.Child
             // 
             // barBtnStart
             // 
-            this.barBtnStart.Caption = "Pause";
+            this.barBtnStart.Caption = "Start";
             this.barBtnStart.Id = 63;
-            this.barBtnStart.ImageOptions.Image = global::Analyze.DesktopApp.Properties.Resources.pause_16x16;
-            this.barBtnStart.ImageOptions.LargeImage = global::Analyze.DesktopApp.Properties.Resources.pause_32x32;
+            this.barBtnStart.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barBtnStart.ImageOptions.Image")));
+            this.barBtnStart.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barBtnStart.ImageOptions.LargeImage")));
             this.barBtnStart.Name = "barBtnStart";
             this.barBtnStart.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnStart_ItemClick);
             // 
@@ -478,6 +484,18 @@ namespace Analyze.DesktopApp.GUI.Child
             0});
             this.repositoryItemSpinEdit1.Name = "repositoryItemSpinEdit1";
             // 
+            // bartxtSymbol
+            // 
+            this.bartxtSymbol.Edit = this.repositoryItemTextEdit1;
+            this.bartxtSymbol.EditValue = "BTC";
+            this.bartxtSymbol.Id = 73;
+            this.bartxtSymbol.Name = "bartxtSymbol";
+            // 
+            // repositoryItemTextEdit1
+            // 
+            this.repositoryItemTextEdit1.AutoHeight = false;
+            this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
+            // 
             // createFinancialChartRibbonPage1
             // 
             this.createFinancialChartRibbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -509,6 +527,7 @@ namespace Analyze.DesktopApp.GUI.Child
             this.chartAnnotationsRibbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             this.chartAnnotationsRibbonPageGroup1.ItemLinks.Add(this.barBtnStart);
             this.chartAnnotationsRibbonPageGroup1.ItemLinks.Add(this.barEditInterval);
+            this.chartAnnotationsRibbonPageGroup1.ItemLinks.Add(this.bartxtSymbol);
             this.chartAnnotationsRibbonPageGroup1.Name = "chartAnnotationsRibbonPageGroup1";
             this.chartAnnotationsRibbonPageGroup1.Text = "";
             // 
@@ -566,7 +585,7 @@ namespace Analyze.DesktopApp.GUI.Child
             ((System.ComponentModel.ISupportInitialize)(bollingerBands1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(movingAverageConvergenceDivergence1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(chaikinsVolatility1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(candleStickSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stockSeriesView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartBarController1)).EndInit();
@@ -574,6 +593,7 @@ namespace Analyze.DesktopApp.GUI.Child
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectAxisMeasureUnitRepositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectSeriesRepositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectPeriodRepositoryItemComboBox1)).EndInit();
             this.ResumeLayout(false);
@@ -608,5 +628,7 @@ namespace Analyze.DesktopApp.GUI.Child
         private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
         private DevExpress.XtraBars.BarEditItem barEditInterval;
         private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit repositoryItemSpinEdit1;
+        private DevExpress.XtraBars.BarEditItem bartxtSymbol;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
     }
 }

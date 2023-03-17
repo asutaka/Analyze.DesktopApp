@@ -188,6 +188,7 @@ namespace Analyze.DesktopApp.GUI.Child
         private static List<FinancialDataPoint> lResult = new List<FinancialDataPoint>();
         internal void InitialData(string symbol)
         {
+            lResult.Clear();
             var settings = Program.Configuration.GetSection("API").Get<APIModel>();
             try
             {
@@ -220,6 +221,7 @@ namespace Analyze.DesktopApp.GUI.Child
 
         internal void InitialDataFast(string symbol)
         {
+            lResult.Clear();
             var settings = Program.Configuration.GetSection("API").Get<APIModel>();
             try
             {
@@ -252,6 +254,7 @@ namespace Analyze.DesktopApp.GUI.Child
 
         internal void InitialDataAll(string symbol)
         {
+            lResult.Clear();
             var settings = Program.Configuration.GetSection("API").Get<APIModel>();
             try
             {
@@ -302,6 +305,7 @@ namespace Analyze.DesktopApp.GUI.Child
 
         internal void InitialDataFastAll(string symbol, int max = 0)
         {
+            lResult.Clear();
             var settings = Program.Configuration.GetSection("API").Get<APIModel>();
             try
             {
