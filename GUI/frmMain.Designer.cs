@@ -47,6 +47,7 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnVersion = new DevExpress.XtraBars.BarButtonItem();
             this.barBtn24h = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnAnalyze = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -83,9 +84,10 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnStop,
             this.barBtnVersion,
             this.barBtn24h,
-            this.barBtnAdd});
+            this.barBtnAdd,
+            this.barBtnAnalyze});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 16;
+            this.ribbon.MaxItemId = 17;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -219,6 +221,15 @@ namespace Analyze.DesktopApp.GUI
             this.barBtnAdd.Name = "barBtnAdd";
             this.barBtnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnAdd_ItemClick);
             // 
+            // barBtnAnalyze
+            // 
+            this.barBtnAnalyze.Caption = "Analyze";
+            this.barBtnAnalyze.Id = 16;
+            this.barBtnAnalyze.ImageOptions.Image = global::Analyze.DesktopApp.Properties.Resources.kpi_16x16;
+            this.barBtnAnalyze.ImageOptions.LargeImage = global::Analyze.DesktopApp.Properties.Resources.kpi_32x32;
+            this.barBtnAnalyze.Name = "barBtnAnalyze";
+            this.barBtnAnalyze.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnAnalyze_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -243,6 +254,7 @@ namespace Analyze.DesktopApp.GUI
             this.ribbonGroup2.ItemLinks.Add(this.barBtn24h);
             this.ribbonGroup2.ItemLinks.Add(this.barBtnRealTime);
             this.ribbonGroup2.ItemLinks.Add(this.barBtnTop30);
+            this.ribbonGroup2.ItemLinks.Add(this.barBtnAnalyze);
             this.ribbonGroup2.Name = "ribbonGroup2";
             this.ribbonGroup2.Text = "Thống kê";
             // 
@@ -373,5 +385,6 @@ namespace Analyze.DesktopApp.GUI
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         public DevExpress.XtraBars.BarButtonItem barBtnAdd;
+        private DevExpress.XtraBars.BarButtonItem barBtnAnalyze;
     }
 }

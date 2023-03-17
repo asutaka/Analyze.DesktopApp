@@ -22,8 +22,6 @@ namespace Analyze.DesktopApp
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(frmLogin.Instance());
             Application.Run(new FinancialChartingCustom());
-            //Application.Run(new FinancialChartingDemo());
-            //Application.Run(new frmFibonacy());
         }
     }
 }

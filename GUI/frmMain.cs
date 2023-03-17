@@ -395,5 +395,10 @@ namespace Analyze.DesktopApp.GUI
         {
             frmCoinInfo.Instance().MakeShow();
         }
+
+        private void barBtnAnalyze_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            new FinancialChartingCustom().Show();
+        }
     }
 }

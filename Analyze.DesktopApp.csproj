@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{643FD3BA-D38D-4820-920C-D960C7F05D66}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>Analyze.DesktopApp</RootNamespace>
     <AssemblyName>Analyze.DesktopApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -306,6 +306,8 @@
     <Content Include="Resources\edit.png" />
     <Content Include="Resources\GoogleSignIn.png" />
     <Content Include="Resources\green.png" />
+    <None Include="Resources\kpi_32x32.png" />
+    <None Include="Resources\kpi_16x16.png" />
     <Content Include="Resources\logo.png" />
     <Content Include="Resources\logo1.png" />
     <None Include="Resources\media_32x32.png" />
