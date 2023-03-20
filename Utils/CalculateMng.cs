@@ -230,6 +230,23 @@ namespace Analyze.DesktopApp.Utils
             }
             return 0;
         }
+        public static (double, double, double) BB(double[] arrInput, MAType type, int period, int count)
+        {
+            try
+            {
+                var outputU = new double[1000];
+                var outputM = new double[1000];
+                var outputL = new double[1000];
+                Bbands(0, count - 1, arrInput, period, 2, 2, type, out var outBegIdx, out var outNBElement, outputU, outputM, outputL);
+                var div = count - period;
+                return (outputU[div], outputM[div], outputL[div]);
+            }
+            catch (Exception ex)
+            {
+                NLogLogger.PublishException(ex, $"CalculateMng.MA|EXCEPTION| {ex.Message}");
+            }
+            return (0, 0, 0);
+        }
         public static double MACD(double[] arrInput, int fast, int slow, int signal, int count)
         {
             try

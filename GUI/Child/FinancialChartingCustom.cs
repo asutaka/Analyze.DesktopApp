@@ -110,7 +110,7 @@ namespace Analyze.DesktopApp.GUI.Child
             if (dataGenerator != null)
             {
                 dataGenerator.UpdateSource();
-                //CalculateNew();
+                Calculate2003();
             }
             CustomAxisLabel currentValueLabel = AxisY.CustomLabels[0];
             if (PriceSeries.Points.Count > 0)
@@ -444,6 +444,61 @@ namespace Analyze.DesktopApp.GUI.Child
                     val = 0;
                 }
             }
+        }
+
+        int _recentStockIndex = -1;
+        private void Calculate2003()
+        {
+            //var MA20Price = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 20, dataGenerator.index);
+            var MA20Volume = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Volume).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 20, dataGenerator.index);
+            var BB = CalculateMng.BB(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 20, dataGenerator.index);
+            var last = dataGenerator._lstCalculate.Last();
+            if(last.Volume >= MA20Volume)
+            {
+                var index = dataGenerator.index - 1;
+                if (_recentStockIndex == -1)
+                {
+                    _recentStockIndex = index;
+                }
+                var divBlock = index - _recentStockIndex;
+                if (divBlock <= 1)
+                {
+                    if(last.Close >= last.Open)
+                    {
+                        if(last.Open < BB.Item2 && last.High < BB.Item1)
+                        {
+                            var bottomWaveIndex = GetBottomWave();
+                            var content = $"Stock Level: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dataGenerator._lstCalculate.ElementAt(bottomWaveIndex).DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}";
+                            var divBottomWave = index - bottomWaveIndex;
+                            if (divBottomWave > 0 && divBottomWave <= 7)
+                            {
+                                content = "[PASS]" + content;
+                            }
+                            LogM.Log(content);
+                        }
+                    }
+                    //phan tu dc chap nhan
+                }
+            }
+            else
+            {
+                _recentStockIndex = -1;
+            }
+        }
+        private int GetBottomWave()
+        {
+            var indexBottomWave = -1;
+            double valBottomWave = 0;
+            for (int i = dataGenerator.index - 11; i <= dataGenerator.index - 1; i++)
+            {
+                var element = dataGenerator._lstCalculate.ElementAt(i);
+                if(valBottomWave == 0 || valBottomWave > element.Low)
+                {
+                    valBottomWave = element.Low;
+                    indexBottomWave = i;
+                }
+            }
+            return indexBottomWave;
         }
         #endregion
 
