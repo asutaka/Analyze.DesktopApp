@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Threading;
+using TicTacTec.TA.Library;
 
 namespace Analyze.DesktopApp.GUI.Child
 {
@@ -211,6 +212,11 @@ namespace Analyze.DesktopApp.GUI.Child
             {
                 NLogLogger.PublishException(ex, $"RealTimeFinancialDataGenerator.InitialData|EXCEPTION| {ex.Message}");
             }
+            var index = 1;
+            foreach (var item in lResult)
+            {
+                item.Volume = MCDX(lResult.Take(index++))*150000;  
+            }
             _AVG = lResult.Sum(x => x.Close) / lResult.Count();
             prevPoint = lResult.Last();
             index = 100;
@@ -356,6 +362,27 @@ namespace Analyze.DesktopApp.GUI.Child
             currentAggregatingPoint = prevPoint;
         }
 
+        public double MCDX(IEnumerable<FinancialDataPoint> data)
+        {
+            var arrClose = data.Select(x => (double)x.Close).ToArray();
+            var count = arrClose.Count();
+            if (count <= 50)
+                return 0;
+
+            double[] output1 = new double[1000];
+            double[] output2 = new double[1000];
+            Core.Rsi(0, count - 1, arrClose, 50, out int outBegIdx1, out int outNBElement1, output1);
+            Core.Rsi(0, count - 1, arrClose, 40, out int outBegIdx2, out int outNBElement2, output2);
+            var rsi50 = output1[count - 51];
+            var rsi40 = output2[count - 41];
+            var banker_rsi = 1.5 * (rsi50 - 50);
+            if (banker_rsi > 20)
+                banker_rsi = 20;
+            if (banker_rsi < 0)
+                banker_rsi = 0;
+            return banker_rsi;
+        }
+
         int count = 0;
         public int index = 0;
         bool isComplete = false;
@@ -407,6 +434,7 @@ namespace Analyze.DesktopApp.GUI.Child
         public double Close { get; set; }
         public double Volume { get; set; }
         public bool IsEmpty { get { return DateTimeStamp.Equals(new DateTime()); } }
+        public double MCDX { get; set; }
 
         public FinancialDataPoint() { }
         public FinancialDataPoint(DateTime date, double open, double high, double low, double close, double volume)

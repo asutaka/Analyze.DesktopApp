@@ -6,6 +6,7 @@ using Analyze.DesktopApp.Utils;
 using DevExpress.Utils;
 using DevExpress.XtraCharts;
 using Newtonsoft.Json;
+using TicTacTec.TA.Library;
 
 namespace Analyze.DesktopApp.GUI.Child
 {
@@ -248,7 +249,9 @@ namespace Analyze.DesktopApp.GUI.Child
                 }
             }
         }
+
         
+
         private bool CheckBuy(double MA20, FinancialDataPoint last)
         {
             if (last.Open <= MA20 && last.Close >= MA20)
@@ -447,56 +450,109 @@ namespace Analyze.DesktopApp.GUI.Child
         }
 
         int _recentStockIndex = -1;
+        double prevMCDX = 0;
         private void Calculate2003()
         {
-            //var MA20Price = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 20, dataGenerator.index);
-            var MA20Volume = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Volume).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 20, dataGenerator.index);
-            var BB = CalculateMng.BB(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 20, dataGenerator.index);
+            var checkMCDX = prevMCDX;
             var last = dataGenerator._lstCalculate.Last();
-            if(last.Volume >= MA20Volume)
+            prevMCDX = last.Volume;
+            if (last.Volume <= 0 || last.Volume < checkMCDX || last.Close < last.Open)
+                return;
+
+            var count = dataGenerator._lstCalculate.Count();
+            var MA20Price = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), Core.MAType.Sma, 20, count);
+            if (last.High < MA20Price || last.Low > MA20Price)
+                return;
+
+            //var index = dataGenerator.index - 1;
+            //if (_recentStockIndex == -1)
+            //{
+            //    _recentStockIndex = index;
+            //}
+            var bottomWaveIndex = GetBottomWave();
+            var entityBotWave = dataGenerator._lstCalculate.ElementAt(bottomWaveIndex);
+            var dateBot = dataGenerator._lstCalculate.ElementAt(bottomWaveIndex).DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss");
+            var content = $"Stock Level: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}";
+            LogM.Log(content);
+            //Check nến hiện tại có phải là đáy hay không
+            if (entityBotWave.DateTimeStamp == last.DateTimeStamp)
             {
-                var index = dataGenerator.index - 1;
-                if (_recentStockIndex == -1)
+                var content1 = $"ERROR1: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}| Loại vì nến hiện tại là đáy";
+                LogM.Log(content1);
+                return;
+            }
+            //Check chỉ duy nhất nến hiện tại cắt qua MA20
+            for (int i = bottomWaveIndex; i < count - 2; i++)
+            {
+                var element = dataGenerator._lstCalculate.ElementAt(i);
+                var MA20PriceElement = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), Core.MAType.Sma, 20, i);
+                if (element.High >= MA20PriceElement && element.Low < MA20PriceElement)
                 {
-                    _recentStockIndex = index;
-                }
-                var divBlock = index - _recentStockIndex;
-                if (divBlock <= 1)
-                {
-                    if(last.Close >= last.Open)
-                    {
-                        if(last.Open < BB.Item2 && last.High < BB.Item1)
-                        {
-                            var bottomWaveIndex = GetBottomWave();
-                            var content = $"Stock Level: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dataGenerator._lstCalculate.ElementAt(bottomWaveIndex).DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}";
-                            var divBottomWave = index - bottomWaveIndex;
-                            if (divBottomWave > 0 && divBottomWave <= 7)
-                            {
-                                content = "[PASS]" + content;
-                            }
-                            LogM.Log(content);
-                        }
-                    }
-                    //phan tu dc chap nhan
+                    var content1 = $"ERROR2: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}| Loại vì từ đáy đến nến hiện tại có nến vượt MA20";
+                    LogM.Log(content1);
+                    LogM.Log(element.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss"));
+                    return;
                 }
             }
-            else
+            //Check từ đáy đến nến hiện tại >= 4
+            if (count - bottomWaveIndex >= 5)
             {
-                _recentStockIndex = -1;
+                var content1 = $"ERROR3: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}| Loại vì từ đáy đến nến hiện tại quá xa({count - bottomWaveIndex})";
+                LogM.Log(content1);
+                return;
             }
+            //Check từ đáy đến MA20 hiện tại phải < 3%
+            var rateBotWave = (MA20Price - entityBotWave.Low) * 100 / entityBotWave.Low;
+            if (rateBotWave > 3)
+            {
+                var content1 = $"ERROR4: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}| Loại vì từ đáy đến MA20 hiện tại lớn hơn 3%({rateBotWave})";
+                LogM.Log(content1);
+                return;
+            }    
+
+            var contentSuccess = $"Success: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}";
+            LogM.Log(contentSuccess);
+            //    var divBlock = index - _recentStockIndex;
+            //    if (divBlock <= 1)
+            //    {
+            //        if(last.Close >= last.Open)
+            //        {
+            //            if(last.Open < BB.Item2 && last.High < BB.Item1)
+            //            {
+            //                var bottomWaveIndex = GetBottomWave();
+            //                var content = $"Stock Level: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dataGenerator._lstCalculate.ElementAt(bottomWaveIndex).DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}";
+            //                var divBottomWave = index - bottomWaveIndex;
+            //                if (divBottomWave > 0 && divBottomWave <= 7)
+            //                {
+            //                    content = "[PASS]" + content;
+            //                }
+            //                LogM.Log(content);
+            //            }
+            //        }
+            //        //phan tu dc chap nhan
+            //    }
         }
         private int GetBottomWave()
         {
             var indexBottomWave = -1;
             double valBottomWave = 0;
-            for (int i = dataGenerator.index - 11; i <= dataGenerator.index - 1; i++)
+            var flag = 0;
+            var count = dataGenerator._lstCalculate.Count();
+            for (int i = count - 1; i >= count - 15; i--)
             {
+                flag++;
                 var element = dataGenerator._lstCalculate.ElementAt(i);
                 if(valBottomWave == 0 || valBottomWave > element.Low)
                 {
                     valBottomWave = element.Low;
                     indexBottomWave = i;
+                    flag = 0;
                 }
+                //check
+                if(flag >= 3)
+                {
+                    return indexBottomWave;
+                }    
             }
             return indexBottomWave;
         }
