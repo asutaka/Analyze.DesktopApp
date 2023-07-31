@@ -111,7 +111,8 @@ namespace Analyze.DesktopApp.GUI.Child
             if (dataGenerator != null)
             {
                 dataGenerator.UpdateSource();
-                Calculate2003();
+                Check2Buy();
+                Check2Sell();
             }
             CustomAxisLabel currentValueLabel = AxisY.CustomLabels[0];
             if (PriceSeries.Points.Count > 0)
@@ -128,149 +129,6 @@ namespace Analyze.DesktopApp.GUI.Child
         private double val = 0;
         private DateTime dt;
         private List<double> lstRate = new List<double>();
-        private void EMA5_12()
-        {
-            var EMA5 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Ema, 5, dataGenerator.index);
-            var EMA12 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Ema, 12, dataGenerator.index);
-            if (EMA5 >= EMA12 && flag)
-            {
-                flag = false;
-                var last = dataGenerator._lstCalculate.Last();
-                val = last.Close;
-                dt = last.DateTimeStamp;
-            }
-
-            if (EMA5 < EMA12)
-            {
-                flag = true;
-                if (val > 0)
-                {
-                    var cur = dataGenerator._lstCalculate.Last();
-                    var rate = (1 - val / cur.Close) * 100;
-                    var divTime = (cur.DateTimeStamp - dt).TotalHours;
-                    lstRate.Add(rate);
-                    LogM.Log($"START: {dt}; Value: {val}| END: {cur.DateTimeStamp}; Value: {cur.Close}|HOUR: {divTime}| Rate: {rate}%");
-                    if (lstRate.Count() > 0)
-                    {
-                        LogM.Log($"AVG: {lstRate.Sum() / lstRate.Count()}");
-                    }
-                    val = 0;
-                }
-            }
-        }
-        private void EMA5_12Advance()
-        {
-            var EMA5 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Ema, 5, dataGenerator.index);
-            var EMA12 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Ema, 12, dataGenerator.index);
-            var RSI = CalculateMng.RSI(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), 14, dataGenerator.index);
-            if (EMA5 >= EMA12 && RSI >= 50 && flag)
-            {
-                flag = false;
-                var last = dataGenerator._lstCalculate.Last();
-                val = last.Close;
-                dt = last.DateTimeStamp;
-            }
-
-            if (EMA5 < EMA12)
-            {
-                flag = true;
-                if (val > 0)
-                {
-                    var cur = dataGenerator._lstCalculate.Last();
-                    var rate = (1 - val / cur.Close) * 100;
-                    var divTime = (cur.DateTimeStamp - dt).TotalHours;
-                    lstRate.Add(rate);
-                    LogM.Log($"START: {dt}; Value: {val}| END: {cur.DateTimeStamp}; Value: {cur.Close}|HOUR: {divTime}| Rate: {rate}%");
-                    if (lstRate.Count() > 0)
-                    {
-                        LogM.Log($"AVG: {lstRate.Sum() / lstRate.Count()}");
-                    }
-                    val = 0;
-                }
-            }
-        }
-        private void EMA5_10()
-        {
-            var EMA5 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Ema, 5, dataGenerator.index);
-            var EMA12 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Ema, 10, dataGenerator.index);
-            if (EMA5 >= EMA12 && flag)
-            {
-                flag = false;
-                var last = dataGenerator._lstCalculate.Last();
-                val = last.Close;
-                dt = last.DateTimeStamp;
-            }
-
-            if (EMA5 < EMA12)
-            {
-                flag = true;
-                if (val > 0)
-                {
-                    var cur = dataGenerator._lstCalculate.Last();
-                    var rate = (1 - val / cur.Close) * 100;
-                    var divTime = (cur.DateTimeStamp - dt).TotalHours;
-                    lstRate.Add(rate);
-                    LogM.Log($"START: {dt}; Value: {val}| END: {cur.DateTimeStamp}; Value: {cur.Close}|HOUR: {divTime}| Rate: {rate}%");
-                    if (lstRate.Count() > 0)
-                    {
-                        LogM.Log($"AVG: {lstRate.Sum() / lstRate.Count()}");
-                    }
-                    val = 0;
-                }
-            }
-        }
-        private void MA5_10()
-        {
-            var EMA5 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 5, dataGenerator.index);
-            var EMA12 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 10, dataGenerator.index);
-            if (EMA5 >= EMA12 && flag)
-            {
-                flag = false;
-                var last = dataGenerator._lstCalculate.Last();
-                val = last.Close;
-                dt = last.DateTimeStamp;
-            }
-
-            if (EMA5 < EMA12)
-            {
-                flag = true;
-                if (val > 0)
-                {
-                    var cur = dataGenerator._lstCalculate.Last();
-                    var rate = (1 - val / cur.Close) * 100;
-                    var divTime = (cur.DateTimeStamp - dt).TotalHours;
-                    lstRate.Add(rate);
-                    LogM.Log($"START: {dt}; Value: {val}| END: {cur.DateTimeStamp}; Value: {cur.Close}|HOUR: {divTime}| Rate: {rate}%");
-                    if (lstRate.Count() > 0)
-                    {
-                        LogM.Log($"AVG: {lstRate.Sum() / lstRate.Count()}");
-                    }
-                    val = 0;
-                }
-            }
-        }
-
-        
-
-        private bool CheckBuy(double MA20, FinancialDataPoint last)
-        {
-            if (last.Open <= MA20 && last.Close >= MA20)
-            {
-                for (int i = 1; i <= 10; i++)
-                {
-                    var index = dataGenerator.index - i;
-                    var entity = dataGenerator._lstCalculate.ElementAt(index - 1);
-                    var MA20i = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).Take(index).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 20, index);
-                    if (entity.Open > MA20i || entity.Close > MA20i)
-                        return false;
-                }
-                buyEntity = last;
-                indexBuy = dataGenerator.index - 1;
-                lstTotalBuy.Add(90);
-                return true;
-            }
-            return false;
-        }
 
         private bool CheckSell(double MA20, FinancialDataPoint last)
         {
@@ -394,65 +252,22 @@ namespace Analyze.DesktopApp.GUI.Child
         int sellCount = 0;
         bool flagSell = false;
 
-        FinancialDataPoint buyEntity = new FinancialDataPoint();
-        int indexBuy = 0;
+        
+        
 
         List<double> lstTotalBuy = new List<double>();
         List<double> lstTotalSell = new List<double>();
 
-        private void CalculateNew()
-        {
-            var MA20 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 20, dataGenerator.index);
-            var last = dataGenerator._lstCalculate.Last();
-            if (hasBuy)
-            {
-                hasSell = CheckSell(MA20, last);
-                if(hasSell)
-                {
-                    TakeProfit(last);
-                }
-            }
 
-            if (!hasBuy)
-            {
-                hasBuy = CheckBuy(MA20, last);
-            }
-        }
-
-        private void MACD()
-        {
-            var MACD = CalculateMng.MACD(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), 12, 26, 9, dataGenerator.index);
-            if (MACD >= 0 && flag)
-            {
-                flag = false;
-                var last = dataGenerator._lstCalculate.Last();
-                val = last.Close;
-                dt = last.DateTimeStamp;
-            }
-
-            if (MACD < 0)
-            {
-                flag = true;
-                if (val > 0)
-                {
-                    var cur = dataGenerator._lstCalculate.Last();
-                    var rate = (1 - val / cur.Close) * 100;
-                    var divTime = (cur.DateTimeStamp - dt).TotalHours;
-                    lstRate.Add(rate);
-                    LogM.Log($"START: {dt}; Value: {val}| END: {cur.DateTimeStamp}; Value: {cur.Close}|HOUR: {divTime}| Rate: {rate}%");
-                    if (lstRate.Count() > 0)
-                    {
-                        LogM.Log($"AVG: {lstRate.Sum() / lstRate.Count()}");
-                    }
-                    val = 0;
-                }
-            }
-        }
-
-        int _recentStockIndex = -1;
+        FinancialDataPoint buyEntity = new FinancialDataPoint();
+        int indexBuy = 0;
         double prevMCDX = 0;
-        private void Calculate2003()
+        double valBottomWave = 0;
+        private void Check2Buy()
         {
+            if (hasBuy)
+                return;
+
             var checkMCDX = prevMCDX;
             var last = dataGenerator._lstCalculate.Last();
             prevMCDX = last.Volume;
@@ -464,21 +279,16 @@ namespace Analyze.DesktopApp.GUI.Child
             if (last.High < MA20Price || last.Low > MA20Price)
                 return;
 
-            //var index = dataGenerator.index - 1;
-            //if (_recentStockIndex == -1)
-            //{
-            //    _recentStockIndex = index;
-            //}
             var bottomWaveIndex = GetBottomWave();
             var entityBotWave = dataGenerator._lstCalculate.ElementAt(bottomWaveIndex);
             var dateBot = dataGenerator._lstCalculate.ElementAt(bottomWaveIndex).DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss");
             var content = $"Stock Level: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}";
-            LogM.Log(content);
+            //LogM.Log(content);
             //Check nến hiện tại có phải là đáy hay không
             if (entityBotWave.DateTimeStamp == last.DateTimeStamp)
             {
                 var content1 = $"ERROR1: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}| Loại vì nến hiện tại là đáy";
-                LogM.Log(content1);
+                //LogM.Log(content1);
                 return;
             }
             //Check chỉ duy nhất nến hiện tại cắt qua MA20
@@ -489,8 +299,8 @@ namespace Analyze.DesktopApp.GUI.Child
                 if (element.High >= MA20PriceElement && element.Low < MA20PriceElement)
                 {
                     var content1 = $"ERROR2: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}| Loại vì từ đáy đến nến hiện tại có nến vượt MA20";
-                    LogM.Log(content1);
-                    LogM.Log(element.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss"));
+                    //LogM.Log(content1);
+                    //LogM.Log(element.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss"));
                     return;
                 }
             }
@@ -498,7 +308,7 @@ namespace Analyze.DesktopApp.GUI.Child
             if (count - bottomWaveIndex >= 5)
             {
                 var content1 = $"ERROR3: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}| Loại vì từ đáy đến nến hiện tại quá xa({count - bottomWaveIndex})";
-                LogM.Log(content1);
+                //LogM.Log(content1);
                 return;
             }
             //Check từ đáy đến MA20 hiện tại phải < 3%
@@ -506,31 +316,16 @@ namespace Analyze.DesktopApp.GUI.Child
             if (rateBotWave > 3)
             {
                 var content1 = $"ERROR4: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}| Loại vì từ đáy đến MA20 hiện tại lớn hơn 3%({rateBotWave})";
-                LogM.Log(content1);
+                //LogM.Log(content1);
                 return;
             }    
 
             var contentSuccess = $"Success: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}";
             LogM.Log(contentSuccess);
-            //    var divBlock = index - _recentStockIndex;
-            //    if (divBlock <= 1)
-            //    {
-            //        if(last.Close >= last.Open)
-            //        {
-            //            if(last.Open < BB.Item2 && last.High < BB.Item1)
-            //            {
-            //                var bottomWaveIndex = GetBottomWave();
-            //                var content = $"Stock Level: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dataGenerator._lstCalculate.ElementAt(bottomWaveIndex).DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}";
-            //                var divBottomWave = index - bottomWaveIndex;
-            //                if (divBottomWave > 0 && divBottomWave <= 7)
-            //                {
-            //                    content = "[PASS]" + content;
-            //                }
-            //                LogM.Log(content);
-            //            }
-            //        }
-            //        //phan tu dc chap nhan
-            //    }
+            valBottomWave = entityBotWave.Low;
+            buyEntity = last;
+            indexBuy = count - 1;
+            hasBuy = true;
         }
         private int GetBottomWave()
         {
@@ -555,6 +350,115 @@ namespace Analyze.DesktopApp.GUI.Child
                 }    
             }
             return indexBottomWave;
+        }
+
+        double valTakeProfit = 0;
+        double valSell = 0;
+        int countSell = 0;
+        private void Check2Sell()
+        {
+            if (!hasBuy)
+                return;
+
+            var last = dataGenerator._lstCalculate.Last();
+            var count = dataGenerator._lstCalculate.Count();
+            var no = count - (1 + indexBuy);
+            //Init
+            if(valSell == 0)
+            {
+                valSell = buyEntity.Close;
+            }
+
+            if(last.Close > valSell)
+            {
+                valSell = last.Close;
+                countSell = 0;
+            }
+            else
+            {
+                countSell++;
+            }
+            if(countSell >= 4)
+            {
+                var contentSell = $"[Sell]|Time: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}|TP: {(last.Close - buyEntity.Close) * 100 / buyEntity.Close}%|No: {no}";
+                LogM.Log(contentSell);
+                hasBuy = false;
+                valTakeProfit = 0;
+                valSell = 0;
+                countSell = 0;
+                return;
+            }
+
+            if (valTakeProfit > 0)
+            {
+                if(last.Close > valTakeProfit)
+                {
+                    valTakeProfit = last.Close;
+                    return;
+                }
+
+                var rate = (valTakeProfit - last.Low) * 100 / last.Low;
+                if(Math.Abs(rate) >= 2)
+                {
+                    var contentSell = $"[TP] Sell|Time: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}|TP: {(valTakeProfit * 0.98 - buyEntity.Close) * 100 / buyEntity.Close}%|No: {no}";
+                    LogM.Log(contentSell);
+                    hasBuy = false;
+                    valTakeProfit = 0;
+                    valSell = 0;
+                    countSell = 0;
+                    return;
+                }
+            }
+
+
+            if (last.Low <= valBottomWave)
+            {
+                var contentSell = $"[Sell] Cutloss1|Time: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}|TP: {(valBottomWave - buyEntity.Close) *100/buyEntity.Close}%|No: {no}";
+                LogM.Log(contentSell);
+                hasBuy = false;
+                valTakeProfit = 0;
+                valSell = 0;
+                countSell = 0;
+                return;
+            }    
+
+            if(no >= 3 && last.Close >= buyEntity.Close)
+            {
+                var rate = (last.Close - buyEntity.Close) * 100 / buyEntity.Close;
+                var MA20Price = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), Core.MAType.Sma, 20, count);
+                if (last.Low < MA20Price && rate < 2)
+                {
+                    var contentSell = $"[Sell] Cutloss2|Time: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}|TP: {rate}%|No: {no}";
+                    LogM.Log(contentSell);
+                    hasBuy = false;
+                    valTakeProfit = 0;
+                    valSell = 0;
+                    countSell = 0;
+                    return;
+                }
+            }    
+
+            if(no >= 5)
+            {
+                var rate = (last.Close - buyEntity.Close) * 100 / buyEntity.Close;
+                if(rate < 2)
+                {
+                    var contentSell = $"[Sell] Cutloss3|Time: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}|TP: {rate}%|No: {no}";
+                    LogM.Log(contentSell);
+                    hasBuy = false;
+                    valTakeProfit = 0;
+                    valSell = 0;
+                    countSell = 0;
+                    return;
+                }    
+            }
+
+            var rateMax = (last.Close - buyEntity.Close) * 100 / buyEntity.Close;
+            if(rateMax >= 9 && valTakeProfit == 0)
+            {
+                valTakeProfit = last.Close;
+                return;
+            }
         }
         #endregion
 
