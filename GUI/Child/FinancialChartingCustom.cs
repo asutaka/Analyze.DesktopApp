@@ -287,9 +287,14 @@ namespace Analyze.DesktopApp.GUI.Child
             //Check nến hiện tại có phải là đáy hay không
             if (entityBotWave.DateTimeStamp == last.DateTimeStamp)
             {
-                var content1 = $"ERROR1: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}| Loại vì nến hiện tại là đáy";
-                //LogM.Log(content1);
-                return;
+                //Nếu là nến bao trùm tăng thì vẫn chấp nhận
+                var entityPrev = dataGenerator._lstCalculate.ElementAt(count - 2);
+                if(last.High <= entityPrev.High)
+                {
+                    var content1 = $"ERROR1: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}; BottomWave: {dateBot}| Loại vì nến hiện tại là đáy";
+                    //LogM.Log(content1);
+                    return;
+                }    
             }
             //Check chỉ duy nhất nến hiện tại cắt qua MA20
             for (int i = bottomWaveIndex; i < count - 2; i++)
@@ -411,7 +416,7 @@ namespace Analyze.DesktopApp.GUI.Child
             }
 
 
-            if (last.Low <= valBottomWave)
+            if (last.Low <= valBottomWave && no > 0)
             {
                 var contentSell = $"[Sell] Cutloss1|Time: {last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")}|TP: {(valBottomWave - buyEntity.Close) *100/buyEntity.Close}%|No: {no}";
                 LogM.Log(contentSell);
