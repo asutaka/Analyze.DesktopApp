@@ -45,6 +45,7 @@ namespace Analyze.DesktopApp.Models
         public string History { get; set; }
         public string HistoryM { get; set; }
         public string HistoryTime { get; set; }
+        public string HistoryTimeFull { get; set; }
     }
 
     public class JobModel

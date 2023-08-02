@@ -61,7 +61,7 @@ namespace Analyze.DesktopApp.GUI.Child
             chart.BeginInit();
             this.dataGenerator = new RealTimeFinancialDataGenerator();
             //this.dataGenerator.InitialDataFastAll("GMTUSDT",3000);
-            this.dataGenerator.InitialDataFast(symbol);
+            this.dataGenerator.InitialDataAll(symbol, 5000);
             InitChartControl();
             SetVisualRangesAndGridOptions();
             chart.EndInit();

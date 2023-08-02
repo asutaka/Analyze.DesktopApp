@@ -205,7 +205,7 @@ namespace Analyze.DesktopApp.GUI.Child
                                             double.Parse(x[4].ToString()), 
                                             double.Parse(x[5].ToString())))
                                                 .ToList());
-                    count = lResult.Count();
+                    _count = lResult.Count();
                 }
             }
             catch (Exception ex)
@@ -243,7 +243,7 @@ namespace Analyze.DesktopApp.GUI.Child
                                             double.Parse(x[4].ToString()),
                                             double.Parse(x[5].ToString())))
                                                 .ToList());
-                    count = lResult.Count();
+                    _count = lResult.Count();
                 }
             }
             catch (Exception ex)
@@ -257,34 +257,60 @@ namespace Analyze.DesktopApp.GUI.Child
             }
             _AVG = lResult.Sum(x => x.Close) / lResult.Count();
             prevPoint = lResult.Last();
-            index = count;
+            index = _count;
             _lstCalculate = lResult.ToList();
             dataSource.AddRange(_lstCalculate);
             currentAggregatingPoint = prevPoint;
         }
 
-        internal void InitialDataAll(string symbol)
+        internal void InitialDataAll(string symbol, float limit = 0)
         {
             lResult.Clear();
             var settings = Program.Configuration.GetSection("API").Get<APIModel>();
             try
             {
+                //Tìm theo tháng để xem dữ liệu có trong bao nhiêu tháng
                 var contentM = WebClass.GetWebContent(string.Format(settings.HistoryM, symbol.ToUpper())).GetAwaiter().GetResult();
                 if (!string.IsNullOrWhiteSpace(contentM))
                 {
                     var arrM = JArray.Parse(contentM);
-                    var time = arrM[0][0];
-                    string content = string.Empty;
-                    JArray arr = null;
-                    int countArr = 0;
-                    LogM.Start();
-                    do
+                    var countMonth = arrM.Count();
+                    if (countMonth <= 0)
+                        return;
+                    //Nếu có giới hạn số bản ghi, tính toán lại và loại bỏ bớt các bản ghi không cần thiết
+                    if(limit > 0)
                     {
-                        content = WebClass.GetWebContent(string.Format(settings.HistoryTime, symbol.ToUpper(), time)).GetAwaiter().GetResult();
+                        var numEnough = (int)Math.Ceiling(limit / 672);//tháng 28 ngày có 672 bản ghi, làm tròn lên sẽ xác định được lấy bao nhiêu bản ghi là cần thiết
+                        var div = countMonth - (1 + numEnough); // trừ đi tháng cuối cùng ko biết chắc chắc có bao nhiêu bản ghi
+                        for (int i = 0; i < div; i++)
+                        {
+                            arrM.RemoveAt(0);
+                            countMonth--;
+                        }
+                    }
+                    //Xong bước chuẩn bị
+
+                    LogM.Start();
+                    string content = string.Empty;
+                    for (int i = 0; i < countMonth; i++)
+                    {
+                        var j = i + 1;
+                        var startTime = arrM[i][0];
+
+                        //Truyền cả startTime, endTime
+                        if (j < countMonth)
+                        {
+                            var endTime = arrM[j][0];
+                            content = WebClass.GetWebContent(string.Format(settings.HistoryTimeFull, symbol.ToUpper(), startTime, endTime)).GetAwaiter().GetResult();
+                        }
+                        else
+                        {
+                            content = WebClass.GetWebContent(string.Format(settings.HistoryTime, symbol.ToUpper(), startTime)).GetAwaiter().GetResult();
+                        }
+
                         if (!string.IsNullOrWhiteSpace(content))
                         {
-                            arr = JArray.Parse(content);
-                            countArr = arr.Count();
+                            var arr = JArray.Parse(content);
                             lResult.AddRange(arr.Select(x =>
                                new FinancialDataPoint((((long)x[0]) / 1000).UnixTimeStampToDateTime(),
                                                        double.Parse(x[1].ToString()),
@@ -293,18 +319,22 @@ namespace Analyze.DesktopApp.GUI.Child
                                                        double.Parse(x[4].ToString()),
                                                        double.Parse(x[5].ToString())))
                                                            .ToList());
-                            time = (countArr > 0) ? arr[countArr - 1][0] : 0;
                         }
                     }
-                    while (!string.IsNullOrWhiteSpace(content) && countArr >= 500);
-                    count = lResult.Count();
-                    LogM.Log($"count: {count}");
+
+                    _count = lResult.Count();
+                    LogM.Log($"count: {_count}");
                     LogM.Stop();
                 }
             }
             catch (Exception ex)
             {
-                NLogLogger.PublishException(ex, $"RealTimeFinancialDataGenerator.InitialData|EXCEPTION| {ex.Message}");
+                NLogLogger.PublishException(ex, $"RealTimeFinancialDataGenerator.InitialDataAll|EXCEPTION| {ex.Message}");
+            }
+            var index = 1;
+            foreach (var item in lResult)
+            {
+                item.Volume = MCDX(lResult.Take(index++)) * 150000;
             }
             _AVG = lResult.Sum(x => x.Close) / lResult.Count();
             prevPoint = lResult.Last();
@@ -350,8 +380,8 @@ namespace Analyze.DesktopApp.GUI.Child
                         }
                     }
                     while (!string.IsNullOrWhiteSpace(content) && countArr >= 500);
-                    count = lResult.Count();
-                    LogM.Log($"count: {count}");
+                    _count = lResult.Count();
+                    LogM.Log($"count: {_count}");
                     LogM.Stop();
                 }
             }
@@ -361,7 +391,7 @@ namespace Analyze.DesktopApp.GUI.Child
             }
             _AVG = lResult.Sum(x => x.Close) / lResult.Count();
             prevPoint = lResult.Last();
-            index = count;
+            index = _count;
             _lstCalculate = lResult.ToList();
             dataSource.AddRange(_lstCalculate);
             currentAggregatingPoint = prevPoint;
@@ -374,8 +404,8 @@ namespace Analyze.DesktopApp.GUI.Child
             if (count <= 50)
                 return 0;
 
-            double[] output1 = new double[1000];
-            double[] output2 = new double[1000];
+            double[] output1 = new double[30000];
+            double[] output2 = new double[30000];
             Core.Rsi(0, count - 1, arrClose, 50, out int outBegIdx1, out int outNBElement1, output1);
             Core.Rsi(0, count - 1, arrClose, 40, out int outBegIdx2, out int outNBElement2, output2);
             var rsi50 = output1[count - 51];
@@ -388,7 +418,7 @@ namespace Analyze.DesktopApp.GUI.Child
             return banker_rsi;
         }
 
-        int count = 0;
+        int _count = 0;
         public int index = 0;
         bool isComplete = false;
         public List<FinancialDataPoint> _lstCalculate = new List<FinancialDataPoint>();
@@ -398,7 +428,7 @@ namespace Analyze.DesktopApp.GUI.Child
             {
                 return;
             }
-            if(index >= count)
+            if(index >= _count)
             {
                 isComplete = true;
                 return;
