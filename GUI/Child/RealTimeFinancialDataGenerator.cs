@@ -250,6 +250,11 @@ namespace Analyze.DesktopApp.GUI.Child
             {
                 NLogLogger.PublishException(ex, $"RealTimeFinancialDataGenerator.InitialData|EXCEPTION| {ex.Message}");
             }
+            var index = 1;
+            foreach (var item in lResult)
+            {
+                item.Volume = MCDX(lResult.Take(index++)) * 150000;
+            }
             _AVG = lResult.Sum(x => x.Close) / lResult.Count();
             prevPoint = lResult.Last();
             index = count;

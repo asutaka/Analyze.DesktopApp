@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Analyze.DesktopApp.Utils;
 using DevExpress.Utils;
 using DevExpress.XtraCharts;
-using Newtonsoft.Json;
 using TicTacTec.TA.Library;
 
 namespace Analyze.DesktopApp.GUI.Child
@@ -63,7 +61,7 @@ namespace Analyze.DesktopApp.GUI.Child
             chart.BeginInit();
             this.dataGenerator = new RealTimeFinancialDataGenerator();
             //this.dataGenerator.InitialDataFastAll("GMTUSDT",3000);
-            this.dataGenerator.InitialData(symbol);
+            this.dataGenerator.InitialDataFast(symbol);
             InitChartControl();
             SetVisualRangesAndGridOptions();
             chart.EndInit();
@@ -125,140 +123,7 @@ namespace Analyze.DesktopApp.GUI.Child
         }
 
         #region Calculate
-        private bool flag = false;
-        private double val = 0;
-        private DateTime dt;
-        private List<double> lstRate = new List<double>();
-
-        private bool CheckSell(double MA20, FinancialDataPoint last)
-        {
-            if(last.Low <= buyEntity.Low)
-            {
-                priceSell = Math.Round((buyEntity.Low * 99 / 100), 2);
-                sellAll = true;
-                return true;
-            }
-            if (!flagSell && dataGenerator.index - indexBuy >= 15)
-            {
-                priceSell = last.Close;
-                sellAll = true;
-                return true;
-            }
-            var div50 = (-1 + last.High / buyEntity.Close) * 100;
-            if(div50 > 50 && !sellHalf)
-            {
-                priceSell = buyEntity.Close * 1.5;
-                sellHalf = true;
-                return true;
-            }
-
-            var close = last.Close;
-            var div = (-1 + close / buyEntity.Close)*100;
-            if(div >= 5)
-            {
-                var MA5 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 5, dataGenerator.index);
-                var MA10 = CalculateMng.MA(dataGenerator._lstCalculate.Select(x => x.Close).ToArray(), TicTacTec.TA.Library.Core.MAType.Sma, 10, dataGenerator.index);
-                var count = 0;
-                if(close < MA5)
-                {
-                    count++;
-                }
-                if (close < MA10)
-                {
-                    count++;
-                }
-                if (close < MA20)
-                {
-                    count++;
-                }
-
-                if(count >= tier)
-                {
-                    sellAll = true;
-                    priceSell = close;
-                    return true;
-                }
-                if (count == sellCount)
-                {
-                    return false;
-                }
-                else if (count < sellCount)
-                {
-                    tier--;
-                    sellCount = count;
-                    return false;
-                }
-                else 
-                {
-                    sellCount = count;
-                    priceSell = close;
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private void TakeProfit(FinancialDataPoint last)
-        {
-            if(sellCount >= tier)
-            {
-                sellAll = true;
-            }
-            //print
-            double moneySell = 0;
-            if(sellAll)
-            {
-                moneySell = balance;
-            }
-            if(sellHalf)
-            {
-                moneySell = balance / 2;
-            }
-            if(sellCount > 0)
-            {
-                moneySell = balance* sellCount / tier;
-            }
-            balance = balance - moneySell;
-            var rate = Math.Round((-1 + priceSell / buyEntity.Close) * 100, 2);
-            lstTotalSell.Add(moneySell * (1 + rate / 100));
-            LogM.Log($"|BUY|Date:{buyEntity.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")};Price: {buyEntity.Close}|SELL|Date:{last.DateTimeStamp.ToString("dd/MM/yyyy HH:mm:ss")};Price: {last.Close}|PRICECELL: {priceSell}");
-            LogM.Log($"|Hour: {(last.DateTimeStamp - buyEntity.DateTimeStamp).TotalHours}|Balance: {balance}|AVG: {dataGenerator._AVG}| Rate: {rate}| MONEYIN: {lstTotalBuy.Sum()}| MONEYOUT: {lstTotalSell.Sum()}");
-
-            if (sellAll)
-            {
-                tier = 3;
-                balance = 90;//USD
-                hasBuy = false;
-                hasSell = false;
-                sellAll = false;
-                sellHalf = false;
-                sellPart = false;
-                sellCount = 0;
-                flagSell = false;
-                buyEntity = new FinancialDataPoint();
-                indexBuy = 0;
-            }
-        }
-
-        double priceSell = 0;
-        int tier = 3;
-        double balance = 90;//USD
         bool hasBuy = false;
-        bool hasSell = false;
-        bool sellAll = false;
-        bool sellHalf = false;
-        bool sellPart = false;
-        int sellCount = 0;
-        bool flagSell = false;
-
-        
-        
-
-        List<double> lstTotalBuy = new List<double>();
-        List<double> lstTotalSell = new List<double>();
-
-
         FinancialDataPoint buyEntity = new FinancialDataPoint();
         int indexBuy = 0;
         double prevMCDX = 0;
